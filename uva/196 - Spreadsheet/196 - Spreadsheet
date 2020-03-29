@@ -1,0 +1,8 @@
+Although the problem says that the maximum column is ZZZ, the data set in this problem is quite smaller than that. In fact, I only use a 999*999 matrix to store the sheet. 
+
+My code first reads in all numbers, storing the relationships in formula. And then it uses topological sort to obtain the ordering of cells. Finally, all formulas are evaluated according to the order. 
+
+0.065s in uva
+
+Same problem:
+	poj 1420

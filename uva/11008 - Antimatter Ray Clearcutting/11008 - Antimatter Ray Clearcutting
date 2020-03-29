@@ -1,0 +1,5 @@
+BFS, geometry, collinearity
+First calculate all lines from each pair of trees. Duplicated lines will be ignored.
+For BFS, each time add a new line to cover more trees.
+
+0.134s in uva (11008)

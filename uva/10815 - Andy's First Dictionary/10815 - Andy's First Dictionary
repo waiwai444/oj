@@ -1,0 +1,6 @@
+Keyword:
+string
+
+I used the Trie tree to store the words. 
+
+It ran in 0.022s in uva.

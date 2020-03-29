@@ -1,0 +1,13 @@
+Easy problem.
+
+This problem is to partition the input integers into different bins. The integers in each bin should be unique. The number of bins should be minimum, and for those solutions with the same minimum number of bins, the maximum number of integers in each bin should be minimum. 
+To get the minimum number of bins, count the maximum number of integers with the same value.
+
+ps: The problem requires an empty line between two cases when output. But it's strange that even I don't output any empty line, the code can also be accepted (both uva and poj).
+
+0.023s in uva
+0.047s in poj
+
+Same problem:
+	poj 3287
+

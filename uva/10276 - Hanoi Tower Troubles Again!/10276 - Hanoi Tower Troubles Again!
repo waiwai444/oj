@@ -1,0 +1,51 @@
+I precalculated the answers. So my code runs only 0.015s in uva.
+
+Through observation, we can see that the answers for smaller N's are 1, 3, 7, 11, 17, 23, 31, ... ( N = 1, 2, 3, 4, 5, 6, 7, ...). The intervals between two answers are 2, 4, 4, 6, 6, 8, ....
+These answers can be obtained from a kind of greedy algorithm that places a new number to the leftmost available peg, as shown below: (This code also runs 0.015s in uva.)
+
+====================================================================================================
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+	int N, T;
+	int result[51];
+	int top[52] = {0};
+	int peg, cur_num;
+	bool placed;
+	for(peg = 1, cur_num = 1; peg <= 50; cur_num++)
+	{
+		placed = false;
+		for(int i = 1; i <= peg; i++)
+		{
+			int sum = cur_num + top[i];
+			int root = sqrt((double)sum);
+			if(root * root == sum)
+			{
+				top[i] = cur_num;
+				placed = true;
+				break;
+			}
+		}
+		if(placed)
+			continue;
+		else
+		{
+			result[peg] = cur_num - 1;
+			peg++;
+			top[peg] = cur_num;
+		}
+	}
+	scanf("%d", &T);
+	while(T-- > 0)
+	{
+		scanf("%d", &N);
+		printf("%d\n", result[N]);
+	}
+	return 0;
+}
+====================================================================================================
+
+P.S. I don't know how to prove the correctness of this greedy algorithm or the observation.

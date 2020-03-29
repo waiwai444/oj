@@ -1,0 +1,5 @@
+We can store strings column by column. And for each column, same strings are stored only once, with their row numbers being recorded. And the database table only needs to store the indices of strings. Also use hash map for strings in each column to facilitate searching.
+For the algorithm to check PNF, bruteforce pairs of columns. See the code for details.
+
+0.520s in uva 1592
+0.609s in la 4592

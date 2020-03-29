@@ -1,0 +1,3 @@
+BFS
+
+Since there are only 15 positions, we can store the whole steps into the queue for BFS.

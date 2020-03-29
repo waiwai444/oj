@@ -1,0 +1,5 @@
+It's related to the Longest Increasing Subsequence problem. We can first find out LIS ending at each position, and then repeat this step with the reversed order of the sequence.
+So the key here is the algorithm to compute the LIS. The naive O(n^2) DP algorithm would cause TLE. So I use the O(nlogn) DP algorithm, which uses an array to record the smallest last value (in fact the index of that value in my implementation) of the LIS of each length and uses binary search since it's obvious that these values are non-descending. 
+
+0.119s in uva (10534)
+

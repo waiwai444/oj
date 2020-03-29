@@ -1,0 +1,4 @@
+It's not a hard problem. Just use DFS to search the path. Notice that the problem guarantees that there is at most one solution for each maze.
+
+0.000s in uva 810
+0.009s in la 5210

@@ -1,0 +1,76 @@
+Keyword:
+DP, sorting
+
+Turtle tower. 
+The key to this problem is how to sort the input data, and how to define the recursive function for DP.
+
+For sorting, we can sort the input data only by their strength. This is because that we can always find out an optimal solution in which turtles from top to bottom are sorted by their strength ascendingly. The reason is as follows:
+	Consider two turtles, turtle A with weight W1 and strength S1 and turtle B with weight W2 and strength S2. When these two turtles are stacked adjacently, the residual strength after they are stacked is S1-W1-W2 or S2-W2-W1, according to who is on the lower level (assume both of them can bear the other one, or else the case is trivial). If in one stacking solution, turtle A is under turtle B, but S1-W1-W2 < S2-W2-W1, then we can exchange them to get no less residual strength (S2-W2-W1). More residual strength means more chance to stack more turtles. Also note that, this relationship between two turtles is equivalent to the strength relationship between them, which produces the conclusion. 
+
+For the recursive function, define m[i,j] be the minimum weight of stacking with height j from the first i+1 sorted turtles. Then we can easily obtain the recursive function to calculate m[i,j]. 
+
+We can use a 2-dimensional table to store m[i,j]. But this will cost a large number of memory. We can also use a one-dimensional array to store them to save memory. 
+
+
+
+My code in .cpp file uses 1-d array and runs in 0.018s in uva. 
+
+====================================================================================================
+The following code uses a 2-d table and runs in 0.085s in uva, which is much slower than the 1-d array version. 
+====================================================================================================
+#include <stdio.h>
+#include <algorithm>
+
+struct Turtle
+{
+	int weight;
+	int strength;
+};
+
+bool cmp(const Turtle& t1, const Turtle& t2)
+{
+	return t1.strength < t2.strength; // t1.strength - t1.weight - t2.weight < t2.strength - t2.weight - t1.weight;
+}
+
+int num;
+Turtle turtles[5607];
+
+int min_weight[5607][5608];
+
+int main()
+{
+	int i, j, tmp, weight, strength, max_height = 0;
+	while(scanf("%d%d", &weight, &strength) != EOF)
+	{
+		if(strength >= weight)
+		{
+			turtles[num].weight = weight;
+			turtles[num++].strength = strength;
+		}
+	}
+	if(num > 0)
+	{
+		std::sort(turtles, turtles + num, cmp);
+		min_weight[0][1] = turtles[0].weight;
+		max_height = 1;
+	}
+	for(i = 1; i < num; i++)
+	{
+		for(j = max_height; j >= 1; j--)
+		{
+			tmp = min_weight[i - 1][j] + turtles[i].weight;
+			if(tmp <= turtles[i].strength && (j == max_height || tmp < min_weight[i - 1][j + 1]))
+			{
+				min_weight[i][j + 1] = tmp;
+				if(j == max_height)
+					max_height++;
+			}
+			else
+				min_weight[i][j + 1] = min_weight[i - 1][j + 1];
+		}
+		min_weight[i][1] = turtles[i].weight < min_weight[i - 1][1] ? turtles[i].weight : min_weight[i - 1][1];
+	}
+	printf("%d\n", max_height);
+	return 0;
+}
+====================================================================================================

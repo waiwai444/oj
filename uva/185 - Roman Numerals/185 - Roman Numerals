@@ -1,0 +1,14 @@
+simple math
+
+Use backtracking on each digit of each left number.
+Since there’re at most 7 different characters, lots of recursive calls are deterministic. 
+
+My algorithm without pruning cost 0.092s in uva and 0.110s in poj. 
+When with some pruning of the first digit of each left number, it ran in 0.047s in poj. 
+But with the pruning that directly avoid those cases where the three numbers have the same length and the first digits of the right-hand one and one of the left-hand ones have the same character, the time cost was reduced to 0.015s in uva and 0s in poj.
+
+0.000s in poj
+0.015s in uva
+
+Same problem:
+	poj 1213

@@ -1,0 +1,5 @@
+Just flood fill the maze. I use dfs for it.
+Note that, in order to improve the efficiency, we can make use of the fact that each room of the maze is 3*3 and walls and doors are all regular. We can fill a whole room at one time instead of filling each grid at one time.
+
+0.022s in uva 784
+0.006s in la 5280

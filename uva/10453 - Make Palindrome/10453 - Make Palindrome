@@ -1,0 +1,6 @@
+DP
+Let dp[i][j] be the minimum number of insertions to make the subsequence from i to j to be a palindrome.
+I use another array to record the choice at each step during DP in order to reconstruct the resulting palindrome.
+
+0.415s in uva (10453)
+

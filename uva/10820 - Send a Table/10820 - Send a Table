@@ -1,0 +1,18 @@
+math, coprime
+
+This problem is equivalent to calculate the number of coprime pairs not exceed n and then multiply the results by 2 except for n=1.
+
+First, we have an equation to get the number of integers less than n that are coprime with n(n > 1). (We only consider integers not exceed n in the following.)
+Let n = p1^k1*p2^k2*...*pr^kr, where pi is the prime factor of n. And denote the number of multiples of pi as ni, and the number of multiples of pi*pj as ni,j, and so on. Then the number of positive integers less than n and coprime with n can be computed as following:
+phi(n) = n-(n1+n2+...+nr)+(n1,2+n1,3+...+nr-1,r)-(n1,2,3+n1,2,4+...+nr-2,r-1,r)+...
+       = n-(n/p1+n/p2+...+n/pr)+(n/p1/p2+n/p1/p3+...+n/p{r-1}/pr)-...
+       = n*[1-(1/p1+1/p2+...+1/pr)+(1/p1/p2+1/p1/p3+...+1/p{r-1}/pr)-...]
+       = n*(1-1/p1)*(1-1/p2)*...*(1-1/pr)
+       = n/(p1*p2*...*pr)*(p1-1)*(p2-1)*...*(pr-1)
+
+This equation is called Euler's totient function (or Euler's phi function).
+
+So for this problem, we can compute using this equation for each n and add up the results. But a more efficient way to compute for all n in a single run is to dynamically update the results using this equation, a similar way like the sieve of Eratosthenes for prime numbers. We can start from 2, and once we encounter a prime pi, update the results of all multiples of this prime by dividing them with pi and then multiplying them with (pi-1).
+
+0.000s in uva 10820
+

@@ -1,0 +1,8 @@
+Keyword:
+geometry, computational geometry, midperpendicular, split of convex polygon
+
+First, calculate the intersection points of the polygon and the midperpendicular of the consecutive two points. Then, cut the polygon into a smaller one according to "Hotter" or "Colder". Then calculate the area of the resulting small polygon. 
+My code ran in 0.009s in uva.
+
+Same problem:
+	poj2540

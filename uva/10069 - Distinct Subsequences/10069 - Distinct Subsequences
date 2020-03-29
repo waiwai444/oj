@@ -1,0 +1,7 @@
+Keyword:
+DP, big number
+
+A simple DP problem, but with large numbers. 
+This code runs in 0.139s in uva.
+
+The 2-dimensional DP table can be reduced to a 1-dimensional array to improve performance. But, here, I just implemented it as a simple 2-d table because it's sufficient.

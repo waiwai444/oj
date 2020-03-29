@@ -1,0 +1,87 @@
+math, big integer
+
+My algorithm is to simulate the process of manually computing the square root by a method similar to the long division method.
+Take 7206604678144 as example:
+   2  6  8  4  5  1  2
+   -------------------
+ 2/7,20,66,04,67,81,44
+   4
+   ----
+46/3 20
+   2 76
+     -----
+ 528/44 66
+     42 24
+	  -------
+ 5364/2 42 04
+      2 14 56
+        --------
+  53685/27 48 67
+        26 84 25
+           --------
+    536901/64 42 81
+           53 69 01
+           -----------
+   5369022/10 73 80 44
+           10 73 80 44
+                     -
+                     0
+So the result is 2684512.
+
+Algorihtm steps:
+1. Partition the integer by 2 digits a group.
+2. For the left most group, find the largest single digit whose square is not greater than the number in the first group. That digit is the first digit of the result.
+3. Combine the remainder of the previous step and the number in the next group as the dividend. Multiply the partial result obtained from previous steps by 20, denoted as s. Then we need to find the largest digit by which (s+d)*d is not greater than the dividend. Take this digit as the next digit of the result.
+4. Repeat step 3 until all groups are handled.
+
+
+==========
+The correctness of this algorithm can be proved by expanding x^2 by digits.
+The sketch of the proof is as follows.
+Let the square root x = sum_{0..n}(a_i*10^i) = a_n*10^n+a_{n-1}*10^(n-1)+a_{n-2}*10^(n-2)+...+a1*10+a0.
+Our goal is to find out each digit a_n, a_{n-1}, ..., a1, a0.
+For simplicity, denote x_k = sum_{0..k}(a_i*10^i). Then x = x_n.
+We have
+x^2 = (a_n*10^n+a_{n-1}*10^(n-1)+...+a0)^2
+    = a_n^2*10^(2n)+2*a_n*10^n*(a_{n-1}*10^(n-1)+...+a0)+(a_{n-1}*10^(n-1)+...+a0)^2
+    = a_n^2*10^(2n)+2*a_n*10^n*x_{n-1}+x_{n-1}^2
+Both the first and the second term will affect the digit in 10^(2n+1) and 10^2n. But the third will not.
+So we only consider the first two terms:
+    a_n^2*10^(2n)+2*a_n*10^n*x_{n-1}
+    = (a_n^2+2*a_n*(a_{n-1}/10+a_{n-2}/10^2+...+a0/10^n))*10^(2n)
+In the parentheses is a_n^2+2*a_n*(a_{n-1}/10+a_{n-2}/10^2+...+a0/10^n).
+On the other hand, (a_n+1)^2 = a_n^2+2*a_n+1, which is obviously larger than the above term by at least 1, and will exceed the digits in the first group. Hence we proved the correctness of the step 2 in the above algorithm, and we have a_n after step 1.
+
+For the following digits of x, we can apply the similar reasoning.
+Here, after subtract a_n^2*10^2n from x^2, the remaining is
+    2*a_n*10^n*x_{n-1}+x_{n-1}^2
+    = (2*a_n*10^n+x_{n-1})*x_{n-1}
+    = ((20*a_n+a_{n-1})*10^(n-1)+x_{n-2})*(a_{n-1}*10^(n-1)+x_{n-2})
+    = (20*a_n+a_{n-1})*a_{n-1}*10^(2n-2)+(20*a_n+2*a_{n-1})*10^(n-1)*x_{n-2}+x_{n-2}^2
+Similarily, only the first two terms will contribute to the digits at least at 10^(2n-2).
+Expanding the first two terms, we have
+    (20*a_n+a_{n-1})*a_{n-1}*10^(2n-2)+(20*a_n+2*a_{n-1})*10^(n-1)*x_{n-2}
+    = ((20*a_n+a_{n-1})*a_{n-1}+(20*a_n+2*a_{n-1})*(a_{n-2}/10+a_{n-3}/10^2+...))*10^(2n-2)
+In the parentheses is (20*a_n+a_{n-1})*a_{n-1}+(20*a_n+2*a_{n-1})*(a_{n-2}/10+a_{n-3}/10^2+...).
+On the other hand, (20*a_n+a_{n-1}+1)*(a_{n-1}+1) = (20*a_n+a_{n-1})*a_{n-1}+(20*a_n+2*a_{n-1})+1. Again, this is obviously larger then the above term by at least 1. Hence the first running of step 3, which is for the second group of two digits, is correct, and we have a_{n-1} after this step.
+
+Then, after subtract (20*a_n+a_{n-1})*a_{n-1}*10^(2n-2), the remaining is
+    (20*a_n+2*a_{n-1})*10^(n-1)*x_{n-2}+x_{n-2}^2
+    = ((20*a_n+2*a_{n-1})*10^(n-1)+x_{n-2})*x_{n-2}
+    = ((200*a_n+20*a_{n-1}+a_{n-2})*10^(n-2)+x_{n-3})*(a_{n-2}*10^(n-2)+x_{n-3})
+    = (20*(10*a_n+a_{n-1})+a_{n-2})*a_{n-2}*10^(2n-4)+(20*(10*a_n+a_{n-1})+2*a_{n-2})*10^(n-2)*x_{n-3}+x_{n-3}^2
+Now, the pattern is very clear. For the remaining of the proof, mathematical induction applies.
+
+Let p be the partial result describe in the algorithm. Then we have,
+    (20*p+a_i)*a_i*10^(2i)+(20*p+2*a_i)*10^i*x_{i-1}+x_{i-1}^2
+And we only need to consider the first two terms above,
+    (20*p+a_i)*a_i*10^(2i)+(20*p+2*a_i)*10^i*x_{i-1}
+    = ((20*p+a_i)*a_i+(20*p+2*a_i)*(a_{i-1}/10+a_{i-2}/10^2+...))*10^(2i)
+In the parentheses is (20*p+a_i)*a_i+(20*p+2*a_i)*(a_{i-1}/10+a_{i-2}/10^2+...).
+On the other hand, (20*p+a_i+1)*(a_i+1) = (20*p+a_i)*a_i+(20*p+2*a_i)+1, which is larger than the above term by at least 1. Thus far, we have proved this algorithm.
+
+In fact, from the proof of this algorithm, we can see that it can apply not only to perfect square numbers, but to all numbers.
+==========
+
+0.163s in uva 10023
+

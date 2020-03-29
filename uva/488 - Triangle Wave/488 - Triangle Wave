@@ -1,0 +1,3 @@
+A very simple problem. 
+
+Note: When outputting only one character per time, my code ran 0.352s in uva. Very poor. But if reduce the number of output times to once a period of wave, the time cost became 0.029s in uva. So reduce the number of output printing will save time dramatically. And the time cost can be improved if reducing the number of output times further. 

@@ -1,0 +1,5 @@
+DP
+
+Let dp[i] be the maximum sum in substring [1..i] (starting from 1).
+
+0.006s in uva (11258)

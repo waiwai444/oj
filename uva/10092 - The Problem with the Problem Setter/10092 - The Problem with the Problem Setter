@@ -1,0 +1,7 @@
+Keyword:
+Graph, Network flow
+
+This problem can be treated as a maximum flow problem.
+My code uses one of the simplest maximum flow algorithms, the Edmonds-Karp algorithm. It runs in 0.082s in uva. Not bad. 
+
+(I chose the flow from problems to categories. If I chose the flow reversely, from categories to problems, maybe I can improve my performance because I can directly check whether there is a solution meeting the demand.)

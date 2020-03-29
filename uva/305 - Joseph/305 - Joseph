@@ -1,0 +1,120 @@
+Josephus cycle
+
+The code in cpp file pre-calculates all values.
+0s in poj
+
+====================================================================================================
+The following code uses simulation. 
+0.219s in poj
+====================================================================================================
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+
+int main()
+{
+	int i;
+	int k;
+	int n;
+	int m;
+	int store[13];
+	memset(store, 0, 13*sizeof(int));
+	while(cin>>k)
+	{
+		if(k==0)
+			break;
+		if(store[k-1]>0)
+		{
+			cout<<store[k-1]<<endl;
+			continue;
+		}
+		m = k+1;
+		while(true)
+		{
+			i = 0;
+			for(n=2*k; n>k; n--)
+			{
+				i = (i+m-1)%n;
+				if(i<k)
+					break;
+			}
+			if(n==k)
+				break;
+			m++;
+			if(m%(2*k)==1)
+				m += k;
+		}
+		store[k-1] = m;
+		cout<<m<<endl;
+	}
+	return 0;
+}
+====================================================================================================
+
+
+
+====================================================================================================
+In face, m can only be a multiple of k+1 or a multiple of k+1 plus 1, so we have the following code.
+The proof is very simple. Consider the case that there're only k+1 persons. The current starting person must be the first one or the k+1'st one. To achieve the goal, m must be the multiple of k+1 or 1 plus a multiple of k+1.
+0.032s in poj
+====================================================================================================
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+
+int main()
+{
+	int i;
+	int k;
+	int n;
+	int m;
+	int store[13];
+	memset(store, 0, 13*sizeof(int));
+	while(cin>>k)
+	{
+		if(k==0)
+			break;
+		if(store[k-1]>0)
+		{
+			cout<<store[k-1]<<endl;
+			continue;
+		}
+		m = k+1;
+		while(true)
+		{
+			i = 0;
+			for(n=2*k; n>k; n--)
+			{
+				i = (i+m-1)%n;
+				if(i<k)
+					break;
+			}
+			if(n==k)
+				break;
+
+			i = 0;
+			for(n=2*k; n>k; n--)
+			{
+				i = (i+m)%n;
+				if(i<k)
+					break;
+			}
+			if(n==k)
+			{
+				m++;
+				break;
+			}
+			m += k+1;
+		}
+		store[k-1] = m;
+		cout<<m<<endl;
+	}
+	return 0;
+}
+====================================================================================================
+
+Same problem:
+	poj 1012
+	

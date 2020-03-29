@@ -1,0 +1,8 @@
+String matching
+
+Trie tree is used in this problem to store all words. It's for the practise purpose of this data structure. And I don't know whether the efficiency of this method is better.
+
+Same problem(s):
+	poj 1501
+Similar problem(s):
+	uva 10010 - In this problem, I simply match each word in the matrix. 

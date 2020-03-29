@@ -1,0 +1,9 @@
+Not hard, but with amounts of details to concern.
+Since the ‘*’ can only appear at the last of name and extension, the difficulty of this problem is reduced significantly. We don’t need backtracking. We just traverse all files to be deleted character by character to decide the corresponding character in the wildcard, and then check if this wildcard matches any file that should be kept. 
+Refer to the code for details.
+
+0.009s in uva
+0.032s in poj
+
+Same problem:
+	poj 1443

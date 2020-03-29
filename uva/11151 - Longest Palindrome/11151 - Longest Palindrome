@@ -1,0 +1,5 @@
+DP
+Let dp[i][j] be the length of the longest palindrome contained in substring [i,j].
+
+0.042s in uva (11151)
+

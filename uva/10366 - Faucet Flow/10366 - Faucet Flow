@@ -1,0 +1,7 @@
+This problem is quite straightforward, but the implementation details are a little bit complicated.
+
+First, we need to find out from which side the flow will finally flow out (from left, from right, or from both sides). Then we can compute the time. Notice that, even if it finally flows out from only one side, the water may flow back to the other side until reaching the wall.
+See the code for all details.
+
+0.000s in uva 10366
+0.000s in poj 2364

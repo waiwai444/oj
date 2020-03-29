@@ -1,0 +1,26 @@
+This problem is to find two edge-disjoint paths with minimum sum of costs.
+We can reduce it to a min-cost max-flow problem. For each edge, we split it into two directed arc for each direction with the same cost and capacity 1. In addition, we add other two nodes s and t as the source and the sink used in the max-flow problem, along with two edges (s->1) and (n->t) being added, both of which have cost 0 and capacity 2.
+We need to use adjacency list since there are two arcs in opposite directions for any connected pair of nodes(except s and t).
+My code uses SPFA for finding the shortest path in the residual graph.
+
+0.000s in uva 10806
+
+Appendix:
+The algorithm to compute the min-cost max-flow problem (for a network without negative cycle) I used here is the classic method. Each time it first computes the shortest path from s to t in the residual graph, and then use this path to augment the flow.
+A correctness proof of this algorithm is as follows:
+  1. First, we can see that if the initial network contains no negative cycle, then neither do all subsequent residual networks.
+  If a network contains no negative cycles and we have found a shortest path from the source to the sink, and if this shortest path makes the residual network contain a negative cycle, this cycle must contain arc(s) that are the reverse of arc(s) in the shortest path. Let the first node of this cycle near the source be node A and the last node near the sink be node B (relative to the shortest path). Denote those arcs whose reverses make up the negative cycle as X, and those arcs between A and B that are in the shortest path but their reverses are not as Y. For paths in Y, the negative cycle contains reversed paths, and denote these arcs as Y'. Then X and Y' forms a path from B back to A. And denote the other path from A to B that makes up the cycle with X and Y' as Z. Let the cost of arcs in X as xi, that of arcs in Y as yi, that of arcs in Y' as yi', and the sum of the cost of arcs in Z as z. We have sum_{-xi}+sum_{yi'}+z < 0. Since the original network contains no negative cycles, we have yi' >= -yi, and hence sum_{-xi}+sum_{-yi}+z < 0. But on the other hand, we have z > sum_{xi}+sum_{yi}. Contradiction.
+  2. Assume we have obtained a min-cost flow F by this method, then we need to prove that, by applying this method on it again, we can get a min-cost flow F' where |F'|=|F|+1 (|F| means the flow value of flow F).
+  If there is another flow F" with the same flow value but less cost, then we can inspect F"-F, which will lead to contradiction. We will see it later.
+  Note that the difference of two flows F2-F1 is a collection of either cycles or paths from s to t, all of which exist in R(F1), the residual graph of F1. Furthermore, if |F2|>|F1|, then there are |F2|-|F1| paths from s to t. This means that we can add flows in these paths or cycles in F1 to change it to F2, and the cost between them is the cost of these cycles and paths.
+  Based on the above fact, we can see that if cost(F") < cost(F'), then cost(F"-F) < cost(F'-F). On the other hand, F'-F is a single shortest path from s to t in R(F). Notice that F"-F contains one path from s to t in R(F) which must not be shorter than the shortest path in F'-F. So, in order to make cost(F"-F) < cost(F'-F), cycles in F"-F must be negative cycles, which means we can augment F itself along with these negative cycles to make a flow of less cost without changing its flow value |F|. Contradiction.
+
+
+PS. The definition of the difference of two flows F2-F1 is as follows:
+  For simplicity, we consider flows as sum of every single flow with value 1 from s to t.
+  For each edge e in the network:
+    if flow(e) exists in both F1 and F2, it doesn't exist in F2-F1;
+    if flow(e) exists in F2 but not in F1, it exists in F2-F1;
+    if flow(e) exists in F1 but not in F2, the reverse of it exists in F2-F1;
+    otherwise, doesn't exist.
+

@@ -1,0 +1,8 @@
+Use greedy algorithm.
+Assume a >= 1, then we can use sqrt(a) as much as possible until the second constraint can not be satisfied. Then use -1/sqrt(a) until the last one. And take the remaining difference as the value of the last one. It's similar for a < 1. 
+The correctness is obvious. 
+
+0.000s in poj (3066)
+0.003s in icpcarchive (2911)
+0.009s in uva (1319)
+

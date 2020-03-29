@@ -1,0 +1,28 @@
+It's a variant of a very classic problem, which asks about the similar question without borrowing empty bottle. That original problem is quite straight forward and we can just simulate the process to count the result, and it's correctness is also trivial.
+
+In this problem, with borrowing empty bottles being allowed but have to return, it also seems quite straight forward that a simple simulation can get the result. However, I think the correctness here is not that obvious. So I will try to show the correctness, and after that, we can easily conclude with a very easy equation to get the result directly.
+
+==========
+First, we can model this problem by full 3-ary trees. Each leaf node represents an original bottle or a borrowed one, while each non-leaf node represents a bottle that is exchanged from 3 empty bottles. 
+
+So, if we don't borrow any bottle, then any solution can be represented by a full 3-ary tree. And if we borrowed some, then at the end of any solution, there must remain the same number of empty bottles so that we can return. In the latter case, the solution is a full 3-ary forest. The key point here is to show that with any solution, we can always find an equivalent full 3-ary tree instead of a forest, with the same number of bottles which are actually drunk by us (not borrowed empty bottles).
+
+Assume we have such a full 3-ary forest. If in a tree there is a borrowed node, then we can just eliminate it by replacing this node with another tree. This will reduce the number of trees as well as borrowed bottles. After merged all trees by this way, there will be one full 3-ary tree with at most one borrowed node in it. And it's obvious that we can freely exchange this borrowed node with any node in the tree (if the exchanged node is not a leaf node, that means we exchange the whole sub-tree where it's the root). This means that for this problem, we only need at most one borrowed empty bottle, and if really needed, we can borrow it at any phase.
+==========
+
+Since all optimal solution can be modeled by a full 3-ary tree, we can make use of properties of full 3-ary trees to get the result directly.
+
+==========
+It's easy to show that the number of leaf nodes in a full 3-ary tree is 3+2*k (k >= -1), which in fact is equivalent to all odd numbers. So according to the previous proof, in any optimal solution, we borrow one empty bottle if and only if the input number n is even.
+
+On the other hand, given the number of leaf nodes, the number of all nodes in a full 3-ary tree is also determined. Let x be the number of non-leaf nodes, y be the number of leaf nodes. We have
+    3+4(x-1)+y = 2(x+y-1)
+  => x = (y-1)/2
+
+The total number of cola we drink is equal to the number of nodes in the tree except the borrowed node if any. If we don't borrow, the answer is n+(n-1)/2 = (3n-1)/2. If we borrow, then the answer is n+1+(n+1-1)/2-1 = 3n/2.
+
+That is,
+     ans = (3n-1)/2,   if n is odd
+           3n/2,       if n is even.
+         = floor(3n/2)
+==========

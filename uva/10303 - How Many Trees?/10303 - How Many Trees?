@@ -1,0 +1,6 @@
+combinatorics, Catalan number, binary search tree, big integer
+
+It's the Catalan number. We need to use big integer for the large result. But since the other number in calculating is always a small number, we can simplify the arithmetic to speed up the algorithm.
+
+0.000s in uva 10303
+

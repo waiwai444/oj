@@ -1,0 +1,9 @@
+Brute force
+
+Just use DFS with some prune. For example, we can prune those branches where it cannot return to the origin with the remaining steps.
+
+0.180s in uva 225
+0.406s in la 5164
+
+
+Notice that the statements of this problem is not good. It doesn't mention the order of the results. And it is said that the same point cannot be visited more than once.

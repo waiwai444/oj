@@ -1,0 +1,4 @@
+easy math problem
+p(a,b)=a*(a-1)/2*b*(b-1)/2
+this can be deduced from the recursive formula: p(a,b)=p(a-1,b)+(a-1)*(b-1)*b/2
+or this can be seen from the perspective of combinatorics, i.e. if we choose from both rows with 2 points each, then the edges between them will induce exactly 1 intersection.

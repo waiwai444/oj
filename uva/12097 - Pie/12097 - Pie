@@ -1,0 +1,6 @@
+Use bisection method to find the answer. 
+Note the precision problem. It's very easy to get WA in such a problem using floating values. 
+
+0.032s in poj (3122)
+0.025s in uva (12097)
+0.013s in icpcarchive (3635)

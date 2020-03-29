@@ -1,0 +1,17 @@
+Keyword:
+grid traverse
+
+Represent the city as a w-by-h grid, and each position in the grid will have a boolean value associated with it for each time, with true means this position is a possible place the robber is in at this time, and false otherwise. 
+
+We only need to traverse from the starting time to the ending time and then from the ending time back to the starting time once. This is quite intuitive, since after that process, the layout of each time has been affected by all messages provided. 
+To prove this strictly, first assume that after this process, we have to restart and the boolean value of some position in time 2 will change from true to false. This means that in time 1 after the traverse, that value of this position and all adjacent positions are false. This can only happen when these positions in time 1 are false even before the traverse. But this will cause that position in time 2 to be false after the traverse. Contradiction. 
+  F           ?
+F F F  <->  ? T ?
+  F           ?
+On the other hand, if we have to restart the traverse again and reach a time that the layout of the city doesn't change, then all the layout afterwards will not change neither.
+Proved.
+
+My code runs in 0.025s in uva.
+
+Same problem:
+	poj 1104

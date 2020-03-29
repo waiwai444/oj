@@ -1,0 +1,10 @@
+Easy problem. 
+For minimum time, each ant walks to the end nearest to it. 
+For maximum time, notice the fact that when two ants meet each other and turn back, it's equivalent to that these two ants keep walking forward, across each other. 
+
+0.079s in uva
+0.141s in poj
+
+Same problem:
+	poj 1852
+

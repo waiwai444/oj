@@ -1,0 +1,6 @@
+Bruteforce on all possible binary trees.
+
+Represent a subset of stones in binary form. It can be represented as an integer because there are at most 6 stones. For each subset, compute all possible left-right ranges recursively by all of its possible left children and right children.
+
+0.000s in uva 1354
+0.006s in la 3403

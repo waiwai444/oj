@@ -1,0 +1,8 @@
+Use DFS.
+
+One important way to prune in my solution is to check if the shortest possible schedule will exceed the current best answer when trying to schedule task 5. Otherwise, my code always got TLE.
+
+In addition, in order to speed up, we can also compress the task status into bits in some large enough integers.
+
+0.050s in uva 690
+0.096s in la 5678

@@ -1,0 +1,85 @@
+Use extended Euclidean algorithm to obtain gcd(A,B) and integers X, Y such that AX+BY = gcd(A,B).
+
+Assume X and Y is the solution returned by the gcd() function. Since Ax+By = gcd(A,B) is a linear equation, the general solution to it is (X+kB, Y-kA). And we need to make |X+kB|+|Y-kA| minimum. 
+Take k as the variable. Let X+kB = 0, we have X = -kB, and Y = kA for Y-kB = 0. Assume -X/B <= Y/A. When k<=-X/B, |X+kB|+|Y-kA| is strictly monotonic decreasing. When k>=Y/A, |X+kB|+|Y-kA| is strictly monotonic increasing. When -X/B<k<Y/A, it's either monotonic decreasing or increasing, or constant. So we can traverse all k values between -X/B and Y/A to find out a solution satisfying the constraints, i.e. |x|+|y| is minimum and if there are multiple solutions, let X<=Y. But if we traverse all these k values, it will cause TLE in UVa. (The implementation of this algorithm is appended at the end of this note.)
+
+However, we can implement the main() function simply by following:
+	int main()
+	{
+		int i;
+		int a, b;
+		int x, y, d;
+		while(scanf("%d %d", &a, &b)!=EOF)
+		{
+			d = gcd(a, b, x, y);
+			printf("%d %d %d\n", x, y, d);
+		}
+		return 0;
+	},
+it's accepted by UVa. It means that the values X and Y obtained by extended Euclidean algorithm is already optimal for minimization of |x|+|y| and if there are multiple solutions to minimize |x|+|y|, X is already less than or equal to Y. Why? How to prove it?
+
+Here is a seemingly proof coming from http://stackoverflow.com/questions/12224577/extend-euclidean-algorithm-can-give-a-solutionm-n-of-the-equation-axby-gcda:
+	For the extended Euclidean algorithm I know, it's true. Suppose a > 0, b > 0. Let d = gcd(a,b); a = d*A; b = d*B. Further, let M = abs(m); N = abs(N), where (m,n) are the coefficients returned by the algorithm (m*a + n*b = d). Then (unless a = b) M/N is the penultimate convergent in the continued fraction expansion of B/A that does not end with 1. The only other solution with abs(x) < B; abs(y) < A is given by the penultimate convergent of the CF expansion of B/A that ends with 1, of which M/N is the propenultimate convergent, thus the sum of the absolute values for the coefficients is larger. All other solutions have abs(x) > B; abs(y) > A. The case a = b is trivial, as are cases with a = 0 or b = 0. The cases with a or b negative follow easily. 
+By Daniel Fischer.
+
+
+
+
+
+
+
+
+The following is the code for traversing all possible k values. (TLE in UVa)
+====================================================================================================
+#include <cstdio>
+
+int gcd(int a, int b, int &x, int &y)
+{
+	if(b==0)
+	{
+		x = 1;
+		y = 0;
+		return a;
+	}
+	int x1, y1;
+	int d = gcd(b, a%b, x1, y1);
+	x = y1;
+	y = x1-a/b*y1;
+	return d;
+}
+
+#define ABS(x) ((x)>=0?(x):-(x))
+
+int main()
+{
+	int a, b;
+	int x, y, d;
+	long long i;
+	long long l, u, t;
+	long long min_x, min_y;
+	while(scanf("%d %d", &a, &b)!=EOF)
+	{
+		d = gcd(a, b, x, y);
+		l = -x/b;
+		u = y/a;
+		if(u<l)
+			t = u, u = l, l = t;
+		l--;
+		u++;
+		min_x = x+l*b;
+		min_y = y-l*a;
+		t = (u-l)*d;
+		for(i=1; i<=t; i++)
+		{
+			long long tmp_x = x+l*b+i*b/d;
+			long long tmp_y = y-l*a-i*a/d;
+			if(ABS(min_x)+ABS(min_y)>ABS(tmp_x)+ABS(tmp_y) || ABS(min_x)+ABS(min_y)==ABS(tmp_x)+ABS(tmp_y) && min_x>min_y && tmp_x<=tmp_y)
+			{
+				min_x = tmp_x;
+				min_y = tmp_y;
+			}
+		}
+		printf("%lld %lld %d\n", min_x, min_y, d);
+	}
+	return 0;
+}

@@ -1,0 +1,10 @@
+math, Fibonacci sequence
+
+It's similar to uva 10518, and can be solved by the similar method. However, since in this problem, the modulo base is quite larger here, the algorithm I currently used in uva 10518 will not so efficient enough here (0.020s).
+There is a much quicker algorithm that employs the Fibonacci Q-Matrix and the exponentiation by squaring for matrices.
+The Fibonacci Q-Matrix is an equation:
+[F_(n+1) F_n] = [1 1]^n
+ F_n F_(n-1)     1 0
+
+0.000s in uva 10229
+

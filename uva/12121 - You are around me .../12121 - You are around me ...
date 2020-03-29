@@ -1,0 +1,6 @@
+First, rotate according to theta to let ellipses be parallel to the x-axis. 
+Then, sort centers of ellipses by x coordinates.
+And then compare ellipses pairwise with pruning to avoid TLE.
+
+0.175s in uva (12121)
+0.156s in icpcarchive (4062) (3/65)

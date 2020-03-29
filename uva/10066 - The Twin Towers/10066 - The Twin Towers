@@ -1,0 +1,6 @@
+longest common subsequence
+
+Use the O(n1*n2) DP algorithm. Refer to uva10405.
+
+0.009s in uva (10066)
+

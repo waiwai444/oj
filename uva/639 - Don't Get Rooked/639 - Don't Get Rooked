@@ -1,0 +1,9 @@
+Easy problem for brute force
+Use DFS to try all positions.
+
+0.015s in uva
+0.000s in poj
+
+Same problem:
+	poj 1315
+

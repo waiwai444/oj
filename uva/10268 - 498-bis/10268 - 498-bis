@@ -1,0 +1,5 @@
+Easy problem. Very similar to uva 498.
+
+Use Horner's rule to evaluate it.
+
+0.020s in uva 10268

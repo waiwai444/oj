@@ -1,0 +1,5 @@
+DP
+Let dp[i][j] be the number of sub palindromes in between character i and j.
+
+0.022s in uva (10617)
+

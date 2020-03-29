@@ -1,0 +1,7 @@
+math, DP, bignum
+
+It's an easy DP problem.
+Let f(n) be the number of different combinations for n houses. Then f(n) = f(n-1)+sum_{i=0}^{n-1}f(i).
+
+0.000s in uva 10862
+

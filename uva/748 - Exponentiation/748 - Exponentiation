@@ -1,0 +1,94 @@
+Keyword:
+big number
+
+My code ran in 0.012s in uva.
+
+Same problem:
+	poj 1001
+	
+	
+====================================================================================================
+The following code is my first AC version, initially accepted in poj, which ran in 0MS in poj and ran in 0.018s in uva. 
+The main difference between this version and the version in cpp file is that this code is based on decimalism and that in the cpp is based on 100000. But if I change the iostream to printf/gets, the time cost reduced to 0.013s in uva. No significant differences.
+====================================================================================================
+#include <iostream>
+#define DIGIT 5
+#define TRAILINGZERO '#'
+
+using namespace std;
+
+int main()
+{
+	char r[DIGIT+2],base[DIGIT],fpos,i,j,carry,temp[2][DIGIT*25];
+	short n,remain;
+	memset(r,0,DIGIT+2);
+	while(cin>>r>>n)
+	{
+		memset(temp[0],0,DIGIT*25);
+		for(i=DIGIT,j=fpos=0;i>=0;i--)
+		{
+			if(r[i]=='.')
+				fpos=DIGIT-i;
+			else
+			{
+				base[j]=r[i]-'0';
+				temp[0][j]=base[j];
+				j++;
+			}
+		}
+		remain=n-1;
+		while(remain>0)								//temp[0] and temp[1] store the intermediate result in turn
+		{											//so, it's no need to move the result from one array to the other
+			memset(temp[1],0,DIGIT*25);
+			for(i=0;i<DIGIT;i++)
+			{
+				carry=0;
+				for(j=0;j<(n-remain)*DIGIT;j++)		//simulate the mutiplication method by hand
+				{
+					temp[1][i+j]=temp[1][i+j]+temp[0][j]*base[i]+carry;
+					carry=temp[1][i+j]/10;
+					temp[1][i+j]=temp[1][i+j]%10;
+				}
+				temp[1][i+j]=carry;
+			}
+			if(--remain==0) break;
+			memset(temp[0],0,DIGIT*25);
+			for(i=0;i<DIGIT;i++)
+			{
+				carry=0;
+				for(j=0;j<(n-remain)*DIGIT;j++)
+				{
+					temp[0][i+j]=temp[0][i+j]+temp[1][j]*base[i]+carry;
+					carry=temp[0][i+j]/10;
+					temp[0][i+j]=temp[0][i+j]%10;
+				}
+				temp[0][i+j]=carry;
+			}
+			remain--;
+		}
+		fpos*=n;
+		if(n%2==0)
+			j=1;
+		else
+			j=0;
+		for(i=0;i<fpos&&temp[j][i]==0;i++)
+		{
+			temp[j][i]=TRAILINGZERO;
+		}
+		for(i=DIGIT*25-1;i>=0;i--)
+		{
+			if(temp[j][i]!=0||i<fpos)
+				break;
+		}
+		for(;i>=0&&temp[j][i]!=TRAILINGZERO;i--)
+		{
+			if(i==fpos-1)
+				cout<<'.';
+			cout<<int(temp[j][i]);
+		}
+		cout<<endl;
+		memset(r,0,DIGIT+2);
+	}
+	return 0;
+}
+====================================================================================================

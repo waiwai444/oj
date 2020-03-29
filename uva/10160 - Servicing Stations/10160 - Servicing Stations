@@ -1,0 +1,14 @@
+Search (BFS or ID-DFS)
+
+My code uses BFS and pruning to search the state space. The representation of states uses state compression as in [1]. 
+
+My first implementation's time cost in UVa (1.660sec) is much worse than that of [1] (0.116sec), which uses ID-DFS. The only reason I could imagine is that some operations in searching is rather time-consuming (Since I think such a great constrast in efficiency should not exist between BFS and ID-DFS). And the only bottleneck I could think of is the STL queue. Since BFS is more space-consuming than DFS, the STL queue here may need frequent memory allocation, which is quite time-consuming. 
+Hence, I tried to use C-style array as the queue instead of the STL queue, and cstdio instead of iostream as in [1]. As a result, the time cost in UVa is 0.112sec. This proves my guess. (The size of queue is set to be 500000, and it suffices in UVa. But if the test cases are changed in UVa, this method may become invalid.) This code can be found in the cpp file. 
+
+A much better solution (0.028sec in UVa) can be found in [2], which is also based on BFS, but with some better optimization such as decompose the graph to connected sub-graphs to reduce the state space, etc.
+
+p.s. Sorting the stations by their degrees as in [2] has hardly effect in my BFS implementation. So I didn't sort them.
+
+
+[1] http://hi.baidu.com/nyroro/item/ec52a4fedb0982b030c19975
+[2] http://blog.csdn.net/metaphysis/article/details/6601365

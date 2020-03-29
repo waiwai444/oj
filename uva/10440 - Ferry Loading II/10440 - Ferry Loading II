@@ -1,0 +1,12 @@
+It's to find the minimum time to deliver all cars, and if same time, use the least number of trips.
+
+It may look like a DP problem, but in fact it can be solved by a greedy method efficiently.
+
+We consider the cars from the last one back to the first one, and each time take as many cars as possible from back to front. This algorithm can guarantee that we obtain a solution meeting the requirements.
+
+Proof:
+  First, we need to show that the time we get is the minimum. If we load less than n cars on the last delivery, say k cars, the optimal time we need to deliver the first m-k cars will be at least as much as what we need to deliver the first m-n cars. So we can safely load as many cars as possible from back to front.
+  Second, it's obvious that this strategy can achieve the minimum number of trips.
+
+0.000s in uva 10440
+0.000s in poj 2336

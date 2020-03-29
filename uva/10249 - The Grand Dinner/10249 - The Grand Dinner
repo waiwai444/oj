@@ -1,0 +1,205 @@
+Keyword:
+Graph, Network-flow;
+Greedy algorithm
+
+
+====================================================================================================
+
+Although this problem is marked as level 4 in [1], you can see that it's a typical network-flow problem. 
+
+The following code uses Edmonds-Karp algorithm (Ford-Fulkerson method). It's one of the simplest methods to solve the maximum flow problem. It runs in 2.145s in uva. Not good but acceptable.
+Other better maximum flow algorithm could be used here to improve the performance. 
+
+Note that, don't try to use '\b' to cancel some output character. This will not work but only add a '\b' character in the output. Because of it, I got WA and cost more than 1 hour to find out this bug! 
+
+====================================================================================================
+
+#include <stdio.h>
+#include <string.h>
+#include <deque>
+
+#define MAX_TEAM 70
+#define MAX_TABLE 50
+#define MAXV (MAX_TEAM + MAX_TABLE + 2)
+
+struct Edge
+{
+	int v;
+	int capacity;
+	int flow;
+};
+
+struct Network
+{
+	Edge adj_list[MAXV][MAXV];
+	int ndegrees[MAXV];
+	int nteams;
+	int ntables;
+} network;
+
+bool visited[MAXV];
+std::deque<int> vqueue;
+
+bool bfs(int source, int sink, int *parent)
+{
+	int i, v;
+	memset(visited, false, sizeof(visited));
+	vqueue.clear();
+	
+	visited[source] = true;
+	parent[source] = -1;
+	vqueue.push_back(source);
+	while(!vqueue.empty())
+	{
+		v = vqueue.front();
+		vqueue.pop_front();
+		for(i = 0; i < network.ndegrees[v]; i++)
+		{
+			Edge &edge = network.adj_list[v][i];
+			if(edge.capacity == edge.flow || visited[edge.v])
+				continue;
+			visited[edge.v] = true;
+			parent[edge.v] = v;
+			vqueue.push_back(edge.v);
+			if(network.adj_list[v][i].v == sink)
+				return true;
+		}
+	}
+	return false;
+}
+
+Edge* find_edge(int v, int w)
+{
+	for(int i = 0; i < network.ndegrees[v]; i++)
+		if(network.adj_list[v][i].v == w)
+			return &network.adj_list[v][i];
+	return NULL;
+}
+
+int path_volume(int source, int sink, int *parent)
+{
+	Edge* edge = find_edge(parent[sink], sink);
+	int volume1 = edge->capacity - edge->flow;	
+	if(source == parent[sink])
+		return volume1;
+	int volume2 = path_volume(source, parent[sink], parent);
+	if(volume2 < volume1)
+		return volume2;
+	else
+		return volume1;
+}
+
+void augment_path(int source, int sink, int *parent, int volume)
+{
+	Edge* edge = find_edge(parent[sink], sink);
+	edge->flow += volume;
+	edge = find_edge(sink, parent[sink]);
+	edge->flow -= volume;
+	if(source == parent[sink])
+		return;
+	augment_path(source, parent[sink], parent, volume);
+}
+
+void edmonds_karp()
+{
+	int parent[MAXV];
+	while(bfs(0, 1, parent))
+		augment_path(0, 1, parent, path_volume(0, 1, parent));
+}
+
+int main()
+{
+	int i, j, total_flow, npeople, nseats;
+	int team_begin, team_end, table_begin, table_end;
+	team_begin = 2;
+	while(scanf("%d%d", &network.nteams, &network.ntables))
+	{
+		if(network.nteams == 0)
+			break;
+		
+		memset(network.adj_list, 0, sizeof(network.adj_list));
+		memset(network.ndegrees, 0, sizeof(network.ndegrees));
+		team_end = team_begin + network.nteams;
+		table_begin = team_end;
+		table_end = table_begin + network.ntables;
+		
+		npeople = 0;
+		for(i = team_begin; i < team_end; i++)
+		{
+			network.adj_list[0][network.ndegrees[0]].v = i;
+			scanf("%d", &network.adj_list[0][network.ndegrees[0]].capacity);
+			npeople += network.adj_list[0][network.ndegrees[0]++].capacity;
+			network.adj_list[i][network.ndegrees[i]++].v = 0;
+		}
+		nseats = 0;
+		for(i = table_begin; i < table_end; i++)
+		{
+			network.adj_list[i][network.ndegrees[i]].v = 1;
+			scanf("%d", &network.adj_list[i][network.ndegrees[i]].capacity);
+			nseats += network.adj_list[i][network.ndegrees[i]++].capacity;
+			network.adj_list[1][network.ndegrees[1]++].v = i;
+		}
+		
+		if(npeople > nseats)
+		{
+			printf("0\n");
+			continue;
+		}
+		
+		for(i = team_begin; i < team_end; i++)
+		{
+			for(j = table_begin; j < table_end; j++)
+			{
+				network.adj_list[i][network.ndegrees[i]].v = j;
+				network.adj_list[i][network.ndegrees[i]++].capacity = 1;
+				network.adj_list[j][network.ndegrees[j]++].v = i;
+			}
+		}
+		
+		edmonds_karp();
+		
+		total_flow = 0;
+		for(i = 0; i < network.ndegrees[0]; i++)
+			total_flow += network.adj_list[0][i].flow;
+		if(total_flow == npeople)
+		{
+			printf("1\n");
+			for(i = team_begin; i < team_end; i++)
+			{
+				int tmp = 0;
+				for(j = 0; j < network.ndegrees[i]; j++)
+				{
+					if(network.adj_list[i][j].v == 0 || network.adj_list[i][j].flow == 0)
+						continue;
+					if(tmp > 0)
+						printf(" ");
+					printf("%d", network.adj_list[i][j].v - table_begin + 1);
+					tmp++;
+				}
+				printf("\n");
+			}
+		}
+		else
+			printf("0\n");
+	}
+	return 0;
+}
+
+====================================================================================================
+
+There is another better method to solve this problem, which is a kind of greedy algorithm, instead of modeling the problem as a maximum flow problem. 
+Such a code can be seen in the .cpp file. It sorts tables and teams in decreasing order, both according to their sizes. It runs in 0.078s in uva. 
+However, I don't know how to prove the correctness of it.
+
+You can find another similar greedy algorithm in the Internet that only sorts teams. It's also accepted by uva with similar time cost. But such a greedy algorithm is wrong. (The test cases in uva are not enough.) Try the following test case:
+4 5
+5 4 3 3
+3 3 3 4 5
+0 0
+
+====================================================================================================
+
+
+[1] Programming Challenges - The Programming Contest Training Manual. Skiena S.S., Revilla M.A.
+
+

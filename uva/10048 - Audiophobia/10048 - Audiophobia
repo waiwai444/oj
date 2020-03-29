@@ -1,0 +1,4 @@
+We can adapt the Floyd-Warshall algorithm that solves APSP problem. It only needs to change the if-condition and equation for updating. The correctness can be easily proved the same way as that for APSP problem.
+
+0.000s in uva 10048
+

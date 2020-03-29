@@ -1,0 +1,6 @@
+Let a boolean array flag[x] be true iff part of the coins can be summed up to x. We can obtain all values of this array one coin by one. 
+This method can be seen as a kind of dynamic programming.
+
+0.025s in uva 562
+0.013s in icpcarchive 5583 (1/36)
+

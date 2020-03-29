@@ -1,0 +1,4 @@
+An easy problem.
+An integer is a multiple of 11 if and only if the difference between the sum of its odd-position digits and that of its even-position digits is a multiple of 11.
+
+0.000s in uva 10929

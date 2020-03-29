@@ -1,0 +1,5 @@
+Easy problem, if you're familiar with mahjong.
+My algorithm adds one tile of each kind each time, and then uses DFS to check if this hand can "hu".
+
+0.019s in uva
+

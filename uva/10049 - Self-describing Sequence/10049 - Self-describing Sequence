@@ -1,0 +1,4 @@
+We can't record all values of f(n) because of the limit of the memory.
+Here, I record only parts of f(n) from the beginning (f(1) to f(1000000)), and then use these values to calculate f(n) for larger n.
+The reason that I can solve this problem like this is that even for the largest n (2000000000), the value of f(n) is less than 1000000.
+The run time in UVa is 0.020s.

@@ -1,0 +1,11 @@
+My code directly copes with the slash grid. It separates the lines of the slash grid as interlaced short lines and long lines, and then traverses the small squares in short lines one by one to check whether it can reach an edge or form a cycle. Since it directly copes with the inclined grid, my code is very long and seems tedious and cumbersome. It costs 0.022s in uva, not good but enough. If I have time later on, maybe I will try to improve my code...
+
+Better solution can be seen in [1][2], etc.
+
+Note: Don't use fflush to eat returns, it will cause OLE in poj and WA in uva... Use scanf("%*c") instead.
+
+Same problem: poj 1103 - Maze
+
+
+[1] http://blog.csdn.net/shuangde800/article/details/7726620
+[2] http://blog.csdn.net/metaphysis/article/details/6828457

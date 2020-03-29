@@ -1,0 +1,10 @@
+Split each crossing into two nodes in the network with one arc of capacity 1 from one to the other, and add a source node and a sink node. Then we can solve it as a max-flow problem.
+
+I use Dinic's algorithm here since it's efficient enough(O(V^2E)) for this problem and it's easy to implement. Other more efficient algorithms could be used to improved the performance.
+
+0.020s in uva 563
+0.046s in la 5584
+
+
+PS. I once used Edmonds-Karp algorithm here, which ran 0.070s in uva 563 and 0.159s in la 5584. It's much slower than Dinic's algorithm, although both of them are based on the idea of Ford-Fulkerson method.
+

@@ -1,0 +1,2 @@
+Easy problem. Use bfs + adjacent matrix. It costs 0.016s in uva.
+Be careful about the output format (a dot after each line).

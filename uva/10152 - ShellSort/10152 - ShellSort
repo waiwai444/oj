@@ -1,0 +1,71 @@
+The following code is my own algorithm I first implemented. It gives the order of the turtles according to their target positions, finds out from the bottom to the top which turtles need to move, and move those turtles according to their positions descendingly. It costs 0.632s in UVa.
+However, according to Algorithmist.com, my algorithm can be modified to improve efficiency. We can give the order of the turtles according to their original positions, traverse the target order from the bottom to the top, find out the first turtle that is reversed in the original order, and inclusively output all turtles above it. It costs 0.540s in UVa.
+In fact, these two algorithms are completely equivalent, except for the efficiency when implemented and the number of lines of the codes. The latter code is in my .cpp file.
+
+The correctness of this algorithm, i.e. it produces the minimum number of move, can be easily proved, since it only move once those really need move.
+
+====================================================================================================
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<string> shells;
+int order[200];
+
+inline bool cmp(const int &a, const int &b)
+{
+	if(order[a]<order[b])
+		return true;
+	else
+		return false;
+}
+
+int main()
+{
+	int i, j, k, n, t;
+	string str;
+	cin>>k;
+	shells.reserve(200);
+	vector<int> to_be_moved;
+	to_be_moved.reserve(200);
+	while(k-->0)
+	{
+		cin>>n;
+		getline(cin, str);
+		shells.resize(n);
+		for(i=0; i<n; i++)
+			getline(cin, shells[i]);
+		for(i=0; i<n; i++)
+		{
+			getline(cin, str);
+			for(j=0; j<n; j++)
+				if(str==shells[j])
+					break;
+			order[j] = i;
+		}
+		t = n-1;	// find out those need to be moved
+		for(i=n-1; i>=0; i--)
+		{
+			if(order[i]!=t)
+				to_be_moved.push_back(i);
+			else
+				t--;
+		}
+		sort(to_be_moved.begin(), to_be_moved.end(), cmp);
+		for(i=to_be_moved.size()-1; i>=0; i--)
+		{
+			cout<<shells[to_be_moved[i]]<<endl;
+		}
+		cout<<endl;
+		if(k>0)
+		{
+			shells.clear();
+			to_be_moved.clear();
+		}
+	}
+	return 0;
+}
+====================================================================================================

@@ -1,0 +1,12 @@
+Keyword:
+DP
+
+Define d[i,j] as the cost when arriving at the i'th gas station (after oil the truck there) with the amount of gas equal to j. The recursive formula for d[i,j] is easy. It only needs two levels of loops. 
+Note that this algorithm is a pseudo-polynomial time algorithm. 
+
+My code runs in 0.015s in uva.
+
+PS: When I modified the code in poj2465 for this problem, I made a small mistake and that mistake took me a whole afternoon to find out it!! That is, I use an inappropriate "break" when reading input. It should be replaced by "continue"! All my attention was wrongly attracted by the input functions(scanf/gets/fgets)...
+
+Same problem:
+	poj 2465

@@ -1,0 +1,5 @@
+It's solved by a greedy algorithm that is very much like Dijkstra's algorithm for SSSP problem. Their difference is just on the definitions of a shortest path, which, here, is based on the earliest arrival day and time. 
+My program runs in 0.032s in poj and in 0.023s in uva.
+
+Same problem:
+	poj 2267

@@ -1,0 +1,7 @@
+matrix chain multiplication
+
+Use the dynamic programming method to get the optimal solution. Then print the output by recursion. 
+
+0.056s in icpcarchive 5456 (3/8(12))
+0.072s in uva 348
+

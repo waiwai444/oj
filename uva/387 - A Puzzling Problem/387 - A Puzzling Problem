@@ -1,0 +1,7 @@
+Use backtracking. Since the square is 4*4, we can use a 16 bit unsigned integer to represent it and hence facilitate backtracking. The translations of each piece can be done once at the beginning of each test case. 
+
+0.058s in uva (19/366)
+0s in poj
+
+Same problem:
+	poj 1544

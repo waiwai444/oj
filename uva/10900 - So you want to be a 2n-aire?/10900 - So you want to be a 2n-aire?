@@ -1,0 +1,19 @@
+An interesting problem about probability.
+
+Let Xn be the prize you will obtain when there are n questions remain, and f(n) = EXn.
+When there is no question remains, which means you have answered correctly all the questions, you can get the prize of 2^n. So f(0) = 2^n.
+When there is i questions remain, you have two choices. Once is to quit with 2^(n-i) prize, the other is try to answer the next question.
+Before answering each question, you can estimate the probability to answer correctly. The probability is itself a random variable. According to the total expectation law, we have:
+  EXi = E(E(Xi|P)),
+  where P is the random variable for the probability of correctly answering the next question. So here E(Xi|P) is also a random variable based on P.
+P is uniformly distributed in [t,1]. So,
+  EXi = E(E(Xi|P))
+      = int_t^1 max{2^(n-i), p*f(n-1)}*(1/(1-t)) dp
+	  = 1/(1-t)*(int_t^1 max{2^(n-i), p*f(i-1)} dp).
+Hence,
+f(0) = EX0 = 2^n
+f(i) = EXi = 1/(1-t)*(int_t^1 max{2^(n-i), p*f(i-1)} dp)
+
+Reference:
+http://www.algorithmist.com/index.php/UVa_10900.
+

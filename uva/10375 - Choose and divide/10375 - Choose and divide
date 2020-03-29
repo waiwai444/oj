@@ -1,0 +1,8 @@
+combinatorics
+
+We can just use long double to store the values. But in the range given by the problem there are some inputs that may still cause overflow. So we can reorder the multiplications and divisions to reduce the risk of overflow by first multiplying the largest numerator then divided by the largest denominator at each iteration of computing to make each intermediate results in proper range.
+p.s. The test cases in uva 10375 is not strong enough so that the naive algorithm which first compute C(p,q) then divided by C(r,s) can still get AC.
+
+0.000s in uva 10375
+0.016s in poj 2613
+

@@ -1,0 +1,11 @@
+shortest common supersequence
+DP
+
+Denote shortest common supersequence as SCS for simplicity.
+Let min_len[i][j] be the length of SCS for str1[1..i] and str2[1..j]. Also, let count[i][j] be the number of SCS for those partial substrings.
+It can be considered as choose which character to place at the current last position in the SCS, str1[i], str2[j], or both if they are the same.
+So, if str1[i] != str2[j], then min_len[i][j] = min(min_len[i-1][j], min_len[i][j-1])+1, i.e., choose str1[i] or str2[j] as the last character.
+If str1[i] == str2[j], we can easily prove that this two characters can share the current last position in the SCS, hence min_len[i][j] == min_len[i-1][j-1]+1:
+  The SCS for str1[1..i-1] and str2[1..j] will be not shorter than that for str1[1..i-1] and str2[1..j-1]. So if there is an SCS for str1[1..i] and str2[1..j] that is made up of SCS for str1[1..i-1] and str2[1..j], and str1[i] as the last character, then str2[j] must share with some k in str1[k] at a position in SCS. We can change str2[j] to share the last position with str1[i], and leave the SCS unchanged. 
+
+0.000s in uva (10723)

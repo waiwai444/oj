@@ -1,0 +1,7 @@
+ID-DFS.
+
+In order to prune effectively, we can sort the squares according to the numbers of un-guarded marked ones each square will guard descendingly, at each recurrence in DFS part. And then we try to put a queen at each square with that order.
+
+On the other hand, since the order for choosing positions of queens is irrelevant, if we cannot get a solution after putting a queen in some position in a DFS, we don't need to consider it any more in deeper recurrences after that.
+
+0.040s in uva 11214

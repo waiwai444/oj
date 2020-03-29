@@ -1,0 +1,6 @@
+DP, modulo arithmetic
+
+Let dp[i][j][k] be the number of groups with j numbers in the subset [1..i] of the numbers which sum up to k modulo d. So the result for each pair of (d, m), given the set of n numbers, is dp[n][m][0].
+
+0.000s in uva 10616
+

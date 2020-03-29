@@ -1,0 +1,7 @@
+Egyptian fractions
+
+A little bit hard. Calculate the Egyptian fraction with some restrictions. I use ID-DFS to solve it, since both the number of numbers in each level to be tested and the number of levels are infinite. In each level, the upper bound of numbers that can be taken as denominator can be easily determined, since it's ID-DFS (see the code). 
+Note that, don't traverse numbers in the last level, since it can be directly determined whether there's a number that can make the path feasible. This makes my code from TLE to 0.286s in uva.
+Long long type can be and should be used. (There's no test case here which exceeds the limitation of long long.)
+
+0.170s in uva 12558

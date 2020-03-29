@@ -1,0 +1,97 @@
+string
+
+
+====================================================================================================
+The following code uses Trie tree to store the concatenations of strings. But it always got TLE in uva.
+I think the reason is the large amount of memory allocation when inserting words into the tree. 
+====================================================================================================
+#include <stdio.h>
+#include <string.h>
+
+int m, n;
+char lang1[1500][10], lang2[1500][10];
+
+struct TrieNode
+{
+	TrieNode *child[26];
+	int word_idx;
+	
+	TrieNode() : word_idx(-1) { memset(child, 0, sizeof(child)); }
+} trie_tree;
+
+int min_word_idx, cur_word_idx;
+
+TrieNode *grow_trie_tree(TrieNode *node, const char *word)
+{
+	if(*word == '\0')
+		return node;
+	char ch = *word-'a';
+	if(node->child[ch] == NULL)
+		node->child[ch] = new TrieNode;
+	return grow_trie_tree(node->child[ch], word+1);
+}
+
+bool insert_word(TrieNode *node, const char *word)
+{
+	if(*word == '\0')
+	{
+		if(node->word_idx < min_word_idx)
+		{
+			node->word_idx = cur_word_idx++;
+			return true;
+		}
+		return false;
+	}
+	char ch = *word-'a';
+	if(node->child[ch] == NULL)
+		node->child[ch] = new TrieNode;
+	return insert_word(node->child[ch], word+1);
+}
+
+int solve()
+{
+	int i, j, result = 0;
+	TrieNode *node;
+	for(i = 0; i < m; i++)
+	{
+		for(j = 0; j < n; j++)
+		{
+			node = grow_trie_tree(&trie_tree, lang1[i]);
+			if(insert_word(node, lang2[j]))
+				result++;
+		}
+	}
+	return result;
+}
+
+int main()
+{
+	int i, t, c;
+	scanf("%d", &t);
+	cur_word_idx = 0;
+	for(c = 1; c <= t; c++)
+	{
+		scanf("%d%d", &m, &n);
+		gets(lang1[0]);
+		for(i = 0; i < m; i++)
+			gets(lang1[i]);
+		for(i = 0; i < n; i++)
+			gets(lang2[i]);
+		
+		min_word_idx = cur_word_idx;
+		printf("Case %d: %d\n", c, solve());
+	}
+	return 0;
+}
+====================================================================================================
+
+
+
+====================================================================================================
+The code in cpp file uses the BKDR hash function. 
+It ran in 0.369s in uva.
+====================================================================================================
+
+
+Pitfall: There exist empty strings in the input languages!
+

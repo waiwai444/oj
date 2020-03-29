@@ -1,0 +1,10 @@
+Keyword:
+geometry, trigonometry, tangent point, angle, vector
+
+The idea of this problem is simple, but to implement it correctly and precisely is a little bit troublesome. 
+
+Note: it's not a good idea to judge the equality of two floating numbers by "=="!
+Note: the return value of atan2 is in [-pi,pi], not in [0,2*pi]. I WAed several times due to this.
+Note: the precision problem of floating numbers is boring. My old code needs "long double" for some critical calculation to get AC, but for this code "double" will suffices. (The difference between the two codes is mainly in tangent_point().)
+
+My code runs in 0.152s in uva.

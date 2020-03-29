@@ -1,0 +1,7 @@
+DP
+
+Let dp[i][j][k] be the number of strings of length i, sum j, and the last value is at most k.
+Although L and S will be as large as 9999, most of the corresponding result is just 0, because the strings are strictly ascending and there are at most 26 lowercase characters.
+
+0.000s in uva 10912
+

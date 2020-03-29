@@ -1,0 +1,12 @@
+math, probability
+
+Let P(n) be the probability for n kids. Then
+	P(n) = 1-C(n-2, n/2-1)*(1/2)^(n-2),
+	where C is the combinatorial number.
+We can use an equation to recursively compute P(n):
+	P(n) = 1-(1-P(n-2))*(n-2)*(n-3)/(n/2-1)^2/4
+Otherwise, it will be very inefficient to compute all P(n) independently.
+
+0.000s in uva 557
+0.006s in la 5578
+

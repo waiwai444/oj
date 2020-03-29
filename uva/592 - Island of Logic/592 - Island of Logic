@@ -1,0 +1,9 @@
+logical deduction
+
+Use brute force to solve it. Generate all possible results, test if they satisfy the statements. If satisfied, record that result. If some facts remain the same across all satisfied results, then they’re real facts. 
+
+0.016s in uva
+0.000s in poj
+
+Same problem:
+	poj 1478

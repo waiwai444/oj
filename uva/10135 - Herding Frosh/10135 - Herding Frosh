@@ -1,0 +1,7 @@
+Keyword:
+geometry, computational geometry, convex hull
+
+A variant of convex hull problem. It adds a special point, i.e. the telephone post, that must be in a node of the result closed line segments set. 
+I used a method that has a similar idea as the Graham's algorithm for convex hull. First, sort the points according to their polar angle (-pi, pi], and remove coincident points and points with same polar angle. Then, from the original point, traverse all possible solutions counter-clockwise. That is, the first point is always the original point, and then traverse all other points counter-clockwise as the second point, go on with the similar method as in Graham's algorithm until the last point before the second point, and finally, connect the last point with the original point. The length of edges can be added then. There are some special cases need to be considered, which can be seen in my code. 
+
+My code runs in 0.219s in uva. 

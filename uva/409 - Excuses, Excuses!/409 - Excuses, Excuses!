@@ -1,0 +1,9 @@
+Keyword:
+string
+
+I used a Trie tree to store the keywords. 
+
+My code ran in 0.009s in uva.
+
+Same problem:
+	poj 1598

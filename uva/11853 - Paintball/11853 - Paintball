@@ -1,0 +1,4 @@
+We can model as a graph, with each vertex representing an opponent and two vertices being connected with each other if their ranges of firing intersects (or touches).
+Then we run DFS from vertices which represent opponents whose firing ranges intersect or touch the top border, and see if they will lead to an opponent whose range reaches the bottom border. If so, then there is no path to cross the field. Otherwise, we can get the entering point and the exit point during this traversal.
+
+0.000s in uva 11853

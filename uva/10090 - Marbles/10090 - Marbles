@@ -1,0 +1,7 @@
+Number theory, extended Euclidean algorithm
+
+Let x1, x2 be the numbers of boxes. The object is to minimize c1*x1+c2*x2 under the constraint that n1*x1+n2*x2 = n, x1>=0, x2>=0, x1, x2 are integers. 
+We can get all the feasible solution of the equation n1*x1+n2*x2 = n, and then to see which makes the minimum cost. 
+n1*x1+n2*x2 = n is a linear equation. We have to find out one of its particular solution to get the general solution. This can be achieved by extended Euclidean algorithm, which solves the equation a*x+b*y = gcd(a,b). We can use the extended Euclidean algorithm to solve n1*x+n2*y = gcd(n1,n2). Since gcd(n1,n2)|n, we have x1' = x*n/gcd(n1,n2), x2' = y*n/gcd(n1,n2). According to the linear algebra, the general solution is x1 = x1'-k*n2/gcd(n1,n2) and x2 = x2'+k*n1/gcd(n1,n2), where k is an integer parameter. 
+Since x1'-k*n2/gcd(n1,n2) >= 0 and x2'+k*n1/gcd(n1,n2) >= 0, we have -x2'*d/n1 <= k <= x1'*d/n2. We can change the integer k in this range to find out an optimal solution to the problem. 
+Indeed, we can directly find out such an integer k. We want to minimize c1*x1+c2*x2 = c1*(x1'-k*n2/gcd(n1,n2))+c2*(x2'+k*n1/gcd(n1,n2)) = (c2*n1-c1*n2)*k+c1*x1'+c2*x2', which is a linear function. If c2*n1>c1*n2, the minimum value of k will be optimal, i.e. k = ceil(-x2'*d/n1), otherwise, the maximum value of k will be optimal, i.e. k = floor(x1'*d/n2). Once we obtain k, we get the solution x1 and x2.

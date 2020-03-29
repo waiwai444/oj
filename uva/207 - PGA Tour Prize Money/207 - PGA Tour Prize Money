@@ -1,0 +1,12 @@
+Bruteforce, simulation
+
+It's a very straightforward but tedious problem with complicated requirements.
+
+First, sort players according to their sums of first two scores. Filter out those not making cut. And then sort again by their sums of all four scores. Then scan them and compute the places and prizes carefully, especially for amateurs and ties.
+
+Notice that 'RDJ' in the text should be 'RD1'.
+Also notice that when sorting by names, '*' should also be taken into consideration. This caused me WA several times.
+Although the text said "the order among disqualified players is unimportant", the judge isn't a special judge and we have to find a unique order.
+
+0.020s in uva 207
+0.043s in la 5146

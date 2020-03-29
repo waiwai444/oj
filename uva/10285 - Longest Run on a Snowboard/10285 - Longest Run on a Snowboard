@@ -1,0 +1,4 @@
+This problem can be modeled as a longest path problem in a DAG. We can use DFS to solve it.
+
+0.029s in uva 10285
+

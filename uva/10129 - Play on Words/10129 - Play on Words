@@ -1,0 +1,8 @@
+I model this problem as a directed graph with 26 nodes for each character. Each directed edge is a word that connects the node for the first character to that for the last character. Then, check if there is a Eulerian path or cycle in this graph. 
+Since we don’t need to output the path or the cycle, we don’t need to record the whole graph. See the code for details.
+
+0.297s in poj
+0.025s in uva
+
+Same problem:
+	poj 1386

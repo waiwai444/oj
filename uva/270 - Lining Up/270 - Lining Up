@@ -1,0 +1,8 @@
+I use the O(n^2logn) algorithm. For each point, sort all other points by their polar angles from that point to facilitate finding out the maximal number of collinear points.
+
+0.242s in uva
+0.282s in poj
+
+Same problem:
+	poj 1118
+

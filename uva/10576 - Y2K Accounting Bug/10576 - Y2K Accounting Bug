@@ -1,0 +1,4 @@
+It can be easily proved the solution based on a greedy method is an optimal one. The key to the proof is to show that the greedy solution has the same number of months of deficit as an optimal one. 
+
+Same problem:
+	poj 2586

@@ -1,0 +1,5 @@
+Keyword:
+
+A very very simple problem. Just one thing - the maximum number is 2^32. So "int" will not suffice. I use "long long" to get AC. But I found a sample code which is also AC using "long". Does it mean that in uva's server, "long" is as the same word length as "long long"? (64bit cpu?)
+
+My code runs in 0.068s in uva.

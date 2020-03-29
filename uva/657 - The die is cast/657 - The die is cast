@@ -1,0 +1,6 @@
+I use two levels of dfs (flood fill), one for searching '*' and the other for 'X'. 
+
+0s in poj, 0.022s in uva.
+
+Same problem:
+	poj 1481

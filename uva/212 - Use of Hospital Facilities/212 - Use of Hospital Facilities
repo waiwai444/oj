@@ -1,0 +1,13 @@
+Simulation.
+
+The way to think this problem is quite straightforward, but to code it correctly is a rather troublesome task. This is largely because its description is quite lengthy and there are a lot of details and pitfalls.
+
+We can use a priority queue to keep track of the time an operating room finished its surgery. See the code for the details of the algorithm.
+
+Notice that, the problem text doesn't describe the exact output format in detail. I referred to the output of uDebug to avoid meaningless WA trials for the output format.
+
+There is another key point that is hidden in this sentence: "If two patients emerge from surgery at the same time, the patient with the lower number will be the first assigned to a recovery room bed."
+Here, "the lower number" refers to the number of the operating room, not the number of the patient in the roster. I got all WA's due to this annoying pitfall.
+
+0.000s in uva 212
+0.000s in la 5151

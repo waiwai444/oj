@@ -1,0 +1,5 @@
+Easy problem
+
+0.010s in uva 11988
+
+ps. I got two PE's because the buffer for fgets() is not large enough so that the trailing newline character may be read in the next call.

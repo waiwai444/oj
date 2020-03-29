@@ -1,0 +1,7 @@
+DP
+
+Since we need to compute the number of longest paths, and paths are only different on their garbage locations, so I model the garbage locations as nodes in a graph, and then use DP on this graph to compute the maximum number of gabages collected and the number of such paths.
+Edges are from node A to node B iff, when picks up them, no other node(garbage) can be picked up between them.
+To facilitate constructing the graph, link lists for every row are introduced, each of which links all garbages in that row.
+
+0.047s in uva (10599)

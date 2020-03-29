@@ -1,0 +1,6 @@
+Easy problem.
+
+Sort the books and then keep track of each book's status (on the shelf, borrowed, or returned on the desk).
+
+0.000s in uva 230
+0.003s in la 5169

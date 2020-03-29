@@ -1,0 +1,5 @@
+An easy problem. But because the maximum length of the encoded message is unknown, I treat the input as a stream and decode it while reading. The code needs to handle the case that an intact key or length is broken by a newline.
+
+0.000s in la 2005
+0.006s in la 5152
+0.000s in uva 213

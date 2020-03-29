@@ -1,0 +1,5 @@
+Easy max-flow problem. It can be modeled as a bipartite graph and solve it using the max-flow algorithm.
+Use Edmonds-Karp algorithm.
+
+0.000s in uva 11045
+

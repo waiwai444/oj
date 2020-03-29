@@ -1,0 +1,24 @@
+Keyword:
+math, geometry
+
+A rather complicated problem. 
+First, there are several non-trivial cases to be considered: 
+	1. The object flies over the origin.
+		1.1 Two observations are on the same side of the origin.
+			Under this case, there are several cases to be considered. (Different possible locations of the third observation. Refer to the code.)
+		1.2 Two observations are on different sides of the origin.
+			Under this case, there are two possible locations to be considered. (Refer to the code.)
+	2. The object doesn't fly over the origin.
+		This is more complicated than item 1.
+		2.1 (p1,o,p2) is counter-clockwise. ('p1','p2' are the first two observations. 'o' means the origin. Here, 'clockwise' is according to the convention in math, which is reverse from the 'clockwise' in the problem description.)
+			This is relatively simpler than 2.2. There is only one location for the next observation.
+		2.2 (p1,o,p2) is clockwise.
+			There are at most 2 possible locations for the next observation. 
+			2.2.1 p1 and p2 are on the same period of the radar scanning. (Note that, this case may not be possible since there will be an observation between p1 and p2. However, the dataset of uva doesn't consider it. So, we'll always include this case.)
+			2.2.2 p2 are on the second period of the radar scanning. 
+The number of possible locations is 1 or 2.
+
+Second, it's sensitive to the precision of floating point number. Different precisions may cause some solutions to be lost. 
+Thrid, to solve the problem under case 2, we have to solve a transcendental equation. Here I use the bisection method to solve get the approximate solution. To use bisection method, we must make sure that there is at most 1 solution in the range. So we have to carefully determine the range in which the solution is searched, and in this problem, such a range does exist. 
+
+My code ran in 0.009s in uva (rank 9, and only 19 people solved it so far).

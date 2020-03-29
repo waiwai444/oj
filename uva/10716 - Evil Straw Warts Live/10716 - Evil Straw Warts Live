@@ -1,0 +1,30 @@
+palindrome
+
+Good problem.
+Calculate the minimum number of swaps to make a string palindrome.
+
+If there are more than one character whose number is odd, then there's no solution.
+If there exist solution, we can find one by the following algorithm:
+  Determine the characters inwards from the two ends. That is, first determine the 0th position and the (n-1)'st position, and then the 1th and the (n-2)'nd, etc. 
+  For each pair of opposite positions i'th and (n-1-i)'th, use a greedy strategy to find the character. The character to place is one of the two characters in the i'th and the (n-1-i)'th position. If the two characters are the same, then done. Otherwise, choose the one that needs less move(s) to make the opposite position have the same character. 
+
+====================================================================================================
+The followings are the sketch of the proof:
+====================================================================================================
+1) If in an optimal solution, the outermost characters of the final string are x, then we can directly move them to the place at the first step. This will not affect the remaining characters and will not increase the number of steps. We can repeat this step on the substring with the first and the last character of the original string removed. So, we denote the determination of the 0th position and the (n-1)'st position as the level 0 determination, and so on.
+2) If none of the characters of the two ends of a string is used in the two ends of that string in the final solution, then one of them must be used in the two ends of a substring of that string (maybe one level or more later). Let that level be the level i, and assume the end-position character used in the level i be 'a', then on the level i-1, there is another character, e.g. 'b', which is not on any of the end positions, being moved to the end positions. We can show that, in any circumstances (consider different relative position of 'a' and 'b'), we could change the order of 'a' and 'b' to be used in level i-1 and level i without increase the number of steps. 
+  Different circumstances include ('.' for any other character. Note that, 'a' and 'b' depicted below are always the first or the last one of that character):
+    a....b......b....a....
+	a....b......a....b....
+	a....a......b....b....
+  It's easy to show that in all these circumstances, the number of steps caused by changing the order will not increase. (In fact, in the first case, the number of steps will decrease.)
+  So, we can safely use 'a' first, i.e. in the level i-1. Repeat this reasoning, we can conclude that we can safely use one of the end-position characters at the end position. 
+3) According to 2), we can choose one the the end-position character at each level. And we can also see that, we can safely choose the one that needs less moves greedily. To choose the one with less moves is mainly because there may exist a character with odd number. If we meet with a end character with no partner, then we should choose the other end character. In other cases, for example, the two end characters are 'a' and 'b', respectively. Then use 'a' first and then use 'b' will be the same as using 'b' first and then 'a'. 
+====================================================================================================
+	
+0.009s in uva
+0.125s in poj
+
+Same problem:
+	poj 1854
+

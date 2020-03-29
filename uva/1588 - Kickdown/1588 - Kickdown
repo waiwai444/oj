@@ -1,0 +1,5 @@
+Since the lengths of strings are at most 100, we can just bruteforce each position for alignment and compare them.
+
+0.000s in la 3712
+0.016s in poj 3158
+0.000s in uva 1588

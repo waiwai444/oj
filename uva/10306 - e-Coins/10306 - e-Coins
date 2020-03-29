@@ -1,0 +1,6 @@
+First, use brute force to find out integers a and b such that a^2+b^2=s^2.
+Then, DP on each such a, b pair.
+
+0.016s in poj (3021)
+0.022s in uva (10306)
+

@@ -1,0 +1,124 @@
+Keyword:
+Disjoint-set
+
+My code uses a disjoint-set to handle people. setFriends is used to merge two friendly subsets. Note that hostile subsets can not be merged. So another array is used to store hostile relationship. (There are only two countries.) 
+It runs in 0.049s in uva. 
+
+
+====================================================================================================
+Following is another brute force algorithm I wrote.
+It uses an array to store which side a person belonging to, as currently known. And in each setFriends or setEnemies, merge sides into one side or into two opposite side. 
+This code runs in 1.979s in uva. Poor but acceptable.
+A better method is to use a disjoint-set. 
+
+====================================================================================================
+
+#include <stdio.h>
+
+#define MAXP 10000
+
+int n;
+int country_label[MAXP] = {0};
+int max_label;
+
+void merge(int l1, int l2)
+{
+	int i;
+	for(i = 0; i < n; i++)
+		if(country_label[i] == l2)
+			country_label[i] = l1;
+		else if(country_label[i] == -l2)
+			country_label[i] = -l1;
+}
+
+void rmerge(int l1, int l2)
+{
+	int i;
+	for(i = 0; i < n; i++)
+		if(country_label[i] == l2)
+			country_label[i] = -l1;
+		else if(country_label[i] == -l2)
+			country_label[i] = l1;
+}
+
+bool setFriends(int x, int y)
+{
+	if(country_label[x] == 0 && country_label[y] == 0)
+		country_label[x] = country_label[y] = ++max_label;
+	else if(country_label[x] != 0 && country_label[y] == 0)
+		country_label[y] = country_label[x];
+	else if(country_label[x] == 0 && country_label[y] != 0)
+		country_label[x] = country_label[y];
+	else if(country_label[x] == -country_label[y])
+		return false;
+	else
+		merge(country_label[x], country_label[y]);
+	return true;
+}
+
+bool setEnemies(int x, int y)
+{
+	if(country_label[x] == 0 && country_label[y] == 0)
+		country_label[y] = -(country_label[x] = ++max_label);
+	else if(country_label[x] != 0 && country_label[y] == 0)
+		country_label[y] = -country_label[x];
+	else if(country_label[x] == 0 && country_label[y] != 0)
+		country_label[x] = -country_label[y];
+	else if(country_label[x] == country_label[y])
+		return false;
+	else
+		rmerge(country_label[x], country_label[y]);
+	return true;
+}
+
+bool areFriends(int x, int y)
+{
+	if(country_label[x] != 0 && country_label[x] == country_label[y])
+		return true;
+	return false;
+}
+
+bool areEnemies(int x, int y)
+{
+	if(country_label[x] != 0 && country_label[x] == -country_label[y])
+		return true;
+	return false;
+}
+
+int main()
+{
+	int op, x, y;
+	scanf("%d", &n);
+	max_label = 0;
+	while(scanf("%d%d%d", &op, &x, &y))
+	{
+		if(op == 0)
+			break;
+		switch(op)
+		{
+			case 1:
+				if(!setFriends(x, y))
+					printf("-1\n");
+				break;
+			case 2:
+				if(!setEnemies(x, y))
+					printf("-1\n");
+				break;
+			case 3:
+				if(areFriends(x, y))
+					printf("1\n");
+				else
+					printf("0\n");
+				break;
+			case 4:
+				if(areEnemies(x, y))
+					printf("1\n");
+				else
+					printf("0\n");
+				break;
+		}
+	}
+	return 0;
+}
+
+====================================================================================================

@@ -1,0 +1,55 @@
+====================================================================================================
+The following code reads input one line each time, and parses the line in an array to get the numbers. I thought it would be faster than that of using scanf each time for a number. But the experiment shows that the time costs in uva of both methods are the same(0.019s). Scanf is so efficient!
+====================================================================================================
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAXN 1000
+
+int main()
+{
+	int i, n, tc = 0, strong, all;
+	int code[MAXN];
+	int guess[MAXN];
+	int code_count[10];
+	int guess_count[10];
+	char input[3000];
+	while(scanf("%d", &n), n)
+	{
+		gets(input);
+		memset(code_count, 0, sizeof(code_count));
+		gets(input);
+		code[0] = atoi(strtok(input, " "));
+		code_count[code[0]]++;
+		for(i = 1; i < n; i++)
+		{
+			code[i] = atoi(strtok(NULL, " "));
+			code_count[code[i]]++;
+		}
+		printf("Game %d:\n", ++tc);
+		while(1)
+		{
+			memset(guess_count, 0, sizeof(guess_count));
+			gets(input);
+			guess[0] = atoi(strtok(input, " "));
+			if(guess[0] == 0)
+				break;
+			guess_count[guess[0]]++;
+			for(i = 1; i < n; i++)
+			{
+				guess[i] = atoi(strtok(NULL, " "));
+				guess_count[guess[i]]++;
+			}
+			strong = all = 0;
+			for(i = 0; i < n; i++)
+				if(code[i] == guess[i])
+					strong++;
+			for(i = 1; i <= 9; i++)
+				all += (code_count[i] <= guess_count[i] ? code_count[i] : guess_count[i]);
+			printf("    (%d,%d)\n", strong, all-strong);
+		}
+	}
+	return 0;
+}
+====================================================================================================

@@ -1,0 +1,1 @@
+A very simple problem. But I've encountered a strange but not interesting issue. I always got PE when using fgets() to get inputs. However, when I changed to gets(), it got AC. I don't know why. 

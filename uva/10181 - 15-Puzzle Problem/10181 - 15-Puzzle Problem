@@ -1,0 +1,8 @@
+I used the A* algorithm[1,2] in the code. The scoring function uses the Manhattan distance. With different scoring functions, it has different performances. When the ratio of the coefficients of g*(n) and h*(n) is 1:2 [3], the running time in UVa is 0.060sec. Other ratio that I have tried includes 0:1(TLE), 1:1(7.216sec), 1:4/3 [4](0.400sec).
+In order to quickly judge whether an initial board layout is solvable, we can use some result from math[5], or otherwise it's likely to be TLE. 
+
+[1] http://en.wikipedia.org/wiki/A*
+[2] http://baike.baidu.com/view/7850.htm
+[3] http://hi.baidu.com/zyz913614263/item/8885f22cdd06fd1b73863e65
+[4] http://blog.csdn.net/metaphysis/article/details/6560047
+[5] http://mathworld.wolfram.com/15Puzzle.html

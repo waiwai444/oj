@@ -1,0 +1,9 @@
+Map the tin plate into a grid by the following method:
+  Each line segment will have its line width occupying one cell (its length unchanged). The space between line segments will be compressed as much as possible. See the code for details.
+
+After this step, we can run the flood fill algorithm on this grid to mark area that is remained(the outer area) and to find holes. (When finding holes, the flood fill algorithm can flood over a line segment if the other side of this line segment is not the outer area.)
+
+0.020s in uva 308
+0.056s in la 5523
+0.110s in poj 1371
+

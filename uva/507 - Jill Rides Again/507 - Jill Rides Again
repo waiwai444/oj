@@ -1,0 +1,6 @@
+Here is an O(n) algorithm. That is, record the current max niceness value where the current road is used when traverse the road array. It's easy to prove the correctness of this algorithm. 
+
+ps: This algorihm turns out to have a name - Kadane's algorithm.
+
+0.152s in uva 507
+0.116s in la 5193

@@ -1,0 +1,5 @@
+Partition the plane into adjacent but not overlapped small grids according to the x and the y coordinates of four edges of each rectangle. And then for each rectangle, flag those small grids laid in the rectangle. Sum the areas of all grids that are in some rectangle(s).
+
+0.000s in uva 688
+0.006s in la 5676
+

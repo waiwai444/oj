@@ -1,0 +1,6 @@
+Notice that if a set of molecules can form unbounded complex, then there must exist an isomer that is formed by expanding each new piece of molecule to the right side or the above side, since molecules can be rotated and turned over.
+
+Then we can easily solve this problem by DFS with pruning.
+
+0.060s in uva 1572
+0.109s in la 6393

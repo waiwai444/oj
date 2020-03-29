@@ -1,0 +1,12 @@
+Use IDA* algorithm. (Just IDDFS with some pruning)
+
+Since the data set is at most 1000, we can compute all answers at the beginning.
+
+Also notice that, when visiting each node, we don't need to add or subtract all pairs of numbers. All we need is just add/subtract each number to/from the last number. It's correct because the last number is obviously always used, and it's always used in the current last computation, otherwise we can always reorder the computations to make an equivalent order which uses the last number in the current last computation.
+
+In order to prune, we record the current longest continuous answers from 1 we already got. If the remaining steps can not make the last number to reach the minimum unknown answer even by doubling, then we can safely ignore that branch.
+
+Since the input is at most 1000, we can also compute all answers and hard-code the answers into the code for better performance. I didn't use it here.
+
+0.020s in uva 1374
+0.049s in la 3621

@@ -1,0 +1,7 @@
+DP, bignum
+
+Let ans[i][j] be the answer for i-ary tree of depth j. And sum[i][j] be the sum from ans[i][0] to ans[i][j]. Then we can use these two arrays for DP.
+Note that, the result numbers will be very huge so that we cannot compute for most of n and d, even if they are in the given ranges. We can ignore those trees with more than 2^10 nodes in a level, according to the problem requirement.
+
+0.000s in uva 10516 (3/262)
+

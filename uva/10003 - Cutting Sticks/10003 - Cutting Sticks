@@ -1,0 +1,6 @@
+Keyword:
+DP
+
+The cutting point is presented from left to right. Define min_cost[i,j] as the cost of cutting between cutting point i and j, where we take cutting point 0 and n+1 as the two end-points of the stick. So our goal is to compute min_cost[0,n+1]. min_cost[i,j] can be expressed as a recursive function: min_cost[i,j] = min{min_cost[i,k] + min_cost[k,j]}+length[i,j], where k represents cutting point between i and j, length[i,j] is the length from i to j, and min_cost[i,i+1] = 0. 
+
+My code runs in 0.129s in uva.

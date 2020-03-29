@@ -1,0 +1,7 @@
+binary tree, simple physics
+
+A simple binary tree problem. For simplicity, I use recursion to solve it. 
+
+Forgetting to return the weight of subtree made me WA once...
+
+0.062s in uva

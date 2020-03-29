@@ -1,0 +1,10 @@
+BigNum; DP
+
+Let m = n/2, which means the number of pairs of parentheses. 
+Let c(m, d) be the number of correct expressions with m pairs of parentheses and depth at most d. 
+So c(m, d) = c(0, d-1)*c(m-1, d)+c(1, d-1)*c(m-2, d)+ ... +c(m-1, d-1)*c(0, d), with boundary conditions c(0, d) = 1, c(m, 0) = 0. It's somewhat similar to the Catalan number, or it can be considered as a 2-dimensional Catalan number.
+Then we can use dynamic programming to calculate these numbers.
+
+However, although it's based on dynamic programming, the computation of big integers in this problem is quite time-consuming. 
+In my first code, which uses one byte (char) to represent a digit (this is the common use), the time elapsed in UVa is 7.208s (time limit 10s)
+But, if we use more bytes as a unit (e.g. int, long, etc.) to represent a group of digits, we can take advantage of the speed of the machine-level arithmetic operations. So in my final code, four bytes (long) are used to represent 4 digits of the big integer (0000-9999). This is equivalent to the 10000-decimal number, and the arithmetic rule of addition is "every 10000 into one". The time costs in UVa is 0.692s. A great advance.

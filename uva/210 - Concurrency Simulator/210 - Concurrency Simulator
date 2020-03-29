@@ -1,0 +1,6 @@
+An easy simulation problem
+
+Use two double-ended queues to represent the ready queue and the blocked queue.
+
+0.090s in uva 210
+0.119s in la 5149

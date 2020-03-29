@@ -1,0 +1,4 @@
+A simple problem. This requires the minimum possible rows. First we can determine the number of columns (ncols). Then, let the number of rows be n/ncols. And last, adjust the last row to achieve the goal of formation.
+
+Same problem:
+	poj 1589

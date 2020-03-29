@@ -1,0 +1,6 @@
+It's similar to the problem that finds k edge-disjoint paths between a pair of vertices with the minimum sum of distances. It can be solved as a min-cost max-flow problem.
+
+Here I use the priority queue in SPFA instead of a normal queue. It ran 0.080s compared to 0.120s when using a normal queue.
+
+0.080s in uva 10594
+

@@ -1,0 +1,12 @@
+I use backtracking on every cell in the board and the three directions in each cell, meanwhile making sure to satisfy the constraints. 
+Since there’re less than 1300 different layouts of pieces for a given set of pieces, we can pre-calculated all these layouts at first by backtracking, and then try all these layouts with given numbers to find out the max. 
+
+0.662s in uva
+0.079s in poj
+
+ps. The problem restricts that each row has only one value in that direction. I don’t know whether there exists bigger summation if we get rid of this constraint. 
+
+ps. There seems to be some fixed format for the maximum result. But I didn’t try to make use of it. 
+
+Same problem:
+	poj 1134

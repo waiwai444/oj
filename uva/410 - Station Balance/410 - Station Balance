@@ -1,0 +1,35 @@
+We can sort the specimens descendingly, denoted as x1, x2, x3, ... x(2c). And then make pairs like (x1, x(2c)), (x2, x(2c-1))... If there are less than 2*c specimens, appended with zeros.
+
+It can be proved that this strategy can achieve the optimal result.
+
+Proof:
+Let M be the current maximum mass value, m be the current minimal mass value, and a be the target value(at the begining, it's the average AM as described in the text).
+If in a solution, M is not paired with m but with x > m, and m is paired with y < M, then we can show that exchanging them can make a better solution.
+Let s1 = |M+x-a|+|m+y-a|, s2 = |M+m-a|+|x+y-a|. We have M >= x, M > y, m < x, m <= y, and M > m.
+We need to discuss different cases:
+1. M+x >= a:
+  1.1. m+y >= a:
+    1.1.1. M+m >= a:
+	  1.1.1.1. x+y >= a: s1-s2 = M+x-a+m+y-a-M-m+a-x-y+a = 0
+	  1.1.1.2. x+y < a: impossible
+	1.1.2. M+m < a: impossible
+  1.2. m+y < a:
+    1.2.1. M+m >= a:
+	  1.2.1.1. x+y >= a: s1-s2 = M+x-a+a-m-y-M-m+a-x-y+a = 2*(a-m-y) > 0
+	  1.2.1.2. x+y < a: s1-s2 = M+x-a+a-m-y-M-m+a-a+x+y = 2*(x-m) > 0
+	1.2.2. M+m < a:
+	  1.2.2.1. x+y >= a: s1-s2 = M+x-a+a-m-y-a+M+m-x-y+a = 2*(M-y) > 0
+	  1.2.2.2. x+y < a: s1-s2 = M+x-a+a-m-y-a+M+m-a+x+y = 2*(M+x-a) >= 0
+2. M+x < a:
+  2.1. m+y >= a: impossible
+  2.2. m+y < a:
+    2.2.1. M+m >= a: impossible
+	2.2.2. M+m < a:
+	  2.2.2.1. x+y >= a: impossible
+	  2.2.2.2. x+y < a: s1-s2 = a-M-x+a-m-y-a+M+m-a+x+y = 0
+So, under any case, s1 >= s2, which means we can pair M with m and x with y to make a better solution.
+Repeat this process with the remaining specimens and we can obtain an optimal result.
+
+0.000s in uva 410
+0.016s in la 5494
+0.000s in poj 1599

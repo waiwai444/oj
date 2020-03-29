@@ -1,0 +1,5 @@
+DP, game
+Let dp[i][j] be the maximum difference between the current player and the other player when dealing with subsequence [i,j].
+
+0.029s in uva (10891)
+

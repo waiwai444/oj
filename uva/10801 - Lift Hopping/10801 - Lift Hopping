@@ -1,0 +1,5 @@
+Construct a graph with each node representing a possible combination of the elevator and the floor. The weights of edges are the time used to move between them. Then take this as a kind of SSSP problem and we can find any shortest path to reach floor k.
+I used Dijkstra's algorithm with priority queue.
+
+0.000s in uva 10801
+

@@ -1,0 +1,7 @@
+Keyword:
+computational geometry, grid polygon
+
+Accord the Pick's theorem, Area(P) = I(P)+B(P)/2-1. 
+First, calculate the area of the simple polygon by sum of signed triangle areas. Then use GCD to get the number of integral points on each border. (When the border is not vertical nor horizontal. Or other cases are trivial.) 
+
+My code ran in 0.025s in uva. When calculate the number of integral points on each border, it will cause TLE if traverse each possible points on a border. 

@@ -1,0 +1,8 @@
+string
+
+Easy problem.
+I use BKDRhash algorithm to hash strings. The seed of BKDRhash is 131.
+(I've also modified the seed to 31 and substracted each character by 'a', but it made no much difference. (0.065s in uva))
+
+
+0.062s in uva

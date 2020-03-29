@@ -1,0 +1,199 @@
+
+In the following code, I implement the linear expected time complexity algorithm for finding the i-th order statistics instead of using sorting function "sort()" or the order statistics function "nth_element()".
+The efficiency of this code is better than using "sort()", and is close to "nth_element()" in UVa. (0.052s, 0.060s, 0.048s, respectively.) Its worst time complexity is O(n^2).
+====================================================================================================
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+
+using namespace std;
+
+int randomized_partition(int a[], int p, int r)
+{
+	int pivot;
+	int s;
+	int i, j;
+	srand(unsigned(time(0)));
+	pivot = p+(r-p)*((double)rand()/RAND_MAX);
+	s = a[pivot];
+	a[pivot] = a[p];
+	i = p, j = r;
+	while(true)
+	{
+		while(j>i && a[j]>=s)
+			j--;
+		if(j==i)
+			break;
+		else
+			a[i] = a[j];
+		while(i<j && a[i]<=s)
+			i++;
+		if(i==j)
+			break;
+		else
+			a[j] = a[i];		
+	}
+	a[i] = s;
+	return i;
+}
+
+int randomized_select(int a[], int p, int r, int i)
+{
+	int q;
+	if(p==r)
+		return a[p];
+	q = randomized_partition(a, p, r);
+	if(i==q)
+		return a[q];
+	if(i>q)
+		return randomized_select(a, q+1, r, i);
+	else
+		return randomized_select(a, p, q-1, i);
+}
+
+int main()
+{
+	int i, d, r, v;
+	int s[500];
+	int dist;
+	cin>>d;
+	while(d-->0)
+	{
+		cin>>r;
+		for(i=0; i<r; i++)
+			cin>>s[i];
+		if(r%2==0)
+		{
+			v = randomized_select(s, 0, r-1, r/2-1);
+		}
+		else
+		{
+			v = randomized_select(s, 0, r-1, r/2);
+		}
+		dist = 0;
+		for(i=0; i<r; i++)
+			if(s[i]<v)
+				dist += v-s[i];
+			else if(s[i]>v)
+				dist += s[i]-v;
+		cout<<dist<<endl;
+	}
+	return 0;
+}
+====================================================================================================
+
+The following code uses the O(n) algorithm. Theoretically, even in the worst case, its time complexity is O(n). 
+In UVa, it still costs 0.052s. (If the functions "insertion_sort()" and "partition()" are not inline, the time costed is 0.056s.)
+====================================================================================================
+#include <cmath>
+#include <iostream>
+
+using namespace std;
+
+inline void insertion_sort(int a[], int p, int r)
+{
+	int i, j;
+	int t;
+	for(i=p+1; i<=r; i++)
+	{
+		t = a[i];
+		for(j=i-1; j>=p; j--)
+		{
+			if(t<a[j])
+				a[j+1] = a[j];
+			else
+				break;
+		}
+		a[j+1] = t;
+	}
+}
+
+// partition the subarray using a[m] as the pivot
+inline int partition(int a[], int p, int r, int m)
+{
+	int s;
+	int i, j;
+	s = a[m];
+	a[m] = a[p];
+	i = p, j = r;
+	while(true)
+	{
+		while(j>i && a[j]>=s)
+			j--;
+		if(j==i)
+			break;
+		else
+			a[i] = a[j];
+		while(i<j && a[i]<=s)
+			i++;
+		if(i==j)
+			break;
+		else
+			a[j] = a[i];
+	}
+	a[i] = s;
+	return i;
+}
+
+// find the index of the element of n-th order between a[p] and a[r].
+int select(int a[], int p, int r, int n)
+{
+	int i;
+	// sort each small subarray with 5 elements
+	int count = (int)ceil((r-p+1)/5.0);
+	for(i=0; i<count-1; i++)
+		insertion_sort(a, p+i*5, p+i*5+4);
+	insertion_sort(a, p+i*5, r);
+	if(count==1)
+		return p+n-1;
+	// get the median of medians of small subarrays
+	int *b = new int[count];
+	for(i=0; i<count-1; i++)
+		b[i] = a[p+i*5+2];
+	b[count-1] = a[p+(count-1)*5+(r-(count-1)*5)/2];
+	int m = select(b, 0, count-1, (count+1)/2);
+	if(m<count-1)
+		m = p+m*5+2;
+	else
+		m = p+m*5+(r-m*5)/2;
+	delete[] b;
+	// partition
+	int k = partition(a, p, r, m);
+	// recursion
+	if(n==k-p+1)
+		return k;
+	else if(n>k-p+1)
+		return select(a, k+1, r, n-k+p-1);
+	else
+		return select(a, p, k-1, n);
+}
+
+int main()
+{
+	int i, d, r, v;
+	int s[500];
+	int dist;
+	cin>>d;
+	while(d-->0)
+	{
+		cin>>r;
+		for(i=0; i<r; i++)
+			cin>>s[i];
+		if(r%2==0)
+		{
+			v = select(s, 0, r-1, r/2);
+		}
+		else
+		{
+			v = select(s, 0, r-1, r/2+1);
+		}
+		dist = 0;
+		for(i=0; i<r; i++)
+			if(s[i]<s[v])
+				dist += s[v]-s[i];
+			else if(s[i]>s[v])
+				dist += s[i]-s[v];
+		cout<<dist<<endl;
+	}
+	return 0;
+}

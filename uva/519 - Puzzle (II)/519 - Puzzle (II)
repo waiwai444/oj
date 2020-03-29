@@ -1,0 +1,9 @@
+Use backtracking on each cell on the board.
+I try each cell from left to right and from top to bottom.
+I think if we choose the four corners first, the time cost may be reduced. (But it’s too late tonight)
+
+0.157s in poj
+0.089s in uva
+
+Same problem:
+	poj 1368

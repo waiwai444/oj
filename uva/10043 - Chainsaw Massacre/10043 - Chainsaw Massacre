@@ -1,0 +1,7 @@
+Keyword:
+geometry, computational geometry
+
+My algorithm is O(n^2) and ran in 0.098s in uva (rank 11). 
+
+Note: There will be duplicated trees in the input data. 
+Note: The number of trees may exceed 1000, even getting rid of the duplicated trees. (Not very sure)

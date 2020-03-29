@@ -1,0 +1,9 @@
+probability, dp
+
+It's about posterior probability. Let Xi be the event that the i'th buyer has bought something, R be the event of r buyers has bought something. Then we need to compute P(Xi|R) = P(Xi*R)/P(R).
+To compute P(R) and P(Xi*R) efficiently, we can use DP. Let dp[i][j] be the probability of j out of the first n buyers buying something. P(R) and P(Xi*R) can be computed by the similar DP process and the same DP table.
+
+0.000s in uva 11181
+
+PS. My old algorithm computes probability for all subsets of buyers to get the posterior probability, that is about one million possible combinations. It ran in 0.270s in uva11181.
+

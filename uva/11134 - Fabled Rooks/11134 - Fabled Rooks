@@ -1,0 +1,11 @@
+sort, greedy, min-heap
+
+Since the areas for rooks are rectangles, the placement can be handled separately and independently in axis x and y. For each axis, we consider the problem as putting rooks in a one-dimensional grid. This can be solved by a greedy method.
+
+First, sort rooks by their xl (or yl), and then go through the axis from 1 to n. For each position in the loop, push all rooks whose xl (or yl) equals to the current position into a min-heap. The min-heap is computed by each rook's ending position (xr or yr). And then pop one rook from the heap. According to the rule of the min-heap, the popped rook has the minimum xr (or yr) among all rooks remaining in the heap.
+
+The correctness of the greedy method is obvious. For a position, if a feasible solution is to put a rook whose ending position is not the smallest, then we can safely swap it with the one we'd like to pick in the greedy method.
+
+The time complexity is O(nlogn).
+
+0.000s

@@ -1,0 +1,5 @@
+Because of the restriction, every kind of blocks can be used at most three times in a tower, each face a time. So we can treat all kinds of blocks with all the three rotations as different kinds of blocks, storing in an array of length 3*n. Sort this array by the area of the bottom (or top) face of a block. And then find the longest subsequence where blocks in this subsequence can be built up according to the requirement of the tower. The last step is like the longest increasing subsequence problem, and can be solved by a simple O(n^2) DP algorithm. 
+
+0.022s in uva 437
+0.000s in poj 2241
+

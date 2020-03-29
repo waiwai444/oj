@@ -1,0 +1,7 @@
+According to a*p+b*q = 0 and x*p+y*q = 1, we have -b*q/a*x+q*y = 1. It's equivalent to a*y-b*x = a/q. Hence our task is to find the number of possible pairs of x and y satisfying this equation with some integer q and that p = -b*q/a is an integer.
+Let x' = y, y' = -x, then we have a*x'+b*y' = a/q. According to the Bezout's identity and its corollary, we know that a/q must be a multiple of gcd(a,b). However, according to the fact that both a/q and p = -b*q/a are integers, a/q can only be gcd(a,b) or -gcd(a,b), not for other multiples of gcd(a,b).
+Hence we can use the extended Euclidean algorithm to find out gcd(a,b) and one pair of x' and y'. Once we get one pair of x' and y', all x' and y' satisfying a*x'+b*y' = gcd(a,b) can be obtained by (x'+k*b/gcd(a,b), y'-k*a/gcd(a,b)). Since the problem require that x and y are in the range of [0, 10^7], we can count the number of possible pairs of x and y through all possible pairs of x' and y'. The main part of my algorithm is to find out possible k's in calculating pairs of x' and y' that make the resulting pairs of x and y to be in the range of [0, 10^7].
+
+0.020s in uva 12158
+0.053s in la 4406
+

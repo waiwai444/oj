@@ -1,0 +1,8 @@
+We can use two BFS to find the ideal path.
+First, use BFS from the target back to the starting node and calculate the distances to the target for each node.
+And then, use another BFS from the starting node to the target, which can only walk along those shortest paths to that target, and print the minimum colors found at each distance. (We need this second BFS because we need to find the lexicographically minimum colors, and colors are not unique.)
+
+ps. We can filter out self loops when processing input easily. But we don't need to filter out multi-edges since the graphs are all sparse.
+
+0.150s in uva 1599
+0.262s in la 4991

@@ -1,0 +1,6 @@
+0-1 knapsack problem
+
+This is a 0-1 knapsack problem with the value of each item being equal to its size. So the dynamic programming method applies. 
+
+0.012s in uva 624
+

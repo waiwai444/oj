@@ -1,0 +1,6 @@
+We can construct a DAG to represent the nesting relationship between boxes. That is, if a box can be nested in another one, then there's an arc pointing to that one from this box. 
+Then we can use DFS on this DAG to find the longest path.
+To check that one box can be nested in another one, use greedy strategy. (See the code.)
+
+0.019s in uva (103)
+

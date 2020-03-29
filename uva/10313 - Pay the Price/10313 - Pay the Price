@@ -1,0 +1,10 @@
+DP
+Let dp[k][i][j] be the number of ways to get value j with at most i coins from the first k coins. It's a three dimension DP. 
+dp[k][i][j] = dp[k-1][i][j]+dp[k][i-1][j-v[k]], where in this problem, v[k] = k.
+We can compress the dimension of this array to two, according to the recursion equation of dp[k][i][j]. That is, let dp[i][j] be the number of ways to get value j with at most i coins. 
+
+0.092s in uva (10313)
+
+A faster algorithm can be used in this problem since the values of coins are from 1, 2, to 300. It's based on the fact that the number of ways to get an integer j with at most i small integers equals to the number of ways to get an integer j with severals small integers no more than i. The proof is quite easy. 
+I didn't implement it. 
+

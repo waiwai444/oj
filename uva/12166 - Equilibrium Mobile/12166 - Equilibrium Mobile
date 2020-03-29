@@ -1,0 +1,10 @@
+Construct a binary tree for each case. And then traverse it to compute the number of changes of weights to make balance.
+
+During traversing, each subtree records all possible total weights and their corresponding number of changes that make it balance, except those that need to change all weights in the subtree. The parent node can then use its two children's such records to compute all its own possible changes. (Note that, it's possible for each subtree to have any weight value, as long as it changes all its weights.)
+
+Since we compute all candidate weights that make the tree balance, we can choose among them the one with least number of changes.
+
+See the code for detailed algorithm.
+
+0.050s in uva 12166
+0.069s in la 4286

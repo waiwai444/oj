@@ -1,0 +1,30 @@
+The 4-peg Hanoi problem
+
+The algorithm described in this problem is the Frame-Stewart algorithm.
+
+Let h(n) be the number of moves of traditional Hanoi problem with n discs, so h(n) = 2^n-1.
+Let f(n) be the number of moves of this four-peg Hanoi problem with n discs, so f(n) = min_k{2*f(k)+h(n-k)} = min_k{2*f(k)+2^(n-k)-1}.
+However, traversing all possible k for each n by this equation is exhaustive, and will cause TLE.
+By printing all values of f(n) for n's in the target range, we have the following sequence: 0,1,3,5,9,13,17,25,33,41,49,.... And the differences between adjacent f(n) are 1,2,2,4,4,4,8,8,8,8,....
+Using this pattern, we can easily compute all f(n).
+
+Refer to the article [1] for a proof related to this problem.
+
+[1] 四柱汉诺塔之初步探究. 杨楷, 徐川. 北京大学学报(自然科学版), 第40卷, 第1期, 2004年1月.
+
+
+
+
+
+
+p.s.
+For the sequence 1,2,2,4,4,4,8,8,8,8,..., the general formula a(n) = 2^ceil((sqrt(8n-7)-1)/2)
+Proof:
+First prove that the general formula for 0,1,1,2,2,2,3,3,3,3,... is b(n) = ceil((sqrt(8n-7)-1)/2).
+We call consecutive numbers with the same value as a group, and the first group is a single 0, the second group is two 1s, ...
+If a(n) is the first number in group i, then
+	n = i(i-1)/2+1
+	i = (sqrt(8n-7)+1)/2
+And,
+	b(n) = i-1 = (sqrt(8n-7)-1)/2 for the first numbers b(n) in all groups.
+Hence for all n, b(n) = ceil((sqrt(8n-7)-1)/2)

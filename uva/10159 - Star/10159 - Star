@@ -1,0 +1,9 @@
+Keyword:
+
+I used a rectangle array to accommodate the board. The x-axis increases from bottom row to upper row, and the y-axis increases from left column to right column and is vertical. 
+Then I record the coordinates of cells for each line (A through L), to which lines a cell belongs, and the maximum possible value a cell can have. Using these data, we can calculate the results. 
+For the maximum value, just sum up the maximum possible values in all cells. 
+For the minimum value, it's a little bit complicated, since some lines can share a cell to contain their maximum values. First, I sum up all the maximum values. And then, subtract the cells that can have three lines' maximum values. And finally, subtract the cells that can have two lines' maximum values.
+For those cases that have no solution, just check whether each line can have a cell to accommodate it's maximum value (according to the maximum possible value of each cell). If not, there's no solution. If all lines can find cells to accommodate their values, there must be a solution. This is because, if there are two lines that have to place their maximum values into the same cell, then these two maximum value must be the same and the cell can be shared. 
+
+My code runs in 0.013s in uva.

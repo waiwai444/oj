@@ -1,0 +1,16 @@
+Brute force
+
+Enumerate all possible polyominoes, including all rotations and flips. We can get all n-polyominoes from all (n-1)-polyominoes.
+
+Since the total numbers of polyominoes are not very large, we can compute all of them beforehand.
+
+In order to speed up, we can also introduce some kind of hash to group different polyominoes, so that we can tremendously reduce the number of comparisons when checking new polyominoes. I chose a very simple hash method, and the only requirement for it is that the values should be the same regardless of rotations and flips.
+
+See the code for details.
+
+In the main data structure "std::map<int, std::vector<std::vector<polyomino_t> > > res[11]" used in my code, the map level is for different hash values for the same n, the first vector level is for different free polyominoes with the same n and hash value, and the inner vector level is for different rotations and flips.
+
+0.010s in uva 1602
+0.029s in la 3224
+
+Also, since the data set has only 1000 different combinations, it's also possible to compute the answers beforehand and hard-coded them to get the best performance.

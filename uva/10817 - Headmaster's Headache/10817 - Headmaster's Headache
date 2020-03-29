@@ -1,0 +1,6 @@
+DP
+
+It can be solved like a variant of 0/1 knapsack problem. But it requires the minimum cost instead of the maximum value. And the knapsack is replaced by subjects which each has capacity of 2 and the goal is to reach this value of capacity for each subject.
+Let cost[i] be the minimum cost for DP state i. The DP state reflects the number of teachers (at most 2) for each subject. Since there are at most 8 subjects, and each requires 2 teachers, the state of DP can be represented by an unsigned short integer.
+
+0.111s in uva (10817)

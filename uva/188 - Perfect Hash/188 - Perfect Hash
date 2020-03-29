@@ -1,0 +1,7 @@
+string, perfect hash
+
+Easy problem. Just follow the formulas to convert words and calculate C.
+
+Note: there's no repeated word in a input line.
+
+0.009s in uva

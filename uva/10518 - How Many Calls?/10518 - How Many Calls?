@@ -1,0 +1,10 @@
+math
+
+Denote this number as g(n). Then g(n) = g(n-1)+g(n-2)+1.
+Because n will be as huge as 2^63-1, we cannot calculate g(n) one by one. Since this problem only requires the last digit under some base b, we can utilize the periodicity of the combination of g(n) and g(n+1) modulo b.
+In fact, it turns out that by any base b <= 10000, g(n) and g(n+1) modulo b will always return to both 1 after about 25000 steps. So no matter how large n is, g(n) modulo b will always be in this relatively small range.
+
+ps. It's easy to prove that g(n) and g(n+1) modulo b will always return to 1 and 1. Because the number of combinations of two digits in base b is limited. And for each pair of digits, the previous digit and the next digit are always determined.
+
+0.000s in uva 10518
+

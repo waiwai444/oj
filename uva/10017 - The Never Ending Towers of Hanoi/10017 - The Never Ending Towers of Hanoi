@@ -1,0 +1,7 @@
+A standard way to play the Hanoi tower problem:
+  1. Move the smallest disk (disk of size 1) to the next peg (or the previous peg, depending on which peg you want to move the whole tower to).
+  2. Move the only possible move on the other two pegs.
+  3. Repeat 1 and 2 until all disks are moved to the target peg.
+It can be easily proved by induction that this algorithm will achieve the goal with the optimal number of moves (2^n-1).
+
+0.000s in uva 10017

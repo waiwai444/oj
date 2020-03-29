@@ -1,0 +1,9 @@
+Keyword:
+geometry, circle
+
+This problem is to check the maximum number of points in a circle with fixed diameter on the plane. Since there are infinite number of circles with fixed diameter on a plane, we can not traverse all such circles. Instead, we can use two points between which the distance is less than or equal to the diameter to get such a circle. It only requires simple geometrical deduction to get the formula. Then we count the number of points in all such circles to find the maximum value. 
+
+Although the time complexity is O(n^3), it's still good enough. My code runs in 0.019s in uva (rank 73 at the time I submitted it).
+
+Same problem:
+	poj 2693

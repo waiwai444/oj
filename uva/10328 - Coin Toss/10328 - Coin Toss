@@ -1,0 +1,6 @@
+DP, bignum
+
+Let ans[i][j] be the number of sequences of length i with at least j consecutive H's.
+
+0.000s in uva 10328
+

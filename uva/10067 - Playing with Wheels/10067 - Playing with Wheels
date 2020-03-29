@@ -1,0 +1,5 @@
+Simple BFS.
+We can generate a graph and using bfs in this graph for each input case. It costs 0.162s in uva (See 10067.cpp). 
+We can also use a implicit graph, i.e. we generate at most four new number configurations each time visiting a number in queue. My code using this method costs 0.199s in uva (I can't find this code due to my carelessness...). There is no significant difference between the efficiencies of these two methods. 
+
+Note: Due to my terrible carelessness, I TLEed this problem several times. (Since I forgot to add the condition "num_status[y] != PROCESSED" before enqueuing a new number.)

@@ -1,0 +1,4 @@
+Easy problem. Use brute force to solve it.
+The depth of DFS is bounded by the inverse number of the array. (The proof is simple. Since the sorted array has inverse number 0. And swapping adjacent inverted numbers will reduce the inverse number by 1, and swapping other cases will add the inverse number 0 or 1. So each time we can choose a pair of inverted numbers to swap.) 
+
+0.009s in uva

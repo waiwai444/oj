@@ -1,0 +1,115 @@
+====================================================================================================
+The following code uses BFS. It ran in uva in 4.475s (accepted). 
+====================================================================================================
+#include <stdio.h>
+#include <string.h>
+#include <string>
+#include <queue>
+#include <set>
+
+struct Board
+{
+	char sq[3][3];
+};
+
+struct Puzzle
+{
+    Board board;
+    int er, ec;
+    std::string step;
+};
+
+std::set<Board> visited;
+const int dir[4][2] = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+const char dir_name[4] = {'U', 'L', 'D', 'R'};
+
+bool operator<(const Board &b1, const Board &b2)
+{
+	return memcmp(&b1, &b2, sizeof(Board)) < 0;
+}
+
+bool move(const Puzzle &puz, Puzzle &new_puz, int dir_idx)
+{
+    int nr = puz.er+dir[dir_idx][0], nc = puz.ec+dir[dir_idx][1];
+    if(nr < 0 || nr >= 3 || nc < 0 || nc >= 3)
+		return false;
+    new_puz.er = nr;
+    new_puz.ec = nc;
+	new_puz.board = puz.board;
+	new_puz.board.sq[nr][nc] = 0;
+	new_puz.board.sq[puz.er][puz.ec] = puz.board.sq[nr][nc];
+    new_puz.step = puz.step;
+    new_puz.step.push_back(dir_name[dir_idx]);
+    return true;
+}
+
+void bfs(const Puzzle &init, Puzzle &result)
+{
+	int i;
+	Puzzle puz, new_puz;
+	std::queue<Puzzle> gq;
+	gq.push(init);
+	visited.clear();
+	visited.insert(init.board);
+	result.step.clear();
+	while(!gq.empty())
+	{
+		puz = gq.front();
+		gq.pop();
+		for(i = 0; i < 4; i++)
+		{
+            if(!move(puz, new_puz, i))
+				continue;
+			if(visited.find(new_puz.board) != visited.end())
+				continue;
+			visited.insert(new_puz.board);
+			gq.push(new_puz);
+			if((init.er == 1 && init.ec == 1 && new_puz.step.size() == 30) || new_puz.step.size() > 30)
+			{
+				result = new_puz;
+				return;
+			}
+		}
+	}
+}
+
+int main()
+{
+	int i, j, c, tc, t;
+	Puzzle init, result;
+	scanf("%d", &tc);
+	for(c = 1; c <= tc; c++)
+	{
+		for(i = 0; i < 3; i++)
+			for(j = 0; j < 3; j++)
+			{
+                scanf("%d", &t);
+                init.board.sq[i][j] = (char)t;
+                if(t == 0)
+				{
+					init.er = i;
+					init.ec = j;
+				}
+			}
+
+		bfs(init, result);
+
+		printf("Puzzle #%d\n", c);
+		for(i = 0; i < 3; i++)
+		{
+			for(j = 0; j < 2; j++)
+				printf("%c ", result.board.sq[i][j]+'0');
+			printf("%c\n", result.board.sq[i][2]+'0');
+		}
+		printf("%s\n\n", result.step.c_str());
+	}
+	return 0;
+}
+====================================================================================================
+
+
+
+====================================================================================================
+The code in the cpp file makes use of the result of pre-calculation by the above BFS based code, and number mappings to speed up. 
+It ran in uva in 0.015s. 
+====================================================================================================

@@ -1,0 +1,54 @@
+////////// brute force
+
+//#include <vector>
+//
+//using namespace std;
+//
+//int main()
+//{
+//	int p, e, i, d;
+//	vector<int> output;
+//	int result;
+//	int c;
+//	while(1)
+//	{
+//		scanf("%d %d %d %d", &p, &e, &i, &d);
+//		if(p==-1)
+//			break;
+//		c = d+1;
+//		while(1)
+//		{
+//			if((c-p)%23==0 && (c-e)%28==0 && (c-i)%33==0)
+//			{
+//				result = c-d;
+//				break;
+//			}
+//			c++;
+//		}
+//		output.push_back(result);
+//	}
+//	for(c=1; c<=output.size(); c++)
+//	{
+//		printf("Case %d: the next triple peak occurs in %d days.\n", c, output.at(c-1));
+//	}
+//	return 0;
+//}
+
+//////////// chinese remainder theorem
+
+// find the least number x such that a|x, b|x and x%c=1
+//int f(int a, int b, int c)
+//{
+//	int mul = a*b;
+//	int delta = mul;
+//	while(1)
+//	{
+//		if(mul%c==1)
+//			break;
+//		mul+=delta;
+//	}
+//	return mul;
+//}
+
+Same problem:
+	poj 1006

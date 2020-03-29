@@ -1,0 +1,57 @@
+Keyword:
+math
+
+====================================================================================================
+brute-force, try different n
+1.029s in uva
+====================================================================================================
+#include <stdio.h>
+#include <math.h>
+
+#define EPS 1e-9
+
+int main()
+{
+	int n, p, littlest, init_height;
+	while(scanf("%d%d", &init_height, &littlest), init_height)
+	{
+		if(littlest == 1)
+		{
+			n = 1;
+			p = 0;
+			int tmp = init_height;
+			while(tmp > 1)
+			{
+				tmp >>= 1;
+				p++;
+			}
+		}
+		else
+		{
+			n = 2;
+			p = (int)(log((double)littlest)/log((double)n)+EPS);
+			int t1 = (int)(pow(n, p)+EPS), t2 = (int)(pow(n+1, p)+EPS);
+			while(t1 < littlest || t1 > littlest || t2 < init_height || t2 > init_height )
+			{
+				n++;
+				p = (int)(log((double)littlest)/log((double)n)+EPS);
+				t1 = (int)(pow(n, p)+EPS);
+				t2 = (int)(pow(n+1, p)+EPS);
+			}
+		}
+		int tmp = (int)(pow(n, p)+EPS);
+		int noworking = n > 1 ? (int)((tmp-1)/(n-1)+EPS) : p;
+		int total_height = (n+1)*init_height-tmp*n;
+		printf("%d %d\n", noworking, total_height);
+	}
+	return 0;
+}
+====================================================================================================
+
+====================================================================================================
+The code in the cpp file also uses brute-force method as above. But it substitutes pow() and log() with loop and multiplication.
+It ran in 0.062s in uva. (Note: both of the above two methods ran in 0MS in poj.)
+====================================================================================================
+
+Same problem:
+	poj 1289

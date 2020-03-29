@@ -1,0 +1,5 @@
+DP
+Map the board to a 12-bit integer. And then use an array to store the results.
+
+0.009s in uva (10651)
+

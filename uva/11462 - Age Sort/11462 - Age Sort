@@ -1,0 +1,5 @@
+Since the maximum number is only 99, we can use the counting sort.
+
+On the other hand, in order to do IO faster, we can write our own integer IO functions making use of getchar() and putchar(), which will be much faster than using scanf/printf or cin/cout.
+
+0.040s in uva 11462

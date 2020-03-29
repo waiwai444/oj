@@ -1,0 +1,9 @@
+DP, knapsack
+
+This problem can be solved like a variant of the complete knapsack problem, with the amount of wine being the size of the knapsack, the minimum capacity of bottle being the size of each item, and the difference between the maximum and the minimum capacity being the value of each item, since the number of each kind of bottle is unlimited.
+Let dp[i] be the maximum value of items which have the sum of sizes i in this knapsack problem. So for the result, we can get the minimum amount of wine that can't be bottled by substracting (i+dp[i]) from the amount of wine, or 0 if all wine can be bottled.
+Here is a trick for this problem. Since the maximum amount of wine can be 1000000 litres, but the capacity of a bottle is measured by millilitres, we can not directly use an array of size 1000000000. However, we can prove that we only need consider a much lower amount of wine, so that we can still open an array for DP. All we need to do is to prove that we can ignore those cases which have the amount of wine larger than some multiple of the capacity of a bottle.
+Let the amount of wine be w, the minimum capacity of a bottle be m, and the maximum one be M. We can bottle all wine into this kind of bottle if and only if there exists a number x such that m*x <= w <= M*x (x is the number of this kind of bottle). Notice that, m is no more than 99% of M. We have 0.99M*x <= w <= M*x. That is, when w is in the range [0.99M*x, M*x], it can all be bottled with that kind of bottle. Let 0.99M*(x+1) <= M*x, that is, x >= 99, we can conclude that if w is no less than 0.99*99*M, it can all bottled by that kind of bottle whose maximum capacity is M. We can apply this fact to the bottle with minimum of maximum capacity to bound the DP array.
+
+0.003s in uva 10280 (4/269)
+0.032s in poj 2614 (38/303)

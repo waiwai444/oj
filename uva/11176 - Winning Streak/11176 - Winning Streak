@@ -1,0 +1,61 @@
+dp, probability
+
+Use DP to calculate the probability of having a longest winning streak of length k.
+Let dp[i][j] be the probability for i matches to have a longest winning streak of length at most j.
+dp[i][j] equals to dp[i-1][j] subtracted by the probability that the last j+1 consecutive matches are all win.
+
+0.000s in uva 11176
+
+
+
+====================================================================================================
+The following is my original algorithm, which is O(n^3) and ran in 0.150s in uva 11176.
+Let Fn(x) = Pn(X <= x), which means the probability for n matches to have a longest winning streak of length at most x. (dp[n][x])
+We consider different cases beginning with L, WL, WWL, WWWL, ..., where W means win and L means lose.
+Then Fn(x) = F_(n-1)(x)*(1-p)+F_(n-2)(x)*p*(1-p)+...+F_(n-x-1)(x)*p^x*(1-p).
+====================================================================================================
+#include <stdio.h>
+
+int n;
+double p;
+double fx[501];
+double pw[501];
+double ans;
+
+void solve()
+{
+	int i, j, k;
+	double r;
+	ans = 0;
+	pw[0] = 1;
+	for(i = 1; i <= n; i++)
+		pw[i] = pw[i-1]*p;
+	r = 0;
+	for(i = 0; i <= n; i++)
+	{
+		for(j = 0; j <= i; j++)
+			fx[j] = 1;
+		for(j = i+1; j <= n; j++)
+		{
+			fx[j] = 0;
+			for(k = 0; k <= i; k++)
+			{
+				fx[j] += fx[j-k-1]*pw[k]*(1-p);
+			}
+		}
+		ans += i*(fx[n]-r);
+		r = fx[n];
+	}
+}
+
+int main()
+{
+	while(scanf("%d%lf", &n, &p), n)
+	{
+		solve();
+		printf("%.6f\n", ans);
+	}
+	return 0;
+}
+====================================================================================================
+

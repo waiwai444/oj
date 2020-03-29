@@ -1,0 +1,12 @@
+Let combinations of bugs be the node in a graph. For example, if there are 3 bugs in total, then there are 8 nodes in the graph. Since there are at most 20 bugs in this problem, there are at most 2^20 nodes in the graph.
+Each patch can be used to form edges between nodes. Since the number of nodes is quite large, and there are at most 100 patches, we cannot use adjacency matrix or adjacency list. We have to check each patch when visiting each node and its edges.
+
+After we have constructed a graph, we can solve it as an SSSP problem from the node with all bugs to the node without any bug (ex. from 111 to 000 when there're 3 bugs).
+Here, I use Dijkstra's algorithm with the priority queue.
+
+Notice that I don't use an array to record the distances, which can be used to filter out some duplicated nodes when pushing into the queue. With this distance array, my code ran in 0.190s in uva658, while without it, 0.070s. One possible reason for this is that such an array has a size of several megabytes, and the number of adjacent nodes can be quite different, and hence there would be lots of page faults.
+
+0.070s in uva 658
+0.153s in la 5629
+0.157s in poj 1482
+

@@ -1,0 +1,7 @@
+Min-cost max-flow problem.
+Solved by Ford-Fulkerson method with SPFA.
+
+Notice that we have to add a small value epsilon to the result because of the precision problem when printing. For example, 0.005 would be represented as 0.004999999999..., and if using printf with %.2f, the output will be 0.00 instead of 0.01.
+
+0.000s in uva 10746
+

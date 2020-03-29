@@ -1,0 +1,7 @@
+This problem doesn't seem hard. However, its size of data is quite large so that it's very easy to cause TLE.
+
+My first code using two levels of loops on the "dictionary" to construct a graph caused TLE.
+
+And then, the following method was used to construct a graph: (similar to the second scheme on 无名之地's http://hi.baidu.com/superslsl/item/c867022f1496f6c10e37f930)
+	Sort the dictionaries of words of different lengths. Then for each word in a dictionary, enumerate all doublets after the orginal word (at most 16*25=400), and binary search in the dictionary to see if they exist in it (at most about log25000). 
+This method was accepted by UVa, however, its time cost is still about 1 sec (time limit: 3 sec). 

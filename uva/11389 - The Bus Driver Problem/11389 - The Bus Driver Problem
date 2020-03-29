@@ -1,0 +1,31 @@
+Pair the shortest morning route with the longest evening route, and the second shortest morning route with the second longest evening route, and so on.
+
+==========
+Proof:
+
+Sort the list of morning routes ascendingly, and the list of evening routes descendingly. And we pair these two route lists one element by one in that order.
+Assume at some position i, that the i'th shortest morning route is not paired with the i'th longest evening path. Let the length of the i'th shortest morning route be x, that of the i'th longest evening route be y. And let the length of the actually paired longest route be y', and that of the morning route which is actually paired with the i'th longest evening route be x'. For simplicity, we denote these routes by their length name (x, y, x', and y').
+We have x <= x' and y >= y', and hence x+y' <= x+y <= x'+y, x+y' <= x'+y' <= x'+y.
+Then discuss different cases. We show in all of these cases, the order of y' and y can be swapped, without increasing the total overtime:
+1. d >= x'+y:
+  x+y <= d, x'+y' <= d.
+  No overtime before and after swap.
+2. x+y' <= d < x'+y:
+  2.1. d >= x+y and d >= x'+y':
+    After swap, the overtime is 0.
+  2.2. d is between x+y and x'+y':
+    2.2.1. x+y <= x'+y':
+      x+y <= d, x'+y' >= d.
+      After swap, the overtime is x'+y'-d <= x'+y-d. So the overtime doesn't increase.
+    2.2.2. x+y > x'+y':
+      x+y >= d, x'+y' <= d.
+      After swap, the overtime is x+y-d <= x'+y-d. So the overtime doesn't increase.
+  2.3. d < x+y and d < x'+y':
+    After swap, the overtime is x+y-d+x'+y'-d. And x+y-d+x'+y'-d-(x'+y-d) = x+y'-d <= 0. So the overtime doesn't increase.
+3. d < x+y':
+  Before swap, the overtime is x+y'-d+x'+y-d, and after swap, the overtime is x+y-d+x'+y'-d. They are all the same.
+So, under all cases, we can swap y and y', and the total overtime will not increase. So we can safely pair x and y at the position i.
+
+==========
+
+0.000s in uva 11389

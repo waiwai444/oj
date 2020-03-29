@@ -1,0 +1,7 @@
+Use DFS with some simple pruning suffices, since the size of test data is small. 
+
+0.047s in poj
+0.010s in uva
+
+Same problem:
+	poj 1419

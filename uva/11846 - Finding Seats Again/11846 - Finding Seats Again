@@ -1,0 +1,8 @@
+DFS
+
+DFS on each position. For each position, enumerate all possible rectangles whose left top corner locates in that position. Each feasible rectangle should cover one and only one leader position, and its size should match the number. So the maximum DFS depth is the number of groups (<= 26). And in each iteration, the maximum number of possible rectangles is no more than 9.
+
+On the other hand, if we DFS on each group, then although the maximum depth is the same, but in each recursion, the number of possible rectangles are much larger, which will then lead to TLE.
+
+0.000s in uva 11846
+

@@ -1,0 +1,13 @@
+Use ID-DFS with pruning.
+First, don't start ID-DFS from 1. For example, if n == 20, then we need at least 6 numbers in the sequence to reach 20. So we can start ID-DFS with that number as the depth limit.
+Second, note that the order of numbers in the sequence is ascending. So we iterate from the least number (1,2...) to n. In each iteration, we choose numbers which is the sum of two numbers already used as the next one, from the double of the last number (the maximum one that's already used) down to the last number plus one, pruning those that are larger than n and those that can't reach n even by double it each time. 
+
+This problem in uva is almost the same as poj 2248, except that the max of n here is 10000 instead of 100 there, which means the problem in uva is much harder than in there. Note that, even some program that ran 0s in poj will get TLE in uva. 
+
+0.016s in uva
+0.000s in poj
+
+BFS won't work here since the search space is so huge. Simple DFS will probably TLE in uva, too.
+
+Same problem:
+	poj 2248

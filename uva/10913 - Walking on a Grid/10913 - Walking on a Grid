@@ -1,0 +1,5 @@
+DP
+Let dp[i][j][m] be the maximum sum on the path to cell (i,j) with m negative cells.
+For each row, first calculate sums from above, then sums from left by traversing cells from left to right, and at last sums from right by traversing from right to left. 
+
+0.005s in uva 10913

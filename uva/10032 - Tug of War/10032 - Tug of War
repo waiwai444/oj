@@ -1,0 +1,19 @@
+DP
+
+Let I(i,j) indicate there are i persons which are summed up to j before the current one. These indicators for the first i persons can be obtained from those for the first i-1 persons. And let f(i) record different weight sums of i persons before the current one. 
+Use these two arrays can we calculate subset sums quickly. 
+
+Use such DP can solve this problem in poj (0.047sec). However, it's not fast enough so that its time cost in UVa is 1.412sec (lim. 3sec). No good! So there is much room for improvement such as DFS+pruning+memorization or DP+recursion as mentioned in [2].
+Some codes accepted by UVa in the Internet are proven to be wrong, such as [3][4]. It means the test cases in UVa are not strong enough. My code here can pass all test cases which causes codes in [3][4] to produce wrong answers, although it's quite slow.
+
+Some faster algorithm using randomization can be found in [1]. But such a method has some probability to cause WA. 
+
+
+Same problem:
+	Poj 2576
+
+	
+[1] http://blog.csdn.net/leolin_/article/details/6702359
+[2] http://online-judge.uva.es/board/viewtopic.php?f=9&t=3505&start=30
+[3] http://blog.csdn.net/metaphysis/article/details/6668485
+[4] http://tausiq.wordpress.com/2011/03/07/uva-10032-tug-of-war/

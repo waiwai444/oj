@@ -1,0 +1,5 @@
+Use backtracking and pruning.
+Make sure the output should be the lexicographically smallest one.
+Note that it doesn’t matter whether the graph is directed or undirected, so I treat it as undirected.
+
+0.022s in uva

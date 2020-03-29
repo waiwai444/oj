@@ -1,0 +1,5 @@
+Keyword:
+graph, cut vertex (articulation point), DFS
+
+A simple graph problem. Just use DFS to find out each cut vertex. My method is to delete each vertex to see if the number of sub-graphs increase. 
+Note that, in this problem, the graph may be disconnected. It runs in 0.045s in uva.

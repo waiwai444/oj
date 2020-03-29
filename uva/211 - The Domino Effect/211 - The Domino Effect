@@ -1,0 +1,6 @@
+Simple DFS for each position.
+
+PS. To understand this problem, you have to know what does a Double Six domino look like.
+
+0.020s in uva 211
+0.046s in la 5150

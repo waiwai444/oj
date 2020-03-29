@@ -1,0 +1,11 @@
+Use greedy algorithm. Sort the line segments by their left ends from left to right, and then linearly go through these line segments to choose the ones that don't exceed the current left end and can cover as right as possible. 
+The correctness of the greedy algorithm is easy to prove.
+
+Note: I tried the std::vector and the c-style array to store the result in uva, and they resulted in the same time cost.
+
+0.076s in uva
+0.141s in poj
+
+Same problem:
+	poj 2620
+

@@ -1,0 +1,40 @@
+Interesting problem.
+We use the greedy algorithm here, i.e. fill in as large squares as possible and as more squares as possible. 
+
+====================================================================================================
+Proof:
+Denote the square of size k as k-square. 
+Note that 1-squares can be placed in any position. It has the unit size. 
+First we place 6-squares. It's easy because a 6-squares will occupy one parcel exclusively. 
+A 5-square will also occupy one parcel, and the remaining spaces can only accommodate 1-squares. And filling in all these remaining spaces will 1-squares will not make more parcels.
+One parcel can only accommodate at most one 4-square. The remaining spaces can accommodate at most five 2-squares. We should fill in them as more 2-squares as possible. Since otherwise the spaces will only be occupied by 1-squares, and we can easily exchange a 2-square from other parcel with at most four 1-squares in this parcel to make this parcel contain one more 2-square, and the resulting number of parcels will not increase. 
+One parcel can accommodate at most four 3-squares. Again, we should fill in a parcel as more 3-squares as possible. The reasoning is as follows, assuming there are more than one 3-square. 
+	1) If there are more than one parcel contain only one 3-square:
+		1.1) If there are only two such parcels:
+			In these two parcels, there're two 3-squares and at most five 2-squares in total. We can rearrange them, making one of the parcels contain two 3-squares and at most 2-squares (and possible 1-squares), and the other parcel contain at most eight 2-squares (and possible 1-squares).  
+		1.2) If there are only three such parcels: 
+			In these three parcels, there're three 3-squares and at most fifteen 2-squares in total. Again, we can rearrange them, making one of the parcels contain three 3-squares and one 2-square (and possible 1-squares), and the remaining fourteen 2-squares scattered in the other two parcels. 
+		1.3) If there are at least four such parcels: 
+			We group these parcels in fours. There are four 3-squares and twenty 2-squares in total. And we can rearrange them, too. Let one of the parcel contain four 3-squares and the remaining 2-squares be contained in the other three parcels. 
+		In all the above cases, the number of parcels will not increase. 
+	2) If there is at least one parcel contain only two 3-squares: 
+		Similar to 1).
+		2.1) If there are two such parcels:
+			We can rearrange them to make one parcel contain four 3-squares and the other contain at most six 2-squares (and possible 1-squares).
+		2.2) If there are one such parcels and one parcel containing only one 3-square:
+			It's also possible to rearrange them to make one parcel contain three 3-squares (and possible one 2-square and other 1-squares), and the other parcel contain no 3-square. 
+		2.3) If there are one such parcels and two parcel containing only one 3-square:
+			Rearrange them to make one parcel contain four 3-squares and the other two parcels contain no 3-square. 
+		In all these cases, the number of parcels will not increase. If new parcels containing only one 3-square come up, resort to 1). 
+	3) If there is at least one parcel contain only three 3-squares:
+		We can exchange the non-3-squares in one such parcel with a 3-square in other parcel which contains no more than three 3-squares. 
+When all 6-squares, 5-squares, 4-squares, and 3-squares are placed as described in the above, the remaining 2-squares and 1-squares are trivial. 
+Thus our greedy algorithm can product the optimal solution. 
+====================================================================================================
+
+0.012s in uva
+0.000s in poj
+
+Same problem:
+	poj 1017
+

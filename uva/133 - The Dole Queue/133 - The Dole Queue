@@ -1,0 +1,4 @@
+Easy problem
+Like Josephus's circle, but counts from two directions.
+
+I use the simplest array representation and simulate the process. It suffices the time limit already.

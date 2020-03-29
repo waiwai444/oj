@@ -1,0 +1,13 @@
+math, Fibonacci sequence
+
+First, change the two Fibinary numbers into decimal form, then add these two decimal numbers, and finally change the result back to the Fibinary form. Because the decimal number will be quite large, we have to implement bignum.
+The transformation from Fibinary form to decimal form is straightforward. The reversal can be achieved by a greedy method that subtracts each Fibonacci number from larger to smaller from the decimal number.
+The correctness of this algorithm can be easily proved through the properties of Fibinary numbers, which in turn can also be proved easily. Some of the properties are shown below.
+1. Each decimal integer has a corresponding Fibinary representation.
+2. The largest Fibinary number for a given length is the repeat of 10. E.g. 1010101 is the largest Fibinary number of length 7.
+3. A Fibinary number with longer length is always larger than any shorter Fibinary number. E.g. 100000 > 10101.
+4. Fibinary numbers can be compared digit by digit as any other number system. Hence, different Fibinary representations represent different numbers.
+
+0.010s in uva 763
+0.033s in la 5339
+

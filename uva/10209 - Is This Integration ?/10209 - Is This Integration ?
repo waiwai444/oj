@@ -1,0 +1,6 @@
+Keyword:
+geometry
+
+Simple question. No need for calculas. Just solve the three-variable linear equation system. Two of these equations can be easily obtained. The third equation need some geometric deduction. 
+
+My code runs in 0.049s in uva. 

@@ -1,0 +1,6 @@
+DFS + Disjoint Set
+
+DFS on each cell.
+To avoid cycles, use a disjoint set. Since we need backtrace, we don't use path compression for the disjoint set. An alternative is to use a new disjoint set with path compression in each recursion, but it's slower in this problem.
+
+0.010s in uva 11694

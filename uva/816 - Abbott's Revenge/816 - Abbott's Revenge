@@ -1,0 +1,4 @@
+Use BFS to search the shortest path to the goal. And then use recursion to reconstruct the path.
+
+0.000s in uva 816
+0.012s in la 5216

@@ -1,0 +1,11 @@
+p(i) = i^3
+     = i^{3}+3i^{2}+i^{1}
+
+P(i) = (1/4)*i^{4}+i^{3}+(1/2)*i^{2}
+     = i(i-1)(i-2)(i-3)/4+i(i-1)(i-2)+i(i-1)/2
+     = (1/4)*(i^2-i)^2
+
+So, S(x) = P(x+1)-P(1)
+         = P(x+1)
+
+Notice that the result number may be larger than 32-bit integer.

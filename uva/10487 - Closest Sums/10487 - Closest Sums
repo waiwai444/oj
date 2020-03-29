@@ -1,0 +1,5 @@
+Easy problem. I use the O(nlogn) algorithm here, where the "nlogn" is cost by the sorting. To find the sum, my algorithm is O(n) after the numbers are sorted. 
+Note that the two numbers to make the sum should be distinct.
+
+0.009s in uva
+

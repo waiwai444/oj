@@ -1,0 +1,12 @@
+math
+
+We can easily get the last three digits by taking the remainder of the power modulo 1000.
+For the first three digits, we can get them by representing the integer by the scientific notation with only one digit before the decimal point and ignoring the exponent during computing, and finally get the result by multiplying with 100.
+For efficiency consideration, we can use bisection method when computing power.
+
+p.s. I'm not quite sure the precision of floating numbers can handle such large integers and exponents for this problem when computing the first three digits. So I use long double and it got AC.
+
+0.000s in uva 11029
+
+
+(Update) There is a much more delicate method to compute the first three digits, which uses logrithm. We can represent n^k as 10^(i+d) where i is the integer part and d is the fraction part. So this problem is to compute the first three digits of 10^d. Since n^k = 10^(lgn*k), we have i+d = lgn*k. So d is the fraction part of lgn*k.

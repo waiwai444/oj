@@ -1,0 +1,19 @@
+expression evaluation, postfix expression, post-order traversal, level-order traversal
+
+good problem
+
+In fact, the sequence that can be processed by a queue is the reverse level-order traversal of the expression tree that the input postfix expression represents. 
+
+To prove this point, see the following sketch:
+1. An expression tree can be represented as a unique postfix expression by post-order traversal of the tree. This can be easily proved inductively by the property of post-order traversal and the definition of postfix expressions (we can use the recursive definition).
+2. A postfix expression will represent a unique expression tree whose post-order traversal is this postfix expression. Since give a postfix expression, the root and the root of the right subtree of the expression tree whose post-order traversal is this postfix expression is uniquely determined. Then we can repeat this determining process to uniquely obtain the whole tree, according to different kinds of nodes, i.e. operators and operands. 
+3. From the above two points, we can make a one-to-one correspondence between the expression tree and the postfix expression by post-order traversal of the tree. 
+4. So, given a postfix expression, there is a unique expression tree whose post-order traversal is this postfix expression. And we can use a stack to construct the expression tree and/or evaluate the expression. 
+5. To use a queue to evaluate this expression tree, observe the property of queue and the order of computing. The root of the tree will be computed last. So it will be in the last position of the sequence. And to compute the root, we must first have the roots of its left subtree and its right subtree. So they come prior to the root in the sequence. Note that, according to the problem, the first dequeued element will be the right operand, so the root of the right subtree come prior to the root of the left subtree in the sequence. Repeat this process, we can construct the whole sequence inversely that can be used with a queue to evaluate the expression.
+
+I use a stack to construct the expression tree from the postfix expression, and then use a queue to level-orderly traverse the tree. The traversal result is the reverse of the sequence that can be calculated by a queue. 
+
+My code ran in 0.036s (25/670) in uva and 0.032s (25/509) in poj. 
+
+Same problem:
+	poj 3367

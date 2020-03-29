@@ -1,0 +1,1 @@
+Notice that the statement "maxint is only 32767" in the problem is no longer valid. We can just use "int" to store all numbers needed in this problem, which makes it a very easy one.

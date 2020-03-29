@@ -1,0 +1,11 @@
+longest path
+
+Easy.
+A variant of longest path problem, in which a path can have repeated node, provided all edges are distinct. 
+Since the size of the test data set is quite small, it can be solved by brute force. Here I use DFS.
+
+0.009s in uva
+0.000s in poj
+
+Same problem:
+	poj 2258

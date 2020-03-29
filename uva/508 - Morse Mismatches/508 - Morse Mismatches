@@ -1,0 +1,8 @@
+The way to solve this problem is relatively straightforward. In fact, although it's slow, brute force method can also run in an acceptable time in this problem.
+
+Here I use Trie tree to store all morse codes of the context words, and use it to compare the morse codes in question. Also, in order to speed up the process of finding the nearest fuzzy matching, I use two pointers in each tree node to point to the nearest ancestor matching and the nearest child matching.
+
+Note that, the text of this problem is not quite clear. For example, in paragraph 4, it says "If multiple context words match morse perfectly, then select the matching word with the fewest characters", but in the end of the same paragraph, it says "If multiple context words exist for a given morse , the first matching word will be displayed followed by an exclamation point". In fact, the online judge doesn't care about the order, that is, we don't even need to sort the context. Another inconsistency comes up in the maximum length of a context word, which it says at most 10 characters, but I have to use a buffer of size 15 to accomodate a context word. I got a bundle of WA's due to this buffer size problem.
+
+0.000s in uva 508
+0.000s in la 5194

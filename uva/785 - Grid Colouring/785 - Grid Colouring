@@ -1,0 +1,9 @@
+Floodfill
+
+It's similar to uva 782. And there is also a problem with the size of the input data (have to use larger array to accomodate the input data).
+
+Since all contour is closed(said by the problem text), and contour character is unique, we can determine the contour character by the first character we encountered.
+
+0.020s in uva 785
+0.042s in la 5281
+

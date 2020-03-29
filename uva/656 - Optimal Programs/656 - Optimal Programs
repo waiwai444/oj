@@ -1,0 +1,13 @@
+I use BFS with pruning here. 
+The memory limitation and test data here is weaker than that of poj 1480.
+
+Note: The efficiency of BFS is compromised by the relative large amount of data associated with each node in BFS. So reducing the number of times of copying data will improve the program.
+Note: Writing queue by yourself instead of using std::queue here. It will improve the speed.
+
+Since copying data during BFS will waste a lot of time, maybe we can try DFS or ID-DFS to solve this problem. They may be faster due to less data storing and copying.
+
+0.157s in poj
+0.062s in uva
+
+Same problem:
+	poj 1480

@@ -1,0 +1,5 @@
+Nothing special. Just use BFS. Record visited chessboard layouts to filter out duplicates. 
+My first version code uses std::set with struct Board to record those visited. It ran in 0.159s in uva. Now, I use std::set with unsigned long which is the hash value of the chessboard. It ran in 0.118s in uva. 
+For further trial and improvement, we could use something like ID-DFS, or bidirectional BFS, etc. 
+
+0.118s in uva

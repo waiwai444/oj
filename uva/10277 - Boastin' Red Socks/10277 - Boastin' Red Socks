@@ -1,0 +1,8 @@
+math
+
+r*(r-1)/(r+b)*(r+b-1) = p/q
+Let s = r+b. Traverse s from 2 to 50000, and check if s*(s-1)*p/q is an integer. If so, then check if we can solve r as an integer. If both satisfied, we get the total number of socks, and hence the red and the black socks.
+
+0.026s in uva 10277
+0.188s in poj 2645
+

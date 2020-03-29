@@ -1,0 +1,9 @@
+probability
+
+Let C denote the current gift distribution, X0 be the gift the first guest brought, and gi be the number of gift i. Then this problem is to calculate max{P(X0=i|C)/gi} among all gift i.
+Since there are at most 12 guests, we can enumerate all possible cases. So we can use DFS.
+
+0.020s in uva 10417
+
+My old algorithm uses std::next_permutation() to enumerate all possible cases. It ran 0.040s in uva 10417. It's slower because it didn't filter out those impossible cases (probability of 0).
+

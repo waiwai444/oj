@@ -1,0 +1,7 @@
+Simple DP problem.
+
+I've found some solution in the internet that just checks whether the last two cells are 'A' and 'B' or the first is 'B' and the last 'A'. Such solution may be accepted since the judge data in UVA is so weak.
+Take BAB for example. It should be mutant, but will wrongly be judged as fully grown by the above method.
+
+0.009s in uva (620)
+

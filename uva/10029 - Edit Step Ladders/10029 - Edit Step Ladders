@@ -1,0 +1,6 @@
+The first time I see this problem, I used a naive O(n^2) DP algorithm. Obviously, it caused TLE. 
+Then I used a hash map to record words that have been seen. That is, hash map + DP. The hash function I used is the BKDRHash. It costs 0.322s in uva and 0.735s in poj.
+
+Note: The code ACed in poj will cause WA in uva. The reason is boring. There must be a return after the output value in uva. (Why not PE?)
+
+Same problem: poj2564

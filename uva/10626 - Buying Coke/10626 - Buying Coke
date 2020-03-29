@@ -1,0 +1,80 @@
+It can be solved by DP, like the code below.
+Actually, we can directly calculate the result without DP.
+
+Note that we can use 10+1+1+1 to buy a coke along with exchange 5, then use this 5 instead of 1+1+1+1+1 to reduce the number of insertion by 1, if needed. This is the key point, and the only case we insert more coins than needed.
+
+0.032s in uva (10626)
+
+
+Other answer:
+====================================================================================================
+DP.
+0.292s in uva (10626)
+====================================================================================================
+#include <stdio.h>
+
+#define MAX 999
+
+int nc, n1, n5, n10;
+int dp[151][701][151];
+
+void calc(int i, int j, int k)
+{
+	int tmp;
+	dp[i][j][k] = MAX;
+	if(k-2 >= 0 && j+2 <= 700 && (tmp = dp[i-1][j+2][k-2]+2) < dp[i][j][k]) //5+5
+		dp[i][j][k] = tmp;
+	if(j-3 >= 0 && k-1 >= 0 && (tmp = dp[i-1][j-3][k-1]+4) < dp[i][j][k]) //5+1*3
+		dp[i][j][k] = tmp;
+	if(j-8 >= 0 && (tmp = dp[i-1][j-8][k]+8) < dp[i][j][k]) //1*8
+		dp[i][j][k] = tmp;
+}
+
+void init()
+{
+	int i, j, k;
+	for(j = 0; j <= 700; j++)
+		for(k = 0; k <= 150; k++)
+			dp[0][j][k] = 0;
+	for(i = 1; i <= 150; i++)
+		for(j = 0; j <= 700; j++)
+			for(k = 0; k <= 150; k++)
+				calc(i, j, k);
+}
+
+void solve()
+{
+	if(n10 >= nc)
+		printf("%d\n", nc);
+	else
+	{
+		int count = n10;
+		nc -= n10;
+		int tmp = nc-n5;
+		if(tmp > 0)
+		{
+			if(n10 < tmp)
+				tmp = n10;
+			n5 += tmp;
+			n1 -= 3*tmp;
+			count += 3*tmp;
+		}
+		else
+			n1 += n10*2;
+		printf("%d\n", count+dp[nc][n1][n5]);
+	}
+}
+
+int main()
+{
+	int tc;
+	init();
+	scanf("%d", &tc);
+	while(tc--)
+	{
+		scanf("%d%d%d%d", &nc, &n1, &n5, &n10);
+		solve();
+	}
+	return 0;
+}
+====================================================================================================

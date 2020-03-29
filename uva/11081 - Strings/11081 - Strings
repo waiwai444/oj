@@ -1,0 +1,5 @@
+DP
+Let dp[i][j][k][m] be the number of different ways to construct substring [1..i] of string 3 by substring [1..j] of string 1 and substring [1..k] of string 2, with the i'th character of string 3 being from the j'th position of string 1 (m = 0) or the k'th position of string 2 (m = 1).
+To facilitate the DP process, define an auxiliary array sum[i][j][k][m] be the sum of numbers of different ways to construct substring [1..i] of string 3 by substring [1..j] of string 1 and substring [1..k] of string 2, with the i'th character of string 3 being from the j'th position of string 1 and positions prior to the j'th, or from the k'th position of string 2 and positions prior to the k'th. (Without this auxiliary array, my algorithm will do a lot of duplicated calculations, and ran in 2.106s in uva).
+
+0.229s in uva 11081

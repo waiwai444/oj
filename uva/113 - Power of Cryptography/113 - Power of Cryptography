@@ -1,0 +1,219 @@
+Keyword:
+big integer
+
+====================================================================================================
+Here, the following code with the standard method for big integer, like in poj 2109, ran in 0.402s. 
+But with the double and the pow(), the code, which is in the cpp file, becomes incredible short and simple. And the time cost reduced tremendously to 0.019s here. 
+====================================================================================================
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+#define MAX_DIGIT 101
+
+class BigUInt
+{
+	char digit[MAX_DIGIT+1];
+	int ndigits;
+public:
+	BigUInt() : ndigits(0) {}
+	BigUInt(const BigUInt& num) : ndigits(num.ndigits)
+	{
+		for(int i = 0; i < ndigits; i++)
+			digit[i] = num.digit[i];
+	}
+	BigUInt(unsigned int num) : ndigits(0)
+	{
+		while(num != 0)
+		{
+			digit[ndigits++] = num%10;
+			num /= 10;
+		}
+	}
+	
+	BigUInt& operator =(const BigUInt& num)
+	{
+		ndigits = num.ndigits;
+		for(int i = 0; i < ndigits; i++)
+			digit[i] = num.digit[i];
+		return *this;
+	}
+	
+	void add_digit(int d) { if(ndigits < MAX_DIGIT) digit[ndigits++] = d; }
+	
+	BigUInt operator *(BigUInt num)
+	{
+		int i, j, temp, carry;
+		BigUInt result;
+		for(i = 0; i < num.ndigits; i++)
+		{
+			carry = 0;
+			for(j = 0; j < ndigits; j++)
+			{
+				temp = num.digit[i]*digit[j]+carry;
+				if(temp >= 10)
+				{
+					carry = temp/10;
+					temp = temp%10;
+				}
+				else
+					carry = 0;
+				
+				if(i+j == result.ndigits)
+				{
+					if(result.ndigits == MAX_DIGIT)	// overflow
+					{
+						result.digit[result.ndigits++] = 1;
+						return result;
+					}
+					result.digit[result.ndigits++] = temp;
+				}
+				else
+				{
+					result.digit[i+j] += temp;
+					if(result.digit[i+j] >= 10)
+					{
+						carry += result.digit[i+j]/10;
+						result.digit[i+j] = result.digit[i+j]%10;
+					}
+				}
+			}
+			if(carry > 0)
+			{
+				if(result.ndigits == MAX_DIGIT)	// overflow
+				{
+					result.digit[result.ndigits++] = 1;
+					return result;
+				}
+				result.digit[result.ndigits++] = carry;
+			}
+		}
+		return result;
+	}
+	
+	BigUInt operator ^(unsigned int n)	// power to nth
+	{
+		BigUInt tmp;
+		BigUInt result(1);
+		int i, r = n;
+		while(r > 0)
+		{
+			tmp = *this;
+			for(i = 2; i <= r; i *= 2)
+			{
+				tmp = tmp*tmp;
+				if(tmp.is_overflow())
+					return tmp;
+			}
+			result = result*tmp;
+			if(result.is_overflow())
+				return result;
+			r -= i/2;
+		}
+		return result;
+	}
+	
+	bool operator ==(const BigUInt& num)
+	{
+		if(ndigits != num.ndigits)
+			return false;
+		for(int i = 0; i < ndigits; i++)
+			if(digit[i] != num.digit[i])
+				return false;
+		return true;
+	}
+	
+	bool operator <(const BigUInt& num)
+	{
+		if(ndigits < num.ndigits)
+			return true;
+		if(ndigits > num.ndigits)
+			return false;
+		for(int i = ndigits-1; i >= 0; i--)
+		{
+			if(digit[i] < num.digit[i])
+				return true;
+			else if(digit[i] > num.digit[i])
+				return false;
+		}
+		return false;
+	}
+	
+	unsigned int to_int()	// don't let it overflow
+	{
+		unsigned int result = 0;
+		for(int i = ndigits-1; i>= 0; i--)
+			result = result*10+digit[i];
+		return result;
+	}
+	
+private:
+	bool is_overflow() { return ndigits == MAX_DIGIT; }
+};
+
+int try_nth_root(int k, int n, const BigUInt& p)
+{
+	BigUInt tmp(k);
+	BigUInt power = tmp^n;
+	if(power == p)
+		return 0;
+	else if(power < p)
+		return -1;
+	else
+		return 1;
+}
+
+int main()
+{
+	int i, n, k;
+	char input[102];
+	BigUInt p;
+	while(scanf("%d%s", &n, input) != EOF)
+	{		
+		int ndigits = strlen(input);
+		p = 0;
+		for(i = ndigits-1; i >= 0; i--)
+			p.add_digit(input[i]-'0');
+		
+		if(n == 1)
+		{
+			printf("%d\n", p.to_int());	// the result must be in the range of uint
+			continue;
+		}
+		
+		int k_ndigits = (int)ceil((double)ndigits/n);
+		if(k_ndigits == 10)
+		{
+			printf("%d\n", 1000000000);	// according to the range of the input data
+			continue;
+		}
+		
+		int lbound = (int)pow((double)10, k_ndigits-1);
+		int ubound = (int)pow((double)10, k_ndigits)-1;
+		while(lbound <= ubound)
+		{
+			k = (lbound+ubound)/2;
+			int result;
+			if((result = try_nth_root(k, n, p)) == 0)
+				break;
+			else if(result < 0)
+				lbound = k+1;
+			else
+				ubound = k-1;
+		}
+		if(lbound <= ubound)
+			printf("%d\n", k);
+
+	}
+	return 0;
+}
+====================================================================================================
+
+The explanation of the correctness of the simpler code, which is in the cpp file and uses only double and pow(), can be found in many places in the internet, such as in [1].
+One of the conclusion is that the precision of double is quite enough for even such large data!
+
+
+Same problem:
+	poj 2109
+	
+[1] http://blog.csdn.net/synapse7/article/details/11672691

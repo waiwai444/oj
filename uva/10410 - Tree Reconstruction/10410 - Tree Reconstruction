@@ -1,0 +1,7 @@
+The problem is to construct a tree given a DFS and a BFS. This tree is not necessarily a binary tree.
+
+We can just go through each node in the DFS order one by one and use a stack to simulate the DFS traversal, and check the relationship between it and the node on the stack top in the BFS order. In most cases, there are only one possible way to add the current node to the tree. But there is also one case that we have two possible ways to place the current node. That is, if the current node and the node on the stack top are also adjacent in the BFS with the same order, then we can put the current node as the first child of the node on the stack top, or as its next sibling. I don't know whether both cases work and won't cause any problem later. However, it's easy to prove that if putting the current node under the node on the stack top, we can also safely put it as the next sibling.
+
+See the code for the details.
+
+0.000s in uva 10410

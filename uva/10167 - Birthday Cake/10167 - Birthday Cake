@@ -1,0 +1,9 @@
+Keyword:
+geometry, brute force
+
+Simple problem. Since all the numbers are integers, we can traverse all possible values (i.e. [-500,500]). 
+Also, we can make some optimizations. 
+First, only one coefficient need to be negative. That reduces a lot of traverses. 
+Second, skip those set of coefficients that are not relatively prime. This can further reduce my code's run time from 0.049s to 0.039s.
+
+My code runs in 0.039s in uva. 

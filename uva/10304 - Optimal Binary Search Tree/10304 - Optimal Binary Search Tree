@@ -1,0 +1,6 @@
+DP
+Let dp[i][j] be the minimum cost of the subtree from node i to node j. 
+Without any pruning, my implementation of this DP ran in 1.169s in uva. But with some pruning in the inner most loop, the time cost will reduce tremendously. This pruning is based on possible positions of the root of a subtree. See the code for details.
+
+0.189s in uva (10304)
+

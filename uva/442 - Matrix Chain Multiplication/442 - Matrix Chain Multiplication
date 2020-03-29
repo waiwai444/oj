@@ -1,0 +1,4 @@
+I use two stacks to simulate the process of computing, one for storing tokens, the other for storing the dimension of matrices.
+
+Same problem:
+	poj 2246

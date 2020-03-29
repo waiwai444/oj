@@ -1,0 +1,8 @@
+Very easy problem. Note that the input buffer should be large enough, otherwise RE (see the problem text in poj).
+
+0.009s in uva
+0.016s in poj
+
+Same problem:
+	poj 1936
+

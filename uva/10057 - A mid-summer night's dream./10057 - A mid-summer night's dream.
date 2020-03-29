@@ -1,0 +1,9 @@
+math
+
+First, it's easy to see that the minimum and the maximum possible value of A is in the input integer set. 
+Second, it's also easy to prove that the value of the formula descends, then possibly remains unchanged, and then ascends, as the value of A increases. The idea of the proof is quite straightforward, but writing it down is a little bit tedious. So I'll ignore it here. 
+Third, to compare adjacent candidate values, we only need to compare the number of values larger than that value and the number of values less than or equal to that value. 
+
+Based on the above facts, we can implement an efficient algorithm, which is O(n), to solve this problem.
+
+0.179s in uva

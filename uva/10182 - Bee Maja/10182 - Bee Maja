@@ -1,0 +1,6 @@
+Keyword:
+simple math
+
+The number of cells in each hexagonal circle from the center to the outer forms a arithmetic sequence. So we can calculate the circle a specified cell in Willi's coordinates located. It's just a quadratic equation. 
+
+My code runs in 0.013s in uva.
