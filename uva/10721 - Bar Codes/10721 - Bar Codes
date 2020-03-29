@@ -1,0 +1,6 @@
+DP
+
+Let ans[i][j][k] be the answer for the input (i, j, k), i.e. BC(i,j,k), the number of symbols of i units, j bars, and at most k units wide for each bar.
+
+0.000s in uva 10721
+

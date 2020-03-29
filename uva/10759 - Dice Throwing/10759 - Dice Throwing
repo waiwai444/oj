@@ -1,0 +1,4 @@
+probability, dp
+
+First, let cnt[i][j] be the number of combinations of i dices that sum to j. Then add them and reduce the fractions.
+

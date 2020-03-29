@@ -1,0 +1,7 @@
+Interesting problem. Use the divide and conquer method.
+First let the array be from 0 to n-1. 
+Then, traverse the array once, and partition the array into two parts. One part contains those integers at even position, and the other part contains the remainings. We can easily see that, there is no arithmetic progression across the first and the second part. 
+Repeat the second step on the two sub-arrays until the sub-array contains less than 3 integers. 
+
+0.012s in uva
+

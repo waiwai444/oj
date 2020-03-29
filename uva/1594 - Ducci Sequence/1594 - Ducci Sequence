@@ -1,0 +1,10 @@
+The simplest way achieved the best result among all my submissions. Using std::set to check repetition increased the running time.
+
+A theorem states that if n is a power of 2, the Ducci sequence will eventually reach all zeros.[1]
+
+Someone said that in fact we need at most 200 steps instead of 1000 steps for the test data set, but I didn't try.
+
+[1] https://en.wikipedia.org/wiki/Ducci_sequence
+
+0.100s in uva 1594
+0.202s in la 4723

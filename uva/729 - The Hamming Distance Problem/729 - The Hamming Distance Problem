@@ -1,0 +1,4 @@
+Generate the binary string with Hamming distance H from zero string.
+Use DFS with pruning
+
+0.029s in uva

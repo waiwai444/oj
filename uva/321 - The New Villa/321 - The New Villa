@@ -1,0 +1,6 @@
+Use BFS to simulate the process, i.e. in each room, choose from moving to next room or switch the light. 
+
+0.015s in uva
+
+Same problem:
+	poj 1137 (The judge in poj is not a special judge, which is wrong! The code here will WA in poj.)

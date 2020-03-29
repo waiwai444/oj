@@ -1,0 +1,55 @@
+unbound knapsack problem
+
+This problem can be seen as a special case of the unbound knapsack problem. There're only two kinds of items, and the value of each kind is only 1. 
+
+But, a method based on elementary mathematics can be much more efficient than treating it as a unbound knapsack problem and using the traditional DP method.
+Let x, y be the numbers of the two kinds of item. Then we can minimize t-x*m-y*n and then maximize x+y, with the restriction that x*m+y*n<=t. 
+
+The code in the cpp file is based on the math method.
+
+0.029s in uva 10465
+
+
+====================================================================================================
+The following code uses the traditional DP method for unbound knapsack problem.
+0.169s in uva 10465
+====================================================================================================
+#include <stdio.h>
+
+int m, n, t;
+int dp[10001];
+
+int main()
+{
+    int i, r;
+    while(scanf("%d%d%d", &m, &n, &t) != EOF)
+    {
+        dp[0] = 0;
+        for(i = 1; i <= t; i++)
+        {
+            dp[i] = -1;
+            if(i-m >= 0 && dp[i-m] != -1)
+                dp[i] = dp[i-m]+1;
+            if(i-n >= 0 && dp[i-n] != -1)
+            {
+                int tmp = dp[i-n]+1;
+                if(dp[i] == -1 || dp[i] < tmp)
+                    dp[i] = tmp;
+            }
+        }
+        r = 0;
+        for(i = t; i >= 0; i--)
+        {
+            if(dp[i] != -1)
+                break;
+            r++;
+        }
+        if(r)
+            printf("%d %d\n", dp[i], r);
+        else
+            printf("%d\n", dp[i]);
+    }
+    return 0;
+}
+====================================================================================================
+

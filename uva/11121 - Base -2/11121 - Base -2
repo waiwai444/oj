@@ -1,0 +1,5 @@
+math, negabinary
+
+The algorithm is easy. Just compute each digit recursively. One key point is when divide the current remaining integer to get a smaller integer, we need to check whether the current integer is positive or negative to determine how to round to integer.
+
+0.003s in uva 11121 (9/1943)

@@ -1,0 +1,13 @@
+I use DFS here, based on orders.
+
+My initial thought was to use DFS based on stations, since there’re at most 7 stations. But at each station, there may be more than one orders starting from there. If trying all combinations of those orders, it will cause combinatorial explosion. Such codes may AC in uva with lots of time cost (1.315s in uva for the best of my code), but will TLE in poj.
+
+To DFS based on orders, my code first sorts orders according to their starting stations. Then use DFS on them. At each step, determine if the current order under consideration can be taken without exceeding the capacity of train. Without other pruning, my code using such method ran in 0.438s in poj.
+
+There is a pruning that will reduce time cost greatly. That is, if the current earnings when considering some order, plus all remaining earnings of those orders that are sorted after this order, is less than or equal to the maximum earnings obtained before, then this branch can be pruned.
+
+0.047s in poj
+0.082s in uva
+
+Same problem:
+	poj 1040

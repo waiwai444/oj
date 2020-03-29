@@ -1,0 +1,5 @@
+We can sort the points by their coordinates (ex, y coordinate first and then x coordinate). If the center of symmetry exists, the first point must be symmetric to the last point, and the second be symmetric to the second last, and so forth.
+
+0.000s in uva 10585
+0.016s in poj 2526
+

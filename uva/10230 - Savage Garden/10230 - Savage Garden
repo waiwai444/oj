@@ -1,0 +1,3 @@
+First, we split the big square matrix into four small square matrices, and place the L-shaped region onto the center of the big square matrix. There are 4 ways to place it onto that 2*2 square, and we have to choose one according to the following rule: keep the cell which is at the same small square matrix with the house empty. Then recursively solve this problem in the four small square matrices. It can be easily proved that this algorithm is correct.
+
+0.040s in uva 10230

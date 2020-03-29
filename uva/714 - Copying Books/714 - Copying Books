@@ -1,0 +1,13 @@
+I use binary search and greedy algorithm to solve this problem. 
+First, use binary search to find out the minimum value. To check if a value is a candidate, use greedy algorithm. 
+Then, another greedy algorithm is used to find the partition with that minimum value according to the requirement. 
+Refer to the code for the details.
+
+The correctness of these two greedy algorithm is easy to prove. 
+
+0.012s in uva
+0.016s in poj
+
+Same problem:
+	poj 1505
+

@@ -1,0 +1,9 @@
+Keyword:
+geometry
+
+A little bit complicated problem. I used the brute force method to try all possible solutions and calculate the maximum area. The key step is to get the intersection of the polygon and the half plane (the dipping line). 
+
+My code ran in 0.152s in uva (rank 17/178).	
+
+Same problem:
+	poj 1271

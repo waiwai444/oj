@@ -1,0 +1,14 @@
+Linear algebra
+
+Let the input vectors of packages be S1=(s11, s12, s13), S2=(s21, s22, s23), ..., Sn=(sn1, sn2, sn3). The target is to find out if there exist a set of integers k1, k2, ..., kn, which mean the numbers of different packages used to repackage, to make k1*S1+k2*S2+...+kn*Sn equal to a constant vector (t, t, t) (t>0). This is equivalent to make k1*(s11-s12)+k2*(s21-s22)+...+kn*(sn1-sn2) = 0 and k1*(s11-s13)+k2*(s21-s23)+...+kn*(sn1-sn3) = 0, where not all of kn are zeros. So we can use a new set of 2-d vectors, i.e. V1=(s11-s12, s11-s13), V2=(s21-s22, s21-s23), ..., Vn=(sn1-sn2, sn1-sn3). The target is then equivalent to see if (0, 0) is a linear combination of V1, V2, ..., Vn where all coefficients are integers and not all of these coefficients are zeros. 
+
+But how can we know whether (0, 0) is such a kind of linear combination of a set of vectors?
+Assume V1, V2, ..., Vn are sorted according to their angles to the positive x-axis ([0, 2*PI)). Note that all these vectors are integer vectors. 
+If some included angle of adjacent two vectors Vi and V(i+1) is larger than PI, then there is no solution (V(n+1) = V1). This is because all vectors are on one side of a line crossing the origin, and combining any of these vectors with positive integers will never get to (0,0). 
+If all included angles of adjacent two vectors are less than or equal to PI, then there is a solution. When there are two vectors Vi and Vj which are collinear but with different directions, we can find two integers ki and kj to make ki*Vi+kj*Vj = (0,0). This is because Vj = -a/b*Vi with some integers a>0,b>0. So a/b*Vi+Vj = a/b*Vi-a/b*Vi = (0,0), and we have ki=a and kj=b. If there is no such a pair of two vectors, then we can pick three vectors Vi, Vj, Vk in order and the included angles <Vi,Vj>,<Vj,Vk>,<Vk,Vi> are all less than PI. Then we can use these three vectors to obtain (0,0) with positive rational numbers (How to prove it rigorously?). From rational numbers, we can easily get integer coefficients by multiplying with the LCM of all denominators. 
+
+
+The implementation of this idea refers to [1][2], which contains an O(n) algorithm which doesn't need sorting. 
+
+[1] http://blog.csdn.net/metaphysis/article/details/6553009
+[2] http://online-judge.uva.es/board/viewtopic.php?f=9&t=2295

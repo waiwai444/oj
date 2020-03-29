@@ -1,0 +1,5 @@
+First, use a variant of Floyd-Warshall algorithm to get all possible paths for the super run, that is, all pairs of nodes between which the shortest path without castle nodes has length no more than L. Add each of these paths as an edge of 0 weight connecting the two nodes.
+Then, use a variant of Dijkstra's algorithm to get the distances of all nodes. The distance for each node has K+1 different values each indicates how many super runs have been used to reach that node. Make sure do not use more than K super runs.
+
+0.000s in uva 10269
+

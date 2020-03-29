@@ -1,0 +1,13 @@
+Two facts about this problem:
+1. For any number of circles, they can be arranged to satisfy the requirements of this problem, that is, any two of them have two intersection points and no three circles intersect in a common point. One scheme is to arrange circles in a line from left to right and make each new circle intersects with all previous arranged circles.
+2. Whatever schemes we use to arrange circles satisfying the requirements, the total numbers of distinct regions are all the same. This can be proved as shown in the deduction the equation to calculate the number.
+
+Let f(n) be the number of regions for n. We have f(n) = n*(n-1)+2.
+Proof:
+Assumed we already have n-1 circles arranged satisfying the requirements, and we add a new circle, it will intersect each circle with two points.
+Imagine we draw this new circle in some direction. Each time we pass through another circle arc, we will divide the region after that arc into two regions.
+Hence, f(n) = f(n-1)+2*(n-1).
+Then we have f(n) = n*(n-1)+2.
+
+0.000s in uva 10519
+

@@ -1,0 +1,6 @@
+math, LCM
+
+Traverse all combinations of four kinds of coins to calculate their LCMs. It's possible because there are at most 50 kinds of coins.
+
+0.019s in uva 10717
+0.125s in poj 1855

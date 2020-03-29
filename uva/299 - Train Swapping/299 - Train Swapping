@@ -1,0 +1,2 @@
+Only need to count the inverse number. The swap process is just like that of the bubble sort. 
+The optimality can be easily concluded. Since we can only swap the two adjacent trains, and after we swap two trains, all other order relationships remain unchanged. 

@@ -1,0 +1,5 @@
+eight queens puzzle
+
+An easy brute force problem. Use DFS.
+
+0.019s in uva

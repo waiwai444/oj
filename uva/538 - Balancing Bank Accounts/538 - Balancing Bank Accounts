@@ -1,0 +1,13 @@
+This problem has a very simple solution:
+  1. Compute the account value for each person. We add the value to the account if someone receives money, and subtract if gives money.
+  2. For each person with positive account value, gives back as much as possible to anyone with negative account value.
+
+This algorithm will guarantee the total number of transactions being at most n-1.
+
+Proof:
+  Assume person X is giving money to person Y. Denote the account values of them as A(X) and A(Y). If A(X) == A(Y), then both of them are satisfied and we don't need to consider them later again. This means we only use one transaction and there are n-2 persons remained. If A(X) > A(Y) or A(X) < A(Y), one and only one person will be satisfied. This costs one transaction and n-1 persons are remained. So, by this algorithm, each transaction will consume at least one person.
+  On the other hand, it's obvious that we must encounter at least one time when A(X) == A(Y), at least on the last step, since the total sum of the account values are zero.
+  Now, we have shown that we will use at most n-1 transactions to satisfy n persons.
+
+0.030s in uva 538
+0.000s in poj 2257

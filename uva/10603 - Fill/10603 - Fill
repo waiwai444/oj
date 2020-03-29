@@ -1,0 +1,7 @@
+We can treat this problem as a kind of SSSP problem in graph theory. The state of three jugs can be seen as node in a graph, and an directed arc exists between two nodes iif we can pour water to change the state from one to the other. The weight of the arc is the amount of water poured. 
+This graph may be quite large, so we can not and don't have to make such a graph explicitly. We just search from the initial state of jugs, making at most six new states each time and enqueue them for later searches. 
+
+0.019s in uva
+
+ps. My first version got TLE in uva. The algorithm used is almost the same. But in that code, I used an array of size 201*201*201 to record if a state have been visited, and before each test case, I used memset to set this memory. However, since there're only three jugs, and amounts of water in two jugs can determine that of the third. So we only need an array of size 201*201. This modification makes my code from TLE to 0.019s in uva. 
+	The conclusion is: large memory cost can reduce the efficiency of the algorithm.

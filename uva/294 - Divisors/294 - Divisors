@@ -1,0 +1,4 @@
+We can factorize every number between the range. Once we got a factorization of a number, we can simply multiply the numbers of different prime factors to get the total number of divisors.
+
+0.010s in uva 294
+0.026s in la 5595

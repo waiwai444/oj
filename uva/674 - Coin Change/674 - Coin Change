@@ -1,0 +1,4 @@
+Use the DP method. Let d[i,j] be the number of ways of making changes for i cent(s) where the value of the largest coin used is of type j. Through this method, we can avoid repeated ways of making changes. 
+
+0.032s in uva (674)
+

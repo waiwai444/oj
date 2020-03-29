@@ -1,0 +1,4 @@
+The y coordinates are irrelevant. We can just sort x coordinates from left to right, and then traverse them to calculate the transparent coefficients. Notice that some line segments may have 0 transparent coefficient.
+
+0.000s in uva 837
+

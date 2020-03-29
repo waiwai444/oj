@@ -1,0 +1,18 @@
+simple physics
+
+A good problem which can be solved by backtracking. 
+The direct idea about this problem is to use backtracking with some pruning. 
+
+The first observation is that those packages that are in the central part, i.e. between the two fulcrums, will stable the lever, so that they can (should) be removed last, which can reduce the number of packages to be considered during backtracking. 
+But with only such pruning, the code will TLE in both poj and uva. In the Internet, there are lots of DFS with some heuristics that can solve this problem efficiently. However, seldom of them has their correctness be rigorously proved or is general enough. 
+
+Noticed that, there’re at most 20 packages, so the number of status to be searched is at most 2^20, which can be stored directly in memory. Hence, we can make use of the memorisation method to prune. My final code employs these pruning and got AC in uva and poj.
+
+p.s.: Calculate the torques of the two fulcrums independently.
+p.s.: All the positions and lengths are doubled to avoid floating points.
+
+0.110s in poj
+0.085s in uva
+
+Same problem:
+	poj 2547

@@ -1,0 +1,5 @@
+math, factor, LCM
+
+An integer is a common multiple of products of subsets of its factors. To let the integer be the LCM of a set of integers, we can multiply all factors of the same value, and then add all of these products to get the result. If an integer has only one kind of factor(a prime or a power of a prime), then the result is itself plus one, because the problem requires the integer to be an LCM of at least two positive integers.
+
+0.000s in uva 10791

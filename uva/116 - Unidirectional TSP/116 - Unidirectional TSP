@@ -1,0 +1,6 @@
+Keyword:
+DP
+
+A simple DP problem. We can calculate the weights from left to right or from right to left. But, since the problem requires that the output path should be the lexicographically smallest, calculating from right to left will make the problem easier. 
+
+My code runs in 0.109s in uva. 

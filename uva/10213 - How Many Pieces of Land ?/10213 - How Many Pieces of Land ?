@@ -1,0 +1,15 @@
+uva 0.160s
+BigNum + Math(Geometry)
+
+It can be proved that the maximum number of areas divided by n points, denoted as F(n), is n(n-1)(n^2-5n+18)/24+1.
+
+Proof:
+By induction, we first prove that F(n+1)=(n^3-3n^2+8n)/6+F(n).
+Assume there are already n points in the circle that divide the land into F(n) areas. We can add a new point in the circle at a proper place and then connect it with every other point in clockwise(or anticlockwise) direction. When this new point is connected with another point, several areas will be divided. When it connects with other existing points, points except the two newly connected points will be partitioned into two parts, one include those on one side of the new line, and the other include those on the other side. This new line will pass through lines connecting these two parts. For example, when the new point is connected with i-th existing point in the specified direction, there will be i-1 and n-i points on the two sides, respectively, and (n-i)*(i-1) lines (it's 0 for the first and the last points). So, when the new point is connected with i-th point, (n-i)*(i-1) lines will be crossed by the new line. Once a new line crosses an existing line, an area will be divided into two smaller areas, which means there will be (n-i)*(i-1) new areas, plus 1 new area before the new line crossing the first existing line, for connecting the new point and i-th point. We generate these new areas from connecting first existing point to connecting the last, the total number of new areas is [(n-1)(1-1)+1]+[(n-2)(2-1)+1]+...+[(n-i)(i-1)+1]+...+[(n-n)*(n-1)+1] = (n^3-3n^2+8n)/6.
+Hence, F(n+1)=[(n-1)(1-1)+1]+[(n-2)(2-1)+1]+...+[(n-i)(i-1)+1]+...+[(n-n)*(n-1)+1]+F(n)
+			 =(n^3-3n^2+8n)/6+F(n).
+By solving this recurrence equation, we obtain F(n)=n(n-1)(n^2-5n+18)/24+1.
+¡ö
+
+P.S.
+When solving [(n-1)(1-1)+1]+[(n-2)(2-1)+1]+...+[(n-i)(i-1)+1]+...+[(n-n)*(n-1)+1], a summation of 1*2+2*3+...+(n-1)*n will occur. Use the fact that 1*2=1*2*3/3, 1*2+2*3=1*2*3/3+2*3=2*3*4/3, ..., to solve this summation.

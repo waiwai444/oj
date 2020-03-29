@@ -1,0 +1,16 @@
+DP, Probability, Expectation
+
+Interesting but quite complicated. The interesting part is about the process of DP, which involves probability and expectations.
+First, we have to parse the input commands to internal sequences of instructions and variables, which is quite boring and error-prone. Be careful.
+Then, for the DP, we use two arrays to record states during DP. Let dp[i][j] record all expectation values regarding variables and registers when we have executed to instruction i of program 1 and instruction j of program 2. And let prob[i][j] be the probability for instruction i of program 1 and instruction j of program 2 to be executed by the machine for the first i+j executions.
+
+The reason we can calculate directly through expectations is because expectation is linear, i.e. E(X+Y)=EX+EY.
+When there are two ways to proceed during DP, the result of expectation value will be calculated by conditional law of total expectation.
+
+Notice that, the results are expectations, not the average values among all possible execution sequences, and different execution sequences will have different probabilities.
+
+PS. The judges in uva1300 and icpcarchive2344 require a blank line after the last test case, which is not mentioned in the description of this problem. This caused me WA many times.
+
+0.000s in uva 1300
+0.006s in icpcarchive 2344
+0.016s in poj 1074

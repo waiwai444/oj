@@ -1,0 +1,7 @@
+Use bidirectional BFS to search the shortest solution.
+
+Since we know both the starting and the target state, we can use bidirectional BFS to speed up.
+
+0.900s in uva 1601
+1.269s in la 3888
+

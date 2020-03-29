@@ -1,0 +1,5 @@
+sorting, code generating
+
+Use DFS. At each level, simulate the process of insertion sort to generate code.
+
+0.065s in uva

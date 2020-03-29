@@ -1,0 +1,51 @@
+Good problem. Here I used a sorting-based algorithm. We have to prove the correctness of this algorithm. 
+[However, I failed to prove the correctness of this algorithm, since I'm not able to prove the transitivity of the binary relation used in sorting. I've searched in the internet, but can't find any valid proof, even in the board of uva. See below.]
+
+Sort the numbers. The relation used for sorting is based on concatenation of two numbers, that is, if AB > BA, then A is prior to B, where A and B are numbers, AB means concatenation of A and B, and > is string comparing when the numbers are taken as strings of digits.
+Since std::sort requires the property of strict weak orderings, we have to prove that the relation defined here satisfied this property. 
+
+====================================================================================================
+For strict weak orderings:
+====================================================================================================
+Irreflexitity and asymmetry are obvious.
+
+Transitivity: 
+  Denote the prior relation used here as >>. Then A >> B means AB > BA. We have to prove that if A >> B and B >> C, then A >> C.
+  A >> B and B >> C means A != B, B != C, and A != C. 
+  If one of A, B, or C is not a prefix of others and does not contain others as prefix, then AC > CA can be concluded easily. 
+  The remaining contains two cases: (Here we use S1, S2, and S3 to denote the three strings.)
+  1) S2 = S1X, S3 = S2Y = S1XY:
+    [TODO: How to prove?]
+  2) S2 = S1X, S3 = S1Y:
+    [TODO: How to prove?]
+  
+Transitivity of incomparability: 
+  Incomparability of A and B means AB = BA.
+  We can see that if AB = BA, then A and B must be repetitions of some common substring. For example, A=xyzxyz, B=xyzxyzxyz.
+  
+  To prove this fact, first consider the trivial case thant len(A) = len(B). Since AB = BA, we have A = B. 
+  Then let len(A) > len(B). Since AB = BA, we can split A as A = BC = CB.
+  Two cases remain to be considered:
+    1) len(C) = len(B):
+      It's obvious that B = C. Then A consists of two adjacent B.
+    2) len(C) < len(B): 
+	  We have A = CXC and B = CX = XC, where len(X) > 0. Recursive solve the equation CX = XC. 
+	3) len(C) > len(B):
+	  Then we can see that C = BX = YB, where len(X) = len(Y) > 0. Three cases are to be considered: 
+	    3.1) len(X) > len(B):
+		  Then C = BZB, where len(Z) > 0. Now A = BBZB = BZBB, that is, BZ = ZB. Recursive solve the equation BZ = ZB. 
+		3.2) len(X) = len(B): 
+		  Then C = BB and A = BBB. 
+		3.3) len(X) < len(B): 
+		  Then A = BBX = YBB. Notice that BX = YB, we can easily deduce that X = Y. Hence C = BX = XB. Recursive solve the equation BX = XB. 
+  It's obvious the recursive will stop. 
+  
+  Hence, if A and B are incomparable, then A and B must consist of repetitions of some common substring. 
+  If A and B are incomparable, B and C are incomparable, then A and C are incomparable. Transitivity of incomparability is satisfied.
+  
+====================================================================================================
+
+Based on the property of strict weak orderings, each time we can choose the best choice to concatenate.
+
+0.192s in uva
+

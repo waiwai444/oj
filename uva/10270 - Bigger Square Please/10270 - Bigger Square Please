@@ -1,0 +1,671 @@
+In this problem, brutal search/backtrack will probably get TLE. I've tried bfs with some pruning such as eliminating symmetric tilings, but failed. I've also tried bi-directional bfs, but also failed. 
+Following are some observations that can be used to solve this problem efficiently:
+For convenience, denote g(n) as the number of small squares in the optimal tiling.
+1) g(n) = 4, for even n. This is trival. Since a square with side of an even number n can be dissected with four small squares with side length of n/2. This is optimal since a square can not be dissected into less than 4 small squares. 
+2) g(n) <= n + 3, for odd n. Since a square with odd length n can be dissected into n+3 small squares: 1 ((n+1)/2)-square, 3 ((n-1)/2)-squares, and n-1 1-squares. (In fact, in the range of this problem, i.e. 2 <= n <= 50, g(n) <= 16. See [1].) 
+3) g(n) >= 6, for odd n. Since square with odd length n can not be dissected into less 6 small squares. 
+	It's trivial for less than 4 small squares.
+	For 4 small squares, each side must have 2 small squares with different sizes. It is impossible.
+	For 5 small squares, 4 squares must be at 4 corners. If there is a square totally inside of the big square, then the other 4 squares will not be able to be placed without overlapping. So, there will be a side with 3 small squares. But this time, the other 2 squares can not be placed without overlapping. Hence, in all circumstances, 5 small squares will not suffice.
+4) From 3), we can conclude that for all n = 3 + 6x (x=0,1,2,...), g(n) = 6. And the tiling is like that of n = 3. 
+5) At least in the range of this problem, g(n) = g(p), in which p is the smallest prime factor of n. So, we have g(5) = g(25) = g(35) and g(7) = g(49). [1]
+6) From above, now we know we only have to calculate g(n) for prime n >= 5. 
+7) It's trivial that, in a feasible tiling, the sum of squares of the side of each small square equals to the square of the big square. [2]
+We also need some heuristics. These heuristics can be found in the code below[2][3]. Although neither can I prove that those heuristics are correct for all numbers, nor can I find the proofs in the Internet, they are correct here and can be very useful. However, even with these heuristics, the code can not be accepted. It still runs too long for large prime. 
+
+====================================================================================================
+
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_DEPTH 20
+
+int n;
+// for decomposition of sum of squares for n
+int cur_decomp[MAX_DEPTH];
+int cur_decomp_size = 0;
+
+struct Square
+{
+	bool grid[50][50];
+};
+
+struct Tile
+{
+	int x, y, l;
+};
+
+Tile best_path[MAX_DEPTH];
+int best_path_len = 0;
+Tile cur_path[MAX_DEPTH];
+int cur_path_len = 0;
+int cur_max_depth;
+
+int get_tiling_pos(const Square& cur_sq, int tile_side, Tile candidate_pos[])
+{
+	int i, j, k, l;
+	int candidate_num = 0;
+	for(i = 0; i <= n - tile_side; i++)
+		for(j = 0; j <= n - tile_side; j++)
+			if(!cur_sq.grid[i][j])
+			{
+				bool overlap = false;
+				for(k = i; k < i + tile_side; k++)
+				{
+					for(l = j; l < j + tile_side; l++)
+						if(cur_sq.grid[k][l])
+						{
+							overlap = true;
+							break;
+						}
+					if(overlap)
+						break;
+				}
+				if(!overlap)
+				{
+					Tile tile;
+					tile.x = i;
+					tile.y = j;
+					candidate_pos[candidate_num++] = tile;
+				}
+			}
+	return candidate_num;
+}
+
+inline void fill_square(Square& cur_sq, int x, int y, int l)
+{
+	for(int i = x; i < x + l; i++)
+		for(int j = y; j < y + l; j++)
+			cur_sq.grid[i][j] = true;
+}
+
+inline void print_result()
+{
+	printf("%d\n", best_path_len);
+	for(int i = 0; i < best_path_len; i++)
+		printf("%d %d %d\n", best_path[i].x, best_path[i].y, best_path[i].l);
+	
+	/*char result[50][50];
+	for(int p = 0; p < best_path_len; p++)
+	{
+		for(int i = 0; i < best_path[p].l; i++)
+		{
+			for(int j = 0; j < best_path[p].l; j++)
+			{
+				result[best_path[p].x + i - 1][best_path[p].y + j - 1] = 'A' + p;
+			}
+		}
+	}
+	for(int i = 0; i < n; i++)
+	{
+		for(int j = 0; j < n; j++)
+			printf("%c ", result[i][j]);
+		printf("\n");
+	}*/
+}
+
+bool tiling(Square cur_sq, int cur_tile_idx)
+{
+	int i;
+	Tile tile;
+	if(cur_tile_idx >= cur_decomp_size)	// all small squares have been embedded into the big square
+	{
+		for(i = 0; i < cur_path_len; i++)
+			best_path[i] = cur_path[i];
+		best_path_len = cur_path_len;
+		cur_path_len = 0;
+		return true;
+	}
+	if(cur_tile_idx == 0)	// heuristic: the first small square will be on the upper left corner
+	{
+		tile.x = 1;
+		tile.y = 1;
+		tile.l = cur_decomp[0];
+		cur_path[cur_path_len++] = tile;
+		fill_square(cur_sq, 0, 0, tile.l);
+		if(tiling(cur_sq, 1))
+			return true;
+		--cur_path_len;
+	}
+	else if(cur_tile_idx == 1)	// heuristic: the second small square will be on the upper right corner
+	{
+		tile.x = 1;
+		tile.y = cur_decomp[0] + 1;
+		tile.l = cur_decomp[1];
+		cur_path[cur_path_len++] = tile;
+		fill_square(cur_sq, 0, cur_decomp[0], tile.l);
+		if(tiling(cur_sq, 2))
+			return true;
+		--cur_path_len;
+	}
+	else if(cur_tile_idx == 2)	// heuristic: the third small square will be on the bottom left corner
+	{
+		tile.x = cur_decomp[0] + 1;
+		tile.y = 1;
+		tile.l = cur_decomp[2];
+		cur_path[cur_path_len++] = tile;
+		fill_square(cur_sq, cur_decomp[0], 0, tile.l);
+		if(tiling(cur_sq, 3))
+			return true;
+		--cur_path_len;
+	}
+	if(cur_tile_idx == 3)	// heuristic: the fourth small square will be on the right side
+	{
+		int tmp = n - cur_decomp[3] + 1;
+		for(i = cur_decomp[1]; i < tmp; i++)
+		{
+			tile.x = i + 1;
+			tile.y = n - cur_decomp[3] + 1;
+			tile.l = cur_decomp[3];
+			cur_path[cur_path_len++] = tile;
+			Square new_sq = cur_sq;
+			fill_square(new_sq, i, n - cur_decomp[3], tile.l);
+			if(tiling(new_sq, 4))
+				return true;
+			--cur_path_len;
+		}
+	}
+	else
+	{
+		Tile candidate_pos[n * n];
+		int candidate_num = get_tiling_pos(cur_sq, cur_decomp[cur_tile_idx], candidate_pos);
+		if(candidate_num == 0)
+			return false;
+		for(i = 0; i < candidate_num; i++)
+		{
+			if(cur_tile_idx == 4 && candidate_pos[i].x != n - cur_decomp[4] && candidate_pos[i].y != n - cur_decomp[4])	// heuristic: the fifth small square will be on the bottom or the right side
+				continue;
+
+			tile.x = candidate_pos[i].x + 1;
+			tile.y = candidate_pos[i].y + 1;
+			tile.l = cur_decomp[cur_tile_idx];
+			cur_path[cur_path_len++] = tile;
+			Square new_sq = cur_sq;
+			fill_square(new_sq, candidate_pos[i].x, candidate_pos[i].y, tile.l);
+			if(tiling(new_sq, cur_tile_idx + 1))
+				return true;
+			--cur_path_len;
+		}
+	}
+	return false;
+}
+
+void sqsum_decomp(int r_sq)
+{
+	int i;
+	if(cur_decomp_size >= cur_max_depth)
+		return;
+	if(cur_decomp_size == 0)	// heuristic: the first number is between n/2 and n-2
+	{
+		for(i = n / 2; i <= n - 2; i++)
+		{
+			cur_decomp[cur_decomp_size++] = i;
+			sqsum_decomp(r_sq - i * i);
+			--cur_decomp_size;
+		}
+	}
+	else if(cur_decomp_size == 1)	// heuristic: the sum of the first two numbers equals to n
+	{
+		i = n - cur_decomp[cur_decomp_size - 1];
+		if(i > cur_decomp[cur_decomp_size - 1])
+			return;
+		cur_decomp[cur_decomp_size++] = i;
+		sqsum_decomp(r_sq - i * i);
+		--cur_decomp_size;
+	}
+	else if(cur_decomp_size == 2)		// heuristic: the third number equals to the second one
+	{
+		i = cur_decomp[cur_decomp_size - 1];
+		cur_decomp[cur_decomp_size++] = i;
+		sqsum_decomp(r_sq - i * i);
+		--cur_decomp_size;
+	}
+	else if(cur_decomp_size == 4)		// heuristic: the sum of the fourth number and the fifth number equals to the first one
+	{
+		i = cur_decomp[0] - cur_decomp[cur_decomp_size - 1];
+		if(i > cur_decomp[cur_decomp_size - 1])
+			return;
+		cur_decomp[cur_decomp_size++] = i;
+		sqsum_decomp(r_sq - i * i);
+		--cur_decomp_size;
+	}
+	else
+	{
+		for(i = cur_decomp[cur_decomp_size - 1]; i >= 1; i--)
+		{
+			if(cur_decomp_size >= 4 && cur_decomp[cur_decomp_size - 4] == i)	// heuristic: a number will not be repeated five times
+				continue;
+			int tmp = r_sq - i * i;
+			if(tmp < 0)
+				continue;
+			cur_decomp[cur_decomp_size++] = i;
+			if(tmp == 0)
+			{
+				if(i == 1 && cur_decomp[cur_decomp_size - 2] == 1)	// heuristic: at least 2 ones
+				{
+					Square cur_sq;
+					memset(cur_sq.grid, false, 50 * 50 * sizeof(bool));
+					if(tiling(cur_sq, 0))
+						cur_max_depth = cur_decomp_size - 1;
+				}
+			}
+			else
+			{
+				sqsum_decomp(tmp);
+			}
+			--cur_decomp_size;
+		}
+	}
+}
+
+void search_solution()
+{
+	cur_max_depth = MAX_DEPTH;
+	sqsum_decomp(n * n);
+	print_result();
+}
+
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while(t-- > 0)
+	{
+		scanf("%d", &n);
+		if((n & 1) == 0)	// n is even, 4 sub-squares is optimal
+		{
+			int m = n / 2;
+			printf("4\n");
+			printf("1 1 %d\n", m);
+			printf("1 %d %d\n", m + 1, m);
+			printf("%d 1 %d\n", m + 1, m);
+			printf("%d %d %d\n", m + 1, m + 1, m);
+		}
+		else if(n % 3 == 0)
+		{
+			int m = n / 3;
+			printf("6\n");
+			printf("1 1 %d\n", m * 2);
+			printf("1 %d %d\n", m * 2 + 1, m);
+			printf("%d %d %d\n", m + 1, m * 2 + 1, m);
+			printf("%d 1 %d\n", m * 2 + 1, m);
+			printf("%d %d %d\n", m * 2 + 1, m + 1, m);
+			printf("%d %d %d\n", m * 2 + 1, m * 2 + 1, m);
+		}
+		else if(n % 5 == 0)
+		{
+			int m = n / 5;
+			printf("8\n");
+			printf("1 1 %d\n", m * 3);
+			printf("1 %d %d\n", m * 3 + 1, m * 2);
+			printf("%d 1 %d\n", m * 3 + 1, m * 2);
+			printf("%d %d %d\n", m * 3 + 1, m * 3 + 1, m * 2);
+			printf("%d %d %d\n", m * 2 + 1, m * 3 + 1, m);
+			printf("%d %d %d\n", m * 2 + 1, m * 4 + 1, m);
+			printf("%d %d %d\n", m * 3 + 1, m * 2 + 1, m);
+			printf("%d %d %d\n", m * 4 + 1, m * 2 + 1, m);
+		}
+		else if(n % 7 == 0)
+		{
+			int m = n / 7;
+			printf("9\n");
+			printf("1 1 %d\n", m * 2);
+			printf("1 %d %d\n", m * 2 + 1, m * 2);
+			printf("1 %d %d\n", m * 4 + 1, m * 3);
+			printf("%d 1 %d\n", m * 2 + 1, m);
+			printf("%d %d %d\n", m * 2 + 1, m + 1, m * 2);
+			printf("%d %d %d\n", m * 2 + 1, m * 3 + 1, m);
+			printf("%d 1 %d\n", m * 3 + 1, m);
+			printf("%d %d %d\n", m * 3 + 1, m * 3 + 1, m * 4);
+			printf("%d 1 %d\n", m * 4 + 1, m * 3);
+		}
+		else
+		{
+			search_solution();
+		}
+	}
+	return 0;
+}
+
+====================================================================================================
+
+The above code still leads to TLE. In order to improve it, we can also use the smallest number found in the Internet for each big square of odd sides for help[1]. (These seem like more cheating, but I have no choice....) The code can be seen below:
+
+====================================================================================================
+
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_DEPTH 16
+
+int n;
+
+// for decomposition of sum of squares for n
+int cur_decomp[MAX_DEPTH];
+int cur_decomp_size = 0;
+// the smallest number of dissection of each odd big square
+const int depth[24] = { 6, 8, 9, 6, 11, 11, 6, 12, 13, 6, 13, 8, 6, 14, 15, 6, 8, 15, 6, 15, 16, 6, 16, 9 };
+int cur_num_depth;	// the depth for the current number
+
+struct Square
+{
+	bool grid[50][50];
+};
+
+struct Tile
+{
+	int x, y, l;
+};
+
+Square cur_square;
+Tile cur_path[MAX_DEPTH];
+int cur_path_len = 0;
+
+int get_tiling_pos(int tile_side, Tile candidate_pos[])
+{
+	int i, j, k, l;
+	int candidate_num = 0;
+	for(i = 0; i <= n - tile_side; i++)
+		for(j = 0; j <= n - tile_side; j++)
+			if(!cur_square.grid[i][j])
+			{
+				bool overlap = false;
+				for(k = i; k < i + tile_side; k++)
+				{
+					for(l = j; l < j + tile_side; l++)
+						if(cur_square.grid[k][l])
+						{
+							overlap = true;
+							break;
+						}
+					if(overlap)
+						break;
+				}
+				if(!overlap)
+				{
+					Tile tile;
+					tile.x = i;
+					tile.y = j;
+					candidate_pos[candidate_num++] = tile;
+				}
+			}
+	return candidate_num;
+}
+
+inline void fill_square(int x, int y, int l, bool value = true)
+{
+	for(int i = x; i < x + l; i++)
+		for(int j = y; j < y + l; j++)
+			cur_square.grid[i][j] = value;
+}
+
+inline void print_result()
+{
+	printf("%d\n", cur_path_len);
+	for(int i = 0; i < cur_path_len; i++)
+		printf("%d %d %d\n", cur_path[i].x, cur_path[i].y, cur_path[i].l);
+	
+	/*char result[50][50];
+	for(int p = 0; p < cur_path_len; p++)
+	{
+		for(int i = 0; i < cur_path[p].l; i++)
+		{
+			for(int j = 0; j < cur_path[p].l; j++)
+			{
+				result[cur_path[p].x + i - 1][cur_path[p].y + j - 1] = 'A' + p;
+			}
+		}
+	}
+	for(int i = 0; i < n; i++)
+	{
+		for(int j = 0; j < n; j++)
+			printf("%c ", result[i][j]);
+		printf("\n");
+	}*/
+}
+
+bool tiling(int cur_tile_idx)
+{
+	int i;
+	Tile tile;
+	if(cur_tile_idx >= cur_decomp_size)	// all small squares have been embedded into the big square
+	{
+		return true;
+	}
+	if(cur_tile_idx == 0)	// heuristic: the first small square will be on the upper left corner
+	{
+		tile.x = 1;
+		tile.y = 1;
+		tile.l = cur_decomp[0];
+		cur_path[cur_path_len++] = tile;
+		fill_square(0, 0, tile.l);
+		if(tiling(1))
+			return true;
+		--cur_path_len;
+	}
+	else if(cur_tile_idx == 1)	// heuristic: the second small square will be on the upper right corner
+	{
+		tile.x = 1;
+		tile.y = cur_decomp[0] + 1;
+		tile.l = cur_decomp[1];
+		cur_path[cur_path_len++] = tile;
+		fill_square(0, cur_decomp[0], tile.l);
+		if(tiling(2))
+			return true;
+		--cur_path_len;
+	}
+	else if(cur_tile_idx == 2)	// heuristic: the third small square will be on the bottom left corner
+	{
+		tile.x = cur_decomp[0] + 1;
+		tile.y = 1;
+		tile.l = cur_decomp[2];
+		cur_path[cur_path_len++] = tile;
+		fill_square(cur_decomp[0], 0, tile.l);
+		if(tiling(3))
+			return true;
+		--cur_path_len;
+	}
+	else if(cur_tile_idx == 3)	// heuristic: the fourth small square will be on the right side
+	{
+		for(i = cur_decomp[1]; i <= n - cur_decomp[3]; i++)
+		{
+			tile.x = i + 1;
+			tile.y = n - cur_decomp[3] + 1;
+			tile.l = cur_decomp[3];
+			cur_path[cur_path_len++] = tile;
+			fill_square(i, n - cur_decomp[3], tile.l);
+			if(tiling(4))
+				return true;
+			fill_square(i, n - cur_decomp[3], tile.l, false);
+			--cur_path_len;
+		}
+	}
+	else
+	{
+		Tile candidate_pos[n * n];
+		int candidate_num = get_tiling_pos(cur_decomp[cur_tile_idx], candidate_pos);
+		if(candidate_num == 0)
+			return false;
+		for(i = 0; i < candidate_num; i++)
+		{
+			if(cur_tile_idx == 4 && candidate_pos[i].x != n - cur_decomp[4] && candidate_pos[i].y != n - cur_decomp[4])	// heuristic: the fifth small square will be on the bottom or the right side
+				continue;
+			
+			tile.x = candidate_pos[i].x + 1;
+			tile.y = candidate_pos[i].y + 1;
+			tile.l = cur_decomp[cur_tile_idx];
+			cur_path[cur_path_len++] = tile;
+			fill_square(candidate_pos[i].x, candidate_pos[i].y, tile.l);
+			if(tiling(cur_tile_idx + 1))
+				return true;
+			fill_square(candidate_pos[i].x, candidate_pos[i].y, tile.l, false);
+			--cur_path_len;
+		}
+	}
+	return false;
+}
+
+bool sqsum_decomp(int r_sq)
+{
+	int i;
+	if(cur_decomp_size >= cur_num_depth)
+		return false;
+	if(cur_decomp_size == 0)	// heuristic: the first number is between n/2 and n-2
+	{
+		for(i = n / 2; i <= n - 2; i++)
+		{
+			cur_decomp[cur_decomp_size++] = i;
+			if(sqsum_decomp(r_sq - i * i))
+			{
+				return true;
+			}
+			--cur_decomp_size;
+		}
+	}
+	else if(cur_decomp_size == 1)	// heuristic: the sum of the first two numbers equals to n
+	{
+		i = n - cur_decomp[cur_decomp_size - 1];
+		if(i > cur_decomp[cur_decomp_size - 1])
+			return false;
+		cur_decomp[cur_decomp_size++] = i;
+		if(sqsum_decomp(r_sq - i * i))
+			return true;
+		--cur_decomp_size;
+	}
+	else if(cur_decomp_size == 2)		// heuristic: the third number equals to the second one
+	{
+		i = cur_decomp[cur_decomp_size - 1];
+		cur_decomp[cur_decomp_size++] = i;
+		if(sqsum_decomp(r_sq - i * i))
+			return true;
+		--cur_decomp_size;
+	}
+	else if(cur_decomp_size == 4)		// heuristic: the sum of the fourth number and the fifth number equals to the first one
+	{
+		i = cur_decomp[0] - cur_decomp[cur_decomp_size - 1];
+		if(i > cur_decomp[cur_decomp_size - 1])
+			return false;
+		cur_decomp[cur_decomp_size++] = i;
+		if(sqsum_decomp(r_sq - i * i))
+			return true;
+		--cur_decomp_size;
+	}
+	else
+	{
+		for(i = cur_decomp[cur_decomp_size - 1]; i >= 1; i--)
+		{
+			if(cur_decomp_size >= 4 && cur_decomp[cur_decomp_size - 4] == i)	// heuristic: a number will not be repeated five times
+				continue;
+			int tmp = r_sq - i * i;
+			if(tmp < 0)
+				continue;
+			cur_decomp[cur_decomp_size++] = i;
+			if(tmp == 0 && cur_decomp_size == cur_num_depth)
+			{
+				if(i == 1 && cur_decomp[cur_decomp_size - 2] == 1)	// heuristic: at least 2 ones
+				{
+					memset(cur_square.grid, false, 50 * 50 * sizeof(bool));
+					if(tiling(0))
+						return true;
+				}
+			}
+			else
+			{
+				if(sqsum_decomp(tmp))
+					return true;
+			}
+			--cur_decomp_size;
+		}
+	}
+	return false;
+}
+
+void search_solution()
+{
+	cur_num_depth = depth[n / 2 - 1];
+	sqsum_decomp(n * n);
+	print_result();
+	cur_path_len = 0;
+	cur_decomp_size = 0;
+}
+
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while(t-- > 0)
+	{
+		scanf("%d", &n);
+		if((n & 1) == 0)	// n is even, 4 sub-squares is optimal
+		{
+			int m = n / 2;
+			printf("4\n");
+			printf("1 1 %d\n", m);
+			printf("1 %d %d\n", m + 1, m);
+			printf("%d 1 %d\n", m + 1, m);
+			printf("%d %d %d\n", m + 1, m + 1, m);
+		}
+		else if(n % 3 == 0)
+		{
+			int m = n / 3;
+			printf("6\n");
+			printf("1 1 %d\n", m * 2);
+			printf("1 %d %d\n", m * 2 + 1, m);
+			printf("%d %d %d\n", m + 1, m * 2 + 1, m);
+			printf("%d 1 %d\n", m * 2 + 1, m);
+			printf("%d %d %d\n", m * 2 + 1, m + 1, m);
+			printf("%d %d %d\n", m * 2 + 1, m * 2 + 1, m);
+		}
+		else if(n % 5 == 0)
+		{
+			int m = n / 5;
+			printf("8\n");
+			printf("1 1 %d\n", m * 3);
+			printf("1 %d %d\n", m * 3 + 1, m * 2);
+			printf("%d 1 %d\n", m * 3 + 1, m * 2);
+			printf("%d %d %d\n", m * 3 + 1, m * 3 + 1, m * 2);
+			printf("%d %d %d\n", m * 2 + 1, m * 3 + 1, m);
+			printf("%d %d %d\n", m * 2 + 1, m * 4 + 1, m);
+			printf("%d %d %d\n", m * 3 + 1, m * 2 + 1, m);
+			printf("%d %d %d\n", m * 4 + 1, m * 2 + 1, m);
+		}
+		else if(n % 7 == 0)
+		{
+			int m = n / 7;
+			printf("9\n");
+			printf("1 1 %d\n", m * 2);
+			printf("1 %d %d\n", m * 2 + 1, m * 2);
+			printf("1 %d %d\n", m * 4 + 1, m * 3);
+			printf("%d 1 %d\n", m * 2 + 1, m);
+			printf("%d %d %d\n", m * 2 + 1, m + 1, m * 2);
+			printf("%d %d %d\n", m * 2 + 1, m * 3 + 1, m);
+			printf("%d 1 %d\n", m * 3 + 1, m);
+			printf("%d %d %d\n", m * 3 + 1, m * 3 + 1, m * 4);
+			printf("%d 1 %d\n", m * 4 + 1, m * 3);
+		}
+		else
+		{
+			search_solution();
+		}
+	}
+	return 0;
+}
+
+====================================================================================================
+
+It still runs too long for large prime, but is better than the previous one. Now, we can use this code to generate the sum-of-squares decomposition of the length of the side of each big square with prime length. (Cheating)
+The final code uses the result from this code so that it can skip the decomposition step to save time. It costs 0.156s in UVA.
+
+
+
+
+Note: 
+1) Since this problem needs a lots of backtracking, even some details will cause the program to run in significantly different time. The logic of my code is very much like that of [3], but much slower at first. And I try to find out why. One of the reason is that, I passed the argument of the big square each time I go into a deeper backtracking level, and there is a array of 50*50 bools in that big square struct. The copy of the big array will multiply the time for backtracking. (I have kept this defect in the first code above.)
+2) This problem has multiple solutions.
+3) Some sum-of-squares decompositions my code generated will cost more time to find out a solution. When I used some other decompositions, the time cost in UVa will be reduced to about 0.03 - 0.04s, about four times faster.
+
+
+
+[1] http://www2.stetson.edu/~efriedma/mathmagic/1298.html
+[2] http://online-judge.uva.es/board/viewtopic.php?f=17&t=4098&start=15
+[3] http://blog.csdn.net/metaphysis/article/details/6820367

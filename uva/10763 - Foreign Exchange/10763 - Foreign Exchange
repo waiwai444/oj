@@ -1,0 +1,6 @@
+Easy problem. Since I don't know the maximum city id, I used a two-level map to store exchanging requirements.
+
+Note that if n is odd, then there's no solution.
+
+0.262s in uva
+

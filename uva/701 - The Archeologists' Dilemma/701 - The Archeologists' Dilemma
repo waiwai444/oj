@@ -1,0 +1,2 @@
+I'm not sure whether the precision problem of floating numbers will cause wrong answers when applying ceil() or floor() to floating numbers.
+But this code actually passes the test of UVa.

@@ -1,0 +1,10 @@
+math
+
+It's not hard to prove that the minimum value comes from the traditional precedence of '+' and '*', and the maximum comes from the reverse precedence, i.e. '+' is prior to '*'. 
+To see the case for maximum values, we notice that every formula here can be seen as a sum of terms, which in turn are products of factors. To choose the first operator to calculate, any '+' will result in a formula with not less terms. For example, a*b+c*d, if we treat it as a*(b+c)*d, then we have a*b*d+a*c*d. So we should use all '+'s first, and then '*'s. And it's easy to see that we can change the order to calculate '+' and the order to calculate '*' in any way, respectively. 
+We can also see the case for minimum values, based on the above arguments.
+
+P.S. We should use 64bit integers to avoid overflow.
+
+0.009s in uva
+

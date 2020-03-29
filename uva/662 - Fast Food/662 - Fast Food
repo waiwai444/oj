@@ -1,0 +1,7 @@
+DP
+I used an O(n^3) DP algorithm. We can place each depot from left to right, one by one. Let dp[i][j] be the minimum sum of distances when placing the i'th depot at the j'th restaurant (The first i depots have already been placed. The i'th depot is always placed left to the (i+1)'st depot). The DP equation will only depend on the position of the previous depot.
+To facilitate and speed up the algorithm, I used another three matrices. diff[i][j] is the difference of sums of distances when the current rightmost depot is at i, and then we add the next depot at j. sep[i][j] means that if there are two adjacent depots at i and j, the rightmost restaurant the depot at i will reach. prev[i][j] is the position of the previous depot when we place the i'th depot at restaurant j. 
+
+0.022s in uva (662)
+0.016s in poj (1485)
+0.006s in icpcarchive (5633)

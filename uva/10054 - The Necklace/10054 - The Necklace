@@ -1,0 +1,4 @@
+Take the colors as vertices and each bead as an edge between the corresponding colors. Then this problem becomes to check if the graph is eulerian and if so, to find out an eulerian cycle in the graph. 
+A graph is eulerian if and only if the graph is connected and the degrees of all vertices are even.
+To find out an eulerian cycle, my code uses an algorithm from USACO. I don't know the exact name for this algorithm. It runs in 0.259s in uva. 
+Other algorithms to get an eulerian cycle include Fleury's algorithm and Hierholzer's algorithm (which is just the same as the proof the Eulerian theorem), etc. (In fact, the algorithm used here can be seen as an elegant implementation of Hierholzer's algorithm.)

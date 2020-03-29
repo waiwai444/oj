@@ -1,0 +1,97 @@
+string
+
+Easy problem.
+
+====================================================================================================
+The code in cpp file uses std::map as the dictionary. It's very easy to implement.
+0.110s in uva
+0.719s in poj (9580KB)
+====================================================================================================
+====================================================================================================
+
+
+====================================================================================================
+The following code uses Trie tree as the dictionary.
+0.702s in uva
+0.375s in poj (16836KB)
+====================================================================================================
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct TrieNode
+{
+	TrieNode *child[26];
+	char word[11];
+};
+
+TrieNode dict;
+
+void init_trie_node(TrieNode *node)
+{
+	memset(node->child, NULL, sizeof(node->child));
+	node->word[0] = '\0';
+}
+
+void insert_word(TrieNode *node, char *key, char *word)
+{
+	if(*key != '\0')
+	{
+		int idx = *key-'a';
+		if(node->child[idx] == NULL)
+		{
+			node->child[idx] = (TrieNode *)malloc(sizeof(TrieNode));
+			init_trie_node(node->child[idx]);
+		}
+		insert_word(node->child[idx], key+1, word);
+	}
+	else
+	{
+		strcpy(node->word, word);
+	}
+}
+
+char *find_word(TrieNode *node, char *key)
+{
+	if(*key != '\0')
+	{
+		int idx = *key-'a';
+		if(node->child[idx] == NULL)
+			return NULL;
+		return find_word(node->child[idx], key+1);
+	}
+	else
+	{
+		return node->word;
+	}
+}
+
+int main()
+{
+	char line[30], *key, *word;
+	while(gets(line))
+	{
+		if(line[0] == '\0')
+			break;
+		word = strtok(line, " ");
+		key = strtok(NULL, " ");
+		insert_word(&dict, key, word);
+	}
+	while(gets(line))
+	{
+		word = find_word(&dict, line);
+		if(word != NULL)
+			printf("%s\n", word);
+		else
+			printf("eh\n");
+	}
+	return 0;
+}
+
+====================================================================================================
+
+Other better methods may be based on some hash functions.
+
+
+Same problem:
+	poj 2503

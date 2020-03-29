@@ -1,0 +1,5 @@
+Cut the covered area of a circle into rows of grids. Sort those strips of grids by y coordinates and then left x coordinates. Then count the number of grids.
+(Although the size of the whole area is at most 1000000*1000000, the radius of a circle is also at most 1000000, and there will be at most 1000 circles, this method can still get accepted in this problem.)
+
+0.000s in uva 10613
+

@@ -1,0 +1,10 @@
+0-1 knapsack problem
+
+Use the dynamic programming algorithm. We can define the state function as the following two ways:
+1) Let f(x) be the maximum prices a bag with capacity x can hold.
+2) Let f(x) be the minimum weight a bag which wants to hold items with total price x should have.
+The decision depends on which value is smaller between the maximum capacity and the maximum total price. 
+In this problem, I use the first way. It ran in uva in 0.029s. (I've implemented the second way, but it ran in uva in 0.175s.)
+
+0.029s in uva 10130
+

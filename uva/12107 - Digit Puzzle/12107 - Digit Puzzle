@@ -1,0 +1,6 @@
+My algorithm is as follows:
+
+First, use ID-DFS to enumerate all changes. And then for each change, use another DFS to check if the puzzle is a good one.
+
+0.090s in uva 12107
+0.146s in la 3784

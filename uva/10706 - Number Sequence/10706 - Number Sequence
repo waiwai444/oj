@@ -1,0 +1,10 @@
+I use two phases of binary search in this problem. 
+The first binary search finds out to which Sk the position given belongs. The second binary search finds out to which number the position given belongs. After these two phase of binary searches, you can easily get the digit in that position. 
+To use binary search, the length of Sk is pre-calculated, where the maximum k is determined according to the maximum position manually. 
+
+0.012s in uva
+0.000s in poj
+
+Same problem:
+	poj 1019
+

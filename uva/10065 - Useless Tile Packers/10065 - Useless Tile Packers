@@ -1,0 +1,7 @@
+Keyword:
+computational geometry, convex hull, area of polygon
+
+A simple convex hull problem. Just obtain the convex hull of the input polygon, and then calculate the areas of the input polygon and its convex hull.
+In my code, I used the Graham's algorithm to calculate the convex hull, and used the sum of signed triangle area to calculate the area of a polygon.
+
+My code ran in 0.015s in uva.

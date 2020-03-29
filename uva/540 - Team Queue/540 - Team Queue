@@ -1,0 +1,11 @@
+queue
+
+The idea is simple. The pop of team queue is the same as a traditional queue. But the push of it is different. An element is always inserted into the position after the last of elements of the same team (jump the queue). 
+But in order to run efficiently, my code seems a little bit complicated. It uses linked list to facilitate the push(insert) operation, and the linked list is implemented as static linked list to avoid dynamic allocation. And an array of pointers is used to point to the last element of a team in the queue. 
+
+PS: I don't know whether there will be same elements in the queue at the same time. There's no explicit tips about that. So I assume there's such a chance and implement my code according to this assumption.  
+
+My code ran in uva in 0.046s (81/1644) and in poj 0.079s (43/612). 
+
+Same problem:
+	poj 2259

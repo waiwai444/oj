@@ -1,0 +1,9 @@
+Let f(k,d) denotes the number of labelings of the k-ary complete tree with depth d, and n(k,d) the number of nodes in such a tree.
+Then f(k,d) = [f(k,d-1)]^k*C(n(k,d)-1, n(k,d-1))*C(n(k,d)-1-n(k,d-1), n(k,d-1))*...*C(n(k,d-1),n(k,d-1))
+			= [f(k,d-1)]^k*[n(k,d)-1]!/[n(k,d)!]^k
+Expand this iteration equation, we have:
+f(k,d) = [n(k,d)-1]!/[n(k,d-1)]^k/[n(k,d-2)]^k^2/.../[n(k,1)]^k^(d-1)
+
+The time cost of the final code in UVa is 0.332s (time limit 15s).
+
+p.s. In order to speed up the division operation of big integers, we can use binary search to find the digits of quotient.

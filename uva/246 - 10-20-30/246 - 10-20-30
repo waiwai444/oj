@@ -1,0 +1,6 @@
+Simulate the game process. Use a set to store game status that have been seen.
+
+I previously use a Trie tree to store those game status that have been seen, but it's much slower that using std::set.
+
+0.000s in uva 246
+0.016s in la 5185

@@ -1,0 +1,9 @@
+Use dynamic programming algorithm.
+
+Let dp(i,j) be the number of ways making up the amount i, without using coins of index 0, 1, ..., j-1. So dp(i,j) = dp(i,j+1)+dp(i-v[j], j). 
+
+Note that long long int is needed. 
+Be aware of fraction problem. For example, if I just multiply the input amount with 100 in my code, then the input 10.20 will become 1019.
+
+0.025s in uva (147)
+

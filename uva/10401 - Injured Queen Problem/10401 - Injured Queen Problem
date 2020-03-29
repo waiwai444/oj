@@ -1,0 +1,6 @@
+DP
+Note that we have to place n injured queens onto the n*n board.
+Let dp[i][j] be the number of arrangements from column 1 to column i+1 when placing the (i+1)st queen to row j+1. If at some column the position of the queen is already known, then it can only be placed at that position.
+
+0.033s in uva (10401)
+

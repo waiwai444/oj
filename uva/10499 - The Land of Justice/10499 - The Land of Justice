@@ -1,0 +1,2 @@
+very easy problem
+note: the termination condition is n < 0, not n == -1!

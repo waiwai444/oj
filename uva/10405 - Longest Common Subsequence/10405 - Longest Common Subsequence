@@ -1,0 +1,5 @@
+longest common subsequence
+
+Use the O(mn) DP algorithm, where m and n is the lengths of the two strings X and Y. Let d(i,j) be the length of the longest common subsequence in X[0..i] and Y[0..j]. d(i,j) equals to the maximum of d(i-1,j), d(i,j-1), and d(i-1,j-1)+1 if X[i] == Y[j]. 
+
+0.000s in uva (10405)

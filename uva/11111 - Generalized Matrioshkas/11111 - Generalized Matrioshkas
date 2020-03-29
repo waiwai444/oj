@@ -1,0 +1,6 @@
+I use two stacks, one for the size of current container, the other for the remaining size of it.
+
+Note: I got WA in uva once, since I didn't allocate enough space to store the input line. In my WA code, I only allocate 2000 chars, but in my AC code, I allocate 30000 chars. (Here, I use fgets to read lines. So even if the space is not enough, it will not get RE. So maybe it's better to use the deprecated gets so that we can easily distinguish between the space error and the logical error?)
+
+Same problem:
+	poj 3195

@@ -1,0 +1,6 @@
+Simulation
+
+Use queues to keep bid orders and ask orders, and some auxiliary data structures.
+
+0.310s in uva 1598
+0.432s in la 3706

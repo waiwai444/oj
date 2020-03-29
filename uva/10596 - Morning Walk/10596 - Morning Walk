@@ -1,0 +1,8 @@
+Eulerian cycle
+
+A simple Eulerian cycle problem. Note that the graph may be disconnected.
+I use DFS to check connectivity.
+
+It’s strange that if the graph is disconnected but all edges are in a connected subgraph, then we can just check the Eulerian cycle in that subgraph. (Why exist isolated points?) However, if there’s no edge at all, it will always be “Not Possible”.
+
+0.106s in uva (42/443)

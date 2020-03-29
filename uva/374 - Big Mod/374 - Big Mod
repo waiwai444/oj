@@ -1,0 +1,6 @@
+Modulo arithmetic
+
+Use the exponentiation by squaring method for fast computation of the powers.
+
+0.000s in uva 374
+0.000s in la 5346

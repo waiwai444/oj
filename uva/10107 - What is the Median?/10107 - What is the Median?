@@ -1,0 +1,4 @@
+I used a static linked list to store numbers in descending order, and each time insert a new number into the proper position.
+
+0.020s in uva 10107
+

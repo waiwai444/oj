@@ -1,0 +1,12 @@
+The description of this problem is a little bit hard to understand for me...
+
+In fact, we can imagine that we have lots of rings, some of which are already chained together, some are not. And the problem is to ask us to find out the minimum number of rings that we have to break to chain all rings into a single end-to-end strand of chain.
+
+Since the maximum number of rings is at most 15, we can easily enumerate all possible combinations of rings that we want to break. Here, we can use a BFS to find the minimum number of rings to be broken.
+
+And for each combination of rings to be broken, we can then use a DFS to see if all remaining rings are in some end-to-end strand of chain. If it's not, then it means we cannot rejoin them into a single end-to-end strand of chain. Also notice that, even if all the remaining rings are already in some end-to-end strand of chain, if the number of remaining chains exceeds the number of broken rings plus one, then we are still not able to rejoin all of them.
+
+Notice that, the input will contain duplicated connections that refer to the same pair of rings, which caused me WA.
+
+0.010s in uva 818
+0.019s in la 5218

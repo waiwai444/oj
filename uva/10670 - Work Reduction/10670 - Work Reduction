@@ -1,0 +1,9 @@
+Easy problem. Use greedy algorithm. Consider $B first until its cost are larger than $A or there's not enough works.
+Note that the target should be satisfied exactly.
+
+0.019s in uva
+0.016s in poj
+
+Same problem:
+	poj 1907
+

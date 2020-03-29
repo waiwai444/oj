@@ -1,0 +1,11 @@
+DP
+
+Because there are 4 colors and at most 7 marbles for each color, we can encode each case into an integer number, with each color occupies 3 bits and 12 bits at total.
+Also, because at most 3 consecutive marbles of the same color is allowed in the result arrangement, we can encode the consecutive positions of the same color by 2 bits. And for 4 colors, another 2 bits are needed.
+These encodings can be used as the index into the DP table.
+
+Let dp[i][j][k] be the number of arrangements of case i(encoded), with the first consecutive positions of the same color being encoded as j, and the last encoded as k, including those arrangements where the first and the last have the same color or the same number when there is other color between them.
+And ans[i] be the answer for case i.
+
+0.010s in uva 11125
+

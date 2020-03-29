@@ -1,0 +1,6 @@
+Keyword:
+math
+
+Calculate the least n that 1+2+...+n >= k. Then, according to the parity of the sum, k, and the n, we can determine the right n directly.
+
+Note: When k=0, n should be 3 instead of 0.

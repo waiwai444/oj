@@ -1,0 +1,8 @@
+DP
+
+Let dp[i][j][k] be the number of such words in alphabet {0, ..., i}, of length j, and with last digit being k. And tot[i][j] be the total number of words in alphabet {0, ..., i} and of length j. And ans[i][j] be the answer.
+Note that this problem requires the percentage, we can use "double" to record values in DP instead of the boring bignum.
+
+0.000s in uva 10081
+0.000s in poj 2537
+

@@ -1,0 +1,12 @@
+Good problem.
+Enumerate different cases which have different furthest reachable lake, i.e. first only lake 0, then lake 0 and 1, and then lake 0, 1, and 2, and so on. 
+For each case, find out the maximum result for this case by a greedy algorithm. That is, choose the current largest number of fish until the available time is used up. The available time is the total time substracted by the total moving time from lake 0 to the furthest lake. 
+The correctness of this greedy strategy is obvious. It can be seen by sorting all possible number of fish for all lakes descendingly. The largest numbers must be in the result.
+Another requirement of this problem is for cases that there is a tie. Since we enumerate reachable lakes from the nearest lake to the furthest lake, and we find the max number from lake 0 to the furthest lake in the greedy strategy, it can be easily seen that that requirement will be satisfied automatically.
+
+0.032s in uva
+0.047s in poj
+
+Same problem:
+	poj 1042
+

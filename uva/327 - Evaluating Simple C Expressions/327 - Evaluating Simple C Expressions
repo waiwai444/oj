@@ -1,0 +1,9 @@
+simple c-like expression parsing
+
+No need to use any complicated method like expression tree. Just scan the expression once and do the calculation.
+
+0.035s (22/1035) in uva
+
+Same problem:
+	poj 1539 (Note that the input length is different there, which got me WA once in uva since I copied the code from there...)
+	poj 3337 (The number of test cases is specified explicitly, and the output format is a little bit different.)

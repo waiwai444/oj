@@ -1,0 +1,9 @@
+It can be considered as a variant of the bipartite graph, where there exist arcs among one part of nodes. We can solve it as a max-flow problem.
+The idea for solving this problem is straightforward, but the implementation is long and tedious.
+
+Notice that there may exist receptacles that are not listed in the first list.
+
+0.000s in uva 753
+0.000s in la 5418
+0.000s in poj 1087 (slightly different in the input format)
+

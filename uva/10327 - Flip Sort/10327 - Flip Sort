@@ -1,0 +1,11 @@
+All we need to do is to count the number of inversions in the input array.
+
+On one hand, each flip can only reduce the number of inversions by at most 1, and our goal is to reduce the number to 0. On the other hand, bubble sort is just such a kind of the so-called flip sort, where the number of exchanges equal to the number of inversions.
+
+So we can just use the naive O(n^2) method to count the number of inversions, or just sort the array by bubble sort, which is also O(n^2) in worst cases. My implementation using the former one cost 0.030s in uva 10327.
+
+Another method is to use the merge sort, which can also be used to count the number of inversions, and its time complexity is just O(nlogn).
+
+My code implements the simplest form of merge sort, which employs an auxiliary array with the same size of the input array.
+
+0.000s in uva 10327

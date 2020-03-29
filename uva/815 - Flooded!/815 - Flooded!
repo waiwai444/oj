@@ -1,0 +1,6 @@
+Easy problem
+
+We can just sort the elevations disregarding their positions in the grid, and then compute the water level. See the code for details.
+
+0.000s in uva 815
+0.009s in la 5215

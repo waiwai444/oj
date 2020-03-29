@@ -1,0 +1,16 @@
+Because there are S satellite channels, we can have at most S different connected components in the graph after we remove all edges with lengths larger than D. We need to find a way to find a minimum D so that we can remove as many edges as possible so that there are still at most S different connected components.
+
+The algorithm here is to first find the MST and then remove the longest S-1 edges. Then the minimum D will be equal to the length of the longest edge after removal.
+
+To prove the correctness of this algorithm, we have the followings:
+1. Although there may be multiple different MST's for a graph, they all have the same sequence of edge lengths. This is to ensure we can obtain unique minimum D through this algorithm.
+  This can be easily concluded from the correctness of Kruskal's algorithm.
+2. For any sorted sequence of edges of a spanning tree, each edge length will not less than that in the same position of the sorted sequence of an MST.
+  Otherwise, Kruskal's algorithm will choose that shorter edge, which contradicts the statement 1 above.
+3. If there are smaller D' than the D we obtain by this algorithm, then because there are at most S different connected components(S satellite channels) and each component has a spanning tree with the longest edge length not longer than D' after we remove all edges longer than D', we can construct a spanning tree of the original graph by adding at most S-1 edges between different connected components to the spanning forest. The edge length sequence of this spanning tree will contradict the statements 2 shown above.
+
+Since it's a full-connected graph, we use Prim's algorithm to get the MST, which is O(n^2).
+
+0.000s in uva 10369
+0.032s in poj 2349
+

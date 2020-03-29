@@ -1,0 +1,34 @@
+One cumbersome method is to generate all permutations with those characters until obtaining the next one of the input permutation. But we don’t need those permutations before the given one. So we can just start with the given one and to find out the next permutation with the same process as the brute force method. 
+
+0.009s in uva
+0.016s in poj
+
+
+====================================================================================================
+An easier (and maybe the easiest) method is using the function std::next_permutation() from C++ STL.
+0.016s in uva
+0.000s in poj
+====================================================================================================
+#include <stdio.h>
+#include <string.h>
+#include <algorithm>
+
+char code[51];
+int code_len;
+
+int main()
+{
+    while(scanf("%s", code), code[0] != '#')
+    {
+        code_len = (int)strlen(code);
+        if(std::next_permutation(&code[0], &code[code_len]))
+            printf("%s\n", code);
+        else
+            printf("No Successor\n");
+    }
+    return 0;
+}
+====================================================================================================
+
+Same problem:
+	poj 1146

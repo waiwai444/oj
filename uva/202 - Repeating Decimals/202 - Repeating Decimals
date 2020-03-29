@@ -1,0 +1,5 @@
+Simulate the process of division operation and record the starting and the ending positions of the cycle.
+It's easy to see that if the current dividend has already been seen, then a cycle is found.
+
+0.003s in la 5141
+0.000s in uva 202

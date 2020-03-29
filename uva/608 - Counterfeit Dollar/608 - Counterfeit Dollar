@@ -1,0 +1,12 @@
+Keyword:
+12 coin weighing problem
+
+1) If coins in the left balance and the right balance are of the same weight, then these coins are all normal ones. 
+2) If a coin was in a lighter balance at some time and in a heavy balance at another time, then this coin is normal.
+3) If in one weighing the two balances are of different weights, then all other coins are normal. 
+Since the solution in this problem is always guaranteed to be uniquely determined, these three items suffice to find out the fake one. 
+
+Same problem:
+	poj 1013
+	icpcarchive 5410
+

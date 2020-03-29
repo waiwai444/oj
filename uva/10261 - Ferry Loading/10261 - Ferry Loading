@@ -1,0 +1,14 @@
+Keyword:
+DP
+
+This problem is a little bit like the knapsack problem. So it can be solved by DP. 
+Define d[i,j] as a boolean function that, if the first i cars can be loaded onto the ferry with the sum of lengths of cars on port equals to j, then it's true, otherwise false. The recursive form for d[i,j] is easy. 
+In order to get the resulting arrangement, use another table with the same dimension as d[i,j] to record the id of the last car on port according to d[i,j]. In my code, I merge these two tables into one table, as can be seen in the code.
+
+My code runs in 0.058s in uva. Note that, although I solved this problem with DP, the time-complexity of my algorithm is still exponential, which is like that of the knapsack problem and is called pseudo-polynomial time algorithm.
+
+PS: I got RE once because there are a little bit more than 200 cars. And I also got WA once since I didn't take the case of 0 car into account. Be careful.
+
+
+Same problem:
+	poj 2609

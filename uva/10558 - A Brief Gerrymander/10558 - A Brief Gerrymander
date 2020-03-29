@@ -1,0 +1,6 @@
+DP
+Let dp[i][j] be the maximum number of areas above the i'th east-west boundary (between this boundary and the north boundary) that contain at least one opposition-friendly neighborhood when the i'th east-west boundary is placed on avenue j. Then do the DP from the last east-west boundary back to the first boundary. When DP, also records the next position to place the next boundary so that we can easily reconstruct the result.
+To speed up the DP, we can precalculate the number of target areas between all pairs of two avenues. My first version of the code didn't precalculate that, and it ran for 0.168s (45/197) in uva.
+
+0.053s in uva 10558 (2/197)
+0.110s in poj 1933 (2/75)

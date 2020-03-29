@@ -1,0 +1,5 @@
+First, generate the sequence. (Use sub instead of mod operator for efficiency purpose.)
+Then, traverse the whole sequence once with two indices indicate a range for checking. See the code for details.
+
+0.310s in uva 11536
+

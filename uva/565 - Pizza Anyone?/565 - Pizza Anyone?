@@ -1,0 +1,10 @@
+Use backtracking on each food, from A to P.
+
+0.012s in uva (13/579)
+
+Note that, poj 1601 is the same problem as this one. However, the code here doesn’t apply to poj 1601, since there’s no special judge there. In the text of this problem, I find no statement that says the solution should conform to any restriction, so I think any solution that satisfies the requirement should be accepted. Nevertheless, I have to modify this code to make it accepted in poj. Sigh.
+
+Another bug in poj is that the maximum number of input constraints will be 16 instead of 12 there. 
+
+Same problem:
+	poj 1601

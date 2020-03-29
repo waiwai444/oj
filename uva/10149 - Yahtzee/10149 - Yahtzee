@@ -1,0 +1,2 @@
+Dynamic programming with bitmasks
+For every intermediate state, record the maximum scores under all possible sums of the first 6 categories.

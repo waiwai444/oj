@@ -1,0 +1,15 @@
+We consider this problem in a fully connected graph, in which we have to traverse a given set of edges with the least number of moves. We then construct a set of connected components in this graph that correspond to those edges we need to traverse.
+
+1) If all vertices in a component have even numbers of degree, then we can traverse all edges in this component with one Eulerian cycle.
+2) If there are only two vertices in a component that have odd numbers of degree, then we traverse with an Eulerian path.
+3) If more than two vertices in a component have odd numbers of degree, then we can traverse by n/2 walks and n/2-1 travels that connect different walks, where n is the number of odd vertices in this component.
+
+To prove 3), we know that there doesn't exist a single Eulerian path that can traverse all edges. Each walk starts at some odd vertex and ends at some other odd vertex. In a component, no matter how we walk, we can eliminate only two odd vertices in a walk. So we need at least n/2 walks. On the other hand, we can show that we need at most n/2 walks. That is, if after some walks, the component is still connected, then we can walk at least one more time to eliminate two more odd vertices. If after some walks, the component is not connected. If in some subcomponent, all vertices are even-degree, that means we can merge the Eulerian cycle in this subcomponent to some previous walk. So we can assume all subcomponents have at least two odd vertices. Since in each walk, we only eliminate odd vertices, no introducing them, we can use at most n/2 walks to eliminate all odd vertices. And, of course, we can traverse all edges in these walks.
+
+Also, don't forget the moves between different inspecting walks.
+
+
+I used the disjoint-set data structure to implement the algorithm. I used path halving instead of the traditional path compression in finding representatives, but it's only slightly faster.
+
+0.020s in uva 12118
+0.066s in la 4059

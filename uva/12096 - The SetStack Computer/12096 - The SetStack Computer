@@ -1,0 +1,5 @@
+Since the content of a set can be very large and complicated in this problem, we cannot store each set by itself. We have to share sub-structures.
+So we use an integer to represent each set. And each set in turn consists of a list of integers representing its elements(also sets). There is a pool to store all different sets, and the integers are just the indices into this pool. The algorithm then is very straightforward. We can make use of the stl algorithms such as set_union and set_intersection to ease our life.
+
+0.000s in uva 12096
+0.003s in la 3634

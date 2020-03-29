@@ -1,0 +1,13 @@
+math, fibonacci sequence, prime number
+
+A theorem: For m, n >= 1, gcd(f_m, f_n) = f_gcd(m,n),
+  where f_n is the n'th fibonacci number, and f_0 = 0, f_1 = 1.
+For the proof, refer to www.cut-the-knot.org/arithmetic/algebra/FibonacciGCD.shtml
+
+The conclusion of this theorem is that the indices of the fibonacci primes defined in this problem are all odd primes and 4.
+So we can pre-calculate the first 22000 primes and all fibonacci numbers not greater than the 22000'th prime.
+
+Note that, the largest fibonacci number in this problem would be more than 50000 digits, and even "long double" can only represent at most about thousands of digits, we have to shrink those fibonacci numbers which are too large during calculating by moving the floating point several positions to the left, or on the other word, dividing by some large multiple of 10, so that it can be accomodated in "long double" variables. This will not affect the final result if we do it properly, since we only need the first 9 digits of larger numbers.
+
+0.000s in uva 10236
+

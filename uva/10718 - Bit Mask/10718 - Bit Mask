@@ -1,0 +1,7 @@
+Easy problem. Traverse the bits instead of using brute force. 
+Refer to the code for details.
+
+P.S.: Use unsigned int. Otherwise WA.
+
+0.016s in uva
+

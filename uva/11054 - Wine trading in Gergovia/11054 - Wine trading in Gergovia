@@ -1,0 +1,16 @@
+Use greedy algorithm. 
+Traverse all habitants from the first one to the last one. For each buyer(or seller), try to trade with the nearest seller(or buyer) until his/her needs are satisfied. 
+The correctness of this greedy algorithm is easy to prove. 
+
+Since the magnitude of test data is large, a naive implementation of this greedy algorithm may cost lots of time. My first version cost 2.138s in uva, which has unnecessary loops. So try to implement this algorithm with linear complexity. See the code for details.
+
+An elegant implementation idea of this greedy algorithm can be found in [1], although his(or her) code has some implementation error. (However, it doesn't improve much in time cost. It ran in uva in 0.055s and in poj 0.110s.)
+
+0.062s in uva
+0.110s in poj
+
+Same problem:
+	poj 2940
+
+[1] http://poj.org/showmessage?message_id=57749
+

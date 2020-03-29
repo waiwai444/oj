@@ -1,0 +1,21 @@
+A hard problem! It costs me several days to solve it.
+
+Note that, the text of this problem is not clear so that it misleads me for a lot of efforts. That is, it says there’re seven “ship patterns”. I misunderstand its meaning as there may be any number of ships selected from this “set of ship patterns”. But the actual meaning is that there’re exactly seven ships each according to one pattern. I think my initial code basically solves that misunderstood problem, but it’s certain that it can’t get AC for this problem.
+
+For this problem, my code uses two different backtracking, one of which is inside the other. The thought behind my code is just simulating the process of human playing this game. 
+First, find out those ships that can be directly found without a guess. Then, use a backtracking on remaining ship patterns to find solutions. If the solution is not unique, then we have to guess. To simulating guessing, first assume we guess “wrongly”, i.e. we get an ‘o’ in the square. Then use recursion based on this guessing. If there’s a unique solution based on this guessing without any further guessing, then it means it’s ok if we guess wrong in this square. Then assume we guess “correctly”, i.e. we get an ‘x’ in this square. We can recursively call again based on this “correct” guessing as with in the “wrong” case, except that we still have a chance to guess “wrongly”. 
+
+With the above method, we can obtain the answer. But in some cases, the speed of this algorithm is unacceptable. A pruning is important here. That is, if there’re too many possible solutions, then it can not be solve by only at most one wrongly guessing. [1]
+
+
+0.329s in uva
+0.610s in poj
+
+Same problem:
+	poj 1138
+
+ps. The problem in uva and the problem in poj have a tiny difference, that is, the order of the input dimension numbers is different, which makes me WA several times in poj.
+
+ps. My code seems ugly and not efficient enough. But at least it’s acceptable. The clumsiness is partly due to the fact that it’s modified from my first code to solve a different problem which is my misunderstanding of this problem. 
+
+[1] http://www.ntnu.edu.tw/acm/ProblemSetArchive/B_EU_SWERC/1996/index.html

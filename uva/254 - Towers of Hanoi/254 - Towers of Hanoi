@@ -1,0 +1,15 @@
+Since each move of this algorithm is determined, we can first calculate the number of moves to finish a tower of n disks for 1 <= n <= 100. 
+Then, given a tower of disks n and a number of moves m, we try to move a complete tower with as many disks as possible, so as to reduce the scale of the problem with less moves. After that, we repeat this step with the smaller problem which has less moves remaining.
+For example:
+	n = 10 and m = 100
+	The initial status is (10, 0, 0).
+	Since within 100 steps, we can move a complete tower of at most 6 disks(which needs 63 moves) to peg C, we will first move such a number of disks. The resulting status is (4, 0, 6). Then because we still have undone moves(100-63=37), we have to continue with the remaining 37 moves. We move the only one possible move next, which leads to (3, 1, 6), and then repeat the step with the remaining 36 moves.
+	Given 36 moves remaining, because it can be used to move a complete tower of at most 5 disks(which needs 31 moves), we move such a number of disks from peg C. The result is (8, 1, 1). Then the only one possible move leads to (8, 2, 0).
+	Now, there is only 4 moves remaining, which will finally leads to (5, 3, 2).
+
+The implementation uses an array named "moves" to stored the pre-computed number of moves needed to move a complete tower of n disks. Then the algorithm repeadedly uses a binary search in this array to compute the next status of towers with remaining moves.
+
+Notice that we need to use a self-defined big interger type.
+
+0.000s in uva 254
+

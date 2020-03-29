@@ -1,0 +1,8 @@
+Brute force
+
+My solution is to do DFS by squares. At the initialization phase, compute all the relations between squares and matchsticks for different board sizes. And then use DFS with some kinds of pruning for each input.
+
+I also tried DFS by matchsticks, but it's much slower than that by squares. Maybe it's due to my poor implementation and pruning.
+
+0.000s in uva 1603
+0.003s in la 2328

@@ -1,0 +1,7 @@
+combinatorics
+
+Since it's a palindrome, we only consider its first part. Try to put each character to each position one by one and check the number of palindromes we can obtain if some character is placed into the current position. If not large enough, try the next character, or else put this character and move to the next position.
+To compute the number of palindromes, use the permutation of multisets.
+
+0.000s in uva 11027
+

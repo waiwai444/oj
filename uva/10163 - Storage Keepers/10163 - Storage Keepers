@@ -1,0 +1,97 @@
+====================================================================================================
+DP
+
+The idea of the current DP algorithm came from the internet. It employs two phases of DP. 
+The first phase is to calculate the maximum safe line. Let dp[i][j] be the maximum safe line when the keepers from 0 to i are considered to look after storages 0 to j.
+The second phase is to calculate the least cost under the condition of the maximum safe line. dp[i][j] is similar as in phase 1, except that it records the least cost when the safe lines in intermediate states are larger than or equal to the final maximum safe line.
+
+0.003s in uva (10163)
+====================================================================================================
+
+
+====================================================================================================
+The following DP algorithm and implementation is my first version and devised by myself, but it's quite inefficient. Just only for reference here.
+
+Let dp[i][j][k] be the least cost when keepers from 0 to i are considered to guard storages from 0 to j with safety value k.
+
+0.760s in uva (10163)
+====================================================================================================
+#include <stdio.h>
+#include <string.h>
+
+#define INF (unsigned int)-1
+
+int stor_num, kp_num;
+int ability[30];
+
+unsigned int dp[30][100][1001];
+
+int solve()
+{
+	int i, j, k, avg, s, max_s = 0;
+	unsigned int cost;
+	for(i = 0; i < kp_num; i++)
+		if(ability[i] > max_s)
+			max_s = ability[i];
+	memset(dp, -1, sizeof(dp));
+	for(i = 0; i < kp_num; i++)
+		for(j = 0; j < stor_num; j++)
+			dp[i][j][0] = 0;
+	for(i = 0; i < stor_num; i++)
+	{
+		avg = ability[0]/(i+1);
+		if(ability[0] < dp[0][i][avg])
+			dp[0][i][avg] = ability[0];
+	}
+	for(i = 1; i < kp_num; i++)
+	{
+		for(j = 0; j < stor_num; j++)
+		{
+			avg = ability[i]/(j+1);
+			if(ability[i] < dp[i][j][avg])
+				dp[i][j][avg] = ability[i];
+			for(k = 0; k < j; k++)
+			{
+				avg = ability[i]/(j-k);
+				for(s = 0; s <= max_s; s++)
+				{
+					if(dp[i-1][k][s] < INF)
+					{
+						cost = dp[i-1][k][s]+ability[i];
+						if(avg >= s)
+						{
+							if(cost < dp[i][j][s])
+								dp[i][j][s] = cost;
+						}
+						else
+						{
+							if(cost < dp[i][j][avg])
+								dp[i][j][avg] = cost; 
+						}
+					}
+				}
+			}
+			for(s = 0; s <= max_s; s++)
+				if(dp[i-1][j][s] < dp[i][j][s])
+					dp[i][j][s] = dp[i-1][j][s];
+		}
+	}
+	for(i = max_s; i >= 0; i--)
+		if(dp[kp_num-1][stor_num-1][i] < INF)
+			return i;
+	return -1;	// never goes here
+}
+
+int main()
+{
+	int i, s;
+	while(scanf("%d%d", &stor_num, &kp_num), stor_num)
+	{
+		for(i = 0; i < kp_num; i++)
+			scanf("%d", &ability[i]);
+		s = solve();
+		printf("%d %u\n", s, dp[kp_num-1][stor_num-1][s]);
+	}
+	return 0;
+}
+====================================================================================================

@@ -1,0 +1,8 @@
+Use the greedy algorithm.
+
+At the beginning, two classes are empty. We add each kid to one of the two classes so that more troublemaker pairs between this kid and those already added (into one of the classes) are broken up.
+
+It's easy to see that this algorithm will always generate a solution meeting the requirement that the resulting number of troublemaker pairs are reduced to at most a half.
+When we consider kid i, we denote as Pi the pairs between kid i and those already added. Then, the sets of pairs P1, P2, ..., Pn are all disjoint, and their union equals to the whole set of pairs. We reduce the size of Pi to at most one half each time we deal with one kid, and finally the number of remaining pairs are at most one half.
+
+0.000s in uva 10982

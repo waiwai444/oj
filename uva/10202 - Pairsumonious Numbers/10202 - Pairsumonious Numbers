@@ -1,0 +1,5 @@
+Assume that the unknown numbers x1, x2, ..., xn are sorted in ascending order, also the pairsumonious numbers s1, s2, ..., s(n*(n-1)/2).
+Notice that, if we know the numbers of x1, x2, x3, we can obtain all the remaining numbers. And x1+x2=s1, x1+x3=s2. So we can enumerate the possible values for x2+x3 to get the possible values for x1, x2, and x3. 
+Once we have known x1, x2, and x3,  we can get x4 from x1+x4, which must be the smallest pairsumonious number that is not used for previous traversal. If x4<x3, then the assumption for x2+x3 must be wrong. Otherwise, we can then assign other pairsumonious numbers for x4+xi (i=2, 3) and continue to find the value for x5. If any contradiction or conflit occurs, i.e. there is not a pairsumonious number for some xi+x5, then the assumption for x2+x3 must also be wrong. 
+
+(PS: for simplicity, the code I submitted hasn't been optimized sufficiently since the magnitude of the datasets in both poj and uva are small enough.)

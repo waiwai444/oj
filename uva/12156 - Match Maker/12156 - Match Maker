@@ -1,0 +1,10 @@
+DP
+
+The idea of this problem is easy, but my implementation is complicated.
+First sort the name of men and women respectively, and store them in two dictionaries, which are implemented by trie trees, and represent them by an index value.
+In order to ease the algorithm, the prefer list is represented by a list and a map.
+For DP, let dp[i][j] be the number of distinct solutions for men from the i'th to the last one and the subset(represented as an integer j) of women that these men marry to. The subsets of women can be represented as an integer because the maximum number of men or women is less than 16.
+For reconstructing a lexicographically least solution, use an array match[i][j] to store the match for the i'th man and women subset j.
+
+0.029s in uva 12156 (4/14)
+0.052s in icpcarchive 4404 (13/131)

@@ -1,0 +1,7 @@
+number theory, factorial
+
+simple problem
+
+Here, the number of trailing zeros and the number of digits are computed seperately. The number of digits is computed by logarithm. And the number of trailing zeros is computed by the number of the largest prime factor of n in n!. 
+
+It ran in uva in 0.412s. Not very good but acceptable (497/1151, there may be lots of early submissions that ran in 0s or nearly 0s).

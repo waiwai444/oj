@@ -1,0 +1,12 @@
+Josephus problem
+
+Of course, we can use simulation to solve it, but dynamic programming is a better choice.
+
+Consider the original Josephus problem where we remove every m-th number. Let the number start from 0, and let f(n) denote the last removed number, we have:
+    f(n) = (m+f(n-1))%n
+
+By using this recursive equation, we can easily compute the result by dynamic programming.
+
+Notice that, in this problem, we remove the first number immediately at the beginning.
+
+0.000s in uva 151

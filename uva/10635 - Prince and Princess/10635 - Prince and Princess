@@ -1,0 +1,7 @@
+Longest common subsequence
+DP
+Although it's a LCS problem, it may not be solved by the classic O(n^2) DP algorithm since the size of the input sequences can be quite large. (At least with a log of time)
+Because all the elements in a sequence are unique, we can reduce such an LCS problem to an LIS problem. We can order each element(integer) increasingly according their position in the second sequence, then use this order to find the LIS in the first sequence. It's easy to prove that such an LIS is an LCS in this two sequences.
+And then, we can use the O(nlogn) DP algorithm to solve that LIS problem. That is, let dp[i] be the index of the smallest element such that there is an increasing subsequence of length i ending at that element.
+
+0.039s in uva (10635)

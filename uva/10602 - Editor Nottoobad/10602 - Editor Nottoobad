@@ -1,0 +1,6 @@
+I use Trie tree here. 
+It can be easily seen that the minimum number of presses is the number of edges of the Trie tree of the input words. We only need to traverse the Trie tree to print each word we met. 
+A special requirement here is to print the first word first. So the process of traversal is different and a little bit sophisticated. The details can be found in the cpp code. 
+
+0.042s in uva
+

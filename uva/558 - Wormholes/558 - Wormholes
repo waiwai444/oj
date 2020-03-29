@@ -1,0 +1,144 @@
+This is problem is to find out whether there exists any negative cycle in the directed graph.
+
+There are several ways to achieve this, including Bellman-Ford algorithm and SPFA for SSSP problems, or just simply DFS.
+
+The faster way is using DFS for this problem. It costs only 0s in uva 558.
+
+0.000s in uva 558
+0.006s in la 5579
+
+====================================================================================================
+The following code uses Bellman-Ford algorithm. It ran in 0.010s in uva 558.
+====================================================================================================
+#include <cstdio>
+#include <cstring>
+
+#define INF 0x3f3f3f3f
+
+int n, m;
+struct edge_t
+{
+    int u, v, w;
+} edge[2000];
+
+int dist[1000];
+
+bool solve()
+{
+    int i, j;
+    memset(dist, INF, sizeof(dist));
+    dist[0] = 0;
+    for(i = 1; i < n; i++)
+    {
+        for(j = 0; j < m; j++)
+        {
+            int u = edge[j].u, v = edge[j].v, w = edge[j].w;
+            if(dist[u]+w < dist[v])
+                dist[v] = dist[u]+w;
+        }
+    }
+    for(j = 0; j < m; j++)
+    {
+        int u = edge[j].u, v = edge[j].v, w = edge[j].w;
+        if(dist[u]+w < dist[v])
+            return true;
+    }
+    return false;
+}
+
+int main()
+{
+    int i, c;
+    scanf("%d", &c);
+    while(c--)
+    {
+        scanf("%d%d", &n, &m);
+        for(i = 0; i < m; i++)
+            scanf("%d%d%d", &edge[i].u, &edge[i].v, &edge[i].w);
+        if(solve())
+            printf("possible\n");
+        else
+            printf("not possible\n");
+    }
+    return 0;
+}
+====================================================================================================
+
+
+====================================================================================================
+This code uses SPFA. It ran in 0.020s in uva 558, slower than Bellman-Ford algorithm.
+====================================================================================================
+#include <cstdio>
+#include <cstring>
+#include <queue>
+
+#define INF 0x3f3f3f3f
+
+int n, m;
+int first[1000], next[2000];
+struct edge_t
+{
+    int u, v, w;
+} edge[2000];
+
+int dist[1000];
+bool inq[1000];
+int cnt[1000];
+
+bool solve()
+{
+    std::queue<int> q;
+    memset(dist, INF, sizeof(dist));
+    memset(inq, false, sizeof(inq));
+    memset(cnt, 0, sizeof(cnt));
+    dist[0] = 0;
+    q.push(0);
+    cnt[0] = 1;
+    while(!q.empty())
+    {
+        int u = q.front(); q.pop();
+        for(int e = first[u]; e != -1; e = next[e])
+        {
+            int v = edge[e].v, w= edge[e].w;
+            if(dist[v] > dist[u]+w)
+            {
+                dist[v] = dist[u]+w;
+                if(!inq[v])
+                {
+                    q.push(v);
+                    inq[v] = true;
+                    ++cnt[v];
+                    if(cnt[v] > n)
+                        return true;
+                }
+            }
+        }
+        inq[u] = false;
+    }
+    return false;
+}
+
+int main()
+{
+    int i, c, u, v, w;
+    scanf("%d", &c);
+    while(c--)
+    {
+        scanf("%d%d", &n, &m);
+        memset(first, -1, sizeof(first));
+        for(i = 0; i < m; i++)
+        {
+            scanf("%d%d%d", &u, &v, &w);
+            edge[i].u = u, edge[i].v = v, edge[i].w = w;
+            next[i] = first[u];
+            first[u] = i;
+        }
+        if(solve())
+            printf("possible\n");
+        else
+            printf("not possible\n");
+    }
+    return 0;
+}
+====================================================================================================
+

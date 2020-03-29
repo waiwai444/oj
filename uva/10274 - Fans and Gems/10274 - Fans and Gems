@@ -1,0 +1,6 @@
+This problem is quite straight-forward. Just use BFS to solve it. But the implementation is a little bit troublesome. 
+I use the std::set to filter out duplicated states. 
+
+Note that, the process of one step is as follows. First, move all gems and flyers to the furthest. Then eliminate all gems that can be eliminated, i.e. adjacent gems with the same color. Repeat the above two operations until all gems and flyers cannot be moved any further. That's one step.
+
+0.075s in uva (18/127)

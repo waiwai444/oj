@@ -1,0 +1,4 @@
+Since the range of the number is from 0000 to 9999 and the number of guesses is at most 10, we can try all these numbers to check if it satisfy the guesses.
+
+0.010s in uva 296
+0.023s in la 5597

@@ -1,0 +1,7 @@
+We can solve this problem as an MST problem. That is, we can construct a full connected graph with the weights of edges being the distances between their endpoints, except that the edges that already exist to connect two buildings have 0 weight. Then we can use an algorithm for MST to solve it.
+Since it's a full connected graph, the number of edges is O(n^2). So we use Prim's algorithm with adjacency matrix which has the time complexity O(n^2).
+
+Notice that, in order to reduce the number of invocation of sqrt(), which is quite expensive, we can use the square of the distance as the weight of an edge. The resulting MST is the same one. It's correct because each time we choose an edge, the two kinds of weights result in the same edge to be pick.
+
+0.000s in uva 10397
+

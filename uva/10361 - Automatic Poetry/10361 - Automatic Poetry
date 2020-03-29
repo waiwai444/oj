@@ -1,0 +1,8 @@
+Keyword:
+string
+
+I implemented another version of strtok(). It can handle empty sub-strings correctly. 
+It ran in 0.015s in uva.
+
+Same problem:
+	poj 1917

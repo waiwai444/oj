@@ -1,0 +1,8 @@
+binary tree, s-expression
+
+I first construct a complete expression, then traverse the expression as a binary tree to sum up.
+
+My code here ran in uva in 0.032s and in poj in 0.016s. 
+
+Same problem:
+	poj 1145 (Their codes are slightly different.)

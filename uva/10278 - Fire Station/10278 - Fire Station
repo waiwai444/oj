@@ -1,0 +1,2 @@
+This problem can be solved as an all-pairs shortest path problem. So my code uses Floyd-Warshall algorithm. 
+It runs in 0.440s in uva. 

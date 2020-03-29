@@ -1,0 +1,7 @@
+Keyword:
+Graph, BFS, DP
+
+Consider a graph in which a node represents a status in the table. A status in the table is a quadruple consisting of row and column the monocycle positioned, the bottom color of the monocycle, and the direction of the monocycle. 
+We don't need to construct this graph explicitly. Instead, we can use a table to store the distance of a status from the starting status during BFS. Once we reach the target status, regardless of the direction, we can output the result and quit.
+
+My code runs in 0.019s in uva.

@@ -1,0 +1,6 @@
+Simulation
+
+If there is no cow killed during the period equals to LCM(Ti), then all the remaining cows survived.
+
+0.330s in uva 10273
+

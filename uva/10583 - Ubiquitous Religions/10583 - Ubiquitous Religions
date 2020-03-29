@@ -1,0 +1,6 @@
+It's a very easy and obvious problem that a disjoint-set can be applied.
+
+My code using disjoint-set with path compression and union by rank ran in 266MS in poj and in 0.139s in uva. (The size of test data set is quite large.)
+
+Same problem:
+	poj 2524

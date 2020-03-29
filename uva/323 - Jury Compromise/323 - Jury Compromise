@@ -1,0 +1,116 @@
+Keyword:
+knapsack
+
+Good one. It's a kind of knapsack problem. I use a DP method to solve it. 
+This problem can be seen as a problem which asks you to find out a subset of size m, out of a collection of size n, in which the sum of value p[i]-d[i] is nearest to 0. 
+To use DP, consider a 3d boolean array - d[i][j][k]. The first dimension is the first i people, the second is the size of the subset, and the third is the sum of p[i]-d[i]. So d[i][j][k]=true means that we can select a subset of size j from the first i people whose sum of p[i]-d[i] equals to k. 
+Values in d[i][j] depend only on d[i-1][j] and d[i-1][j-1]. So we can reduce the memory space to only record d[j][k]. 
+Note that, since this problem requires that the result should make the sum of p[i]+d[i] maximum, and also give the detail selection, we must record other auxiliary fields to accomplish that. 
+The code in the cpp file implement this algorithm. It ran in 0.059s in uva (rank 12/165). The same code ran in poj in 47MS and 544K. 
+
+
+==============================================================================================================
+Also noted that, different DP method would have different cost, both in time and space. And the difference may be quite significant.
+For example, I first implement another DP method. It exchanges the first two dimensions of the array defined above. And it ran in 0.715s in uva and in 875MS and in 7972K in poj, which is much poorer that the previous algorithm. The implementation is as follows:
+==============================================================================================================
+#include <stdio.h>
+#include <string.h>
+
+struct DPStruct
+{
+	bool has_value(int v) { return _value[v+400]; }
+	unsigned char* get_jury(int v) { return _jury[v+400]; }
+	int get_d_plus_p(int v) { return _d_plus_p[v+400]; }
+	
+	void set_value(int v) { _value[v+400] = true; }
+	void set_jury(int v, unsigned char* j, int n) { memcpy(_jury[v+400], j, n*sizeof(unsigned char)); }
+	void set_d_plus_p(int v, int s) { _d_plus_p[v+400] = s; }
+private:
+	bool _value[801];
+	unsigned char _jury[801][20];
+	int _d_plus_p[801];
+};
+
+DPStruct dptable[2][200];
+
+int main()
+{
+	int i, j, k, n, m, tc = 0;
+	int p[200], d[200];
+	unsigned char tmp_jury[20];
+	while(scanf("%d%d", &n, &m), n)
+	{
+		for(i = 0; i < n; i++)
+			scanf("%d%d", &p[i], &d[i]);
+		memset(dptable, 0, sizeof(dptable));
+		
+		dptable[1][0].set_value(p[0]-d[0]);
+		tmp_jury[0] = 0;
+		dptable[1][0].set_jury(p[0]-d[0], tmp_jury, 1);
+		dptable[1][0].set_d_plus_p(p[0]-d[0], p[0]+d[0]);
+		for(j = 1; j < n; j++)
+		{
+			memcpy(&dptable[1][j], &dptable[1][j-1], sizeof(DPStruct));
+			if(!dptable[1][j].has_value(p[j]-d[j]) || p[j]+d[j] > dptable[1][j].get_d_plus_p(p[j]-d[j]))
+			{
+				tmp_jury[0] = j;
+				dptable[1][j].set_jury(p[j]-d[j], tmp_jury, 1);
+				dptable[1][j].set_d_plus_p(p[j]-d[j], p[j]+d[j]);
+			}
+			dptable[1][j].set_value(p[j]-d[j]);			
+		}
+		for(i = 2; i <= m; i++)
+		{
+			for(j = i-1; j < n; j++)
+			{
+				memcpy(&dptable[i%2][j], &dptable[i%2][j-1], sizeof(DPStruct));
+				for(k = -400; k <= 400; k++)
+				{
+					if(dptable[1-i%2][j-1].has_value(k))
+					{
+						if(!dptable[i%2][j].has_value(k+p[j]-d[j]) || dptable[1-i%2][j-1].get_d_plus_p(k)+p[j]+d[j] > dptable[i%2][j].get_d_plus_p(k+p[j]-d[j]))
+						{
+							memcpy(tmp_jury, dptable[1-i%2][j-1].get_jury(k), 20*sizeof(unsigned char));
+							tmp_jury[i-1] = j;
+							dptable[i%2][j].set_jury(k+p[j]-d[j], tmp_jury, i);
+							dptable[i%2][j].set_d_plus_p(k+p[j]-d[j], dptable[1-i%2][j-1].get_d_plus_p(k)+p[j]+d[j]);
+						}
+						dptable[i%2][j].set_value(k+p[j]-d[j]);
+					}
+				}
+			}
+			memset(&dptable[1-i%2], 0, sizeof(dptable[1-i%2]));
+		}
+		
+		int r;
+		for(k = 0; k <= 400; k++)
+		{
+			if(dptable[m%2][n-1].has_value(k) || dptable[m%2][n-1].has_value(-k))
+			{
+				if(dptable[m%2][n-1].get_d_plus_p(k) >= dptable[m%2][n-1].get_d_plus_p(-k))
+					r = k;
+				else if(dptable[m%2][n-1].get_d_plus_p(k) < dptable[m%2][n-1].get_d_plus_p(-k))
+					r = -k;
+				break;
+			}
+		}
+		
+		int D = 0, P = 0;
+		unsigned char *jury = dptable[m%2][n-1].get_jury(r);
+		for(i = 0; i < m; i++)
+		{
+			D += d[jury[i]];
+			P += p[jury[i]];
+		}
+		printf("Jury #%d\nBest jury has value %d for prosecution and value %d for defence:\n", ++tc, P, D);
+		for(i = 0; i < m; i++)
+			printf(" %d", jury[i]+1);
+		printf("\n\n");	
+	}
+	return 0;
+}
+==============================================================================================================
+
+
+Same problem:
+	poj 1015

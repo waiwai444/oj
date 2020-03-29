@@ -1,0 +1,4 @@
+Just simulate the process to see if at some time all students are awaken. To determine if the process will loop forever, encode the status at some time as a big integer with each decimal digit representing one student, and then use a hash set to record it to check repetition.
+
+0.000s in uva 12108
+0.000s in la 3785

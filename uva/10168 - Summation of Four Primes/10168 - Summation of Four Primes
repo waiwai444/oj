@@ -1,0 +1,111 @@
+Number theory, Eratosthenes sieve
+
+The following code costs 1.156s in UVa. It is based on DP and records the summations of one prime, two primes, three primes, and four primes of all integers.
+====================================================================================================
+#include <iostream>
+#include <cstring>
+#include <vector>
+
+using namespace std;
+
+#define MAXNUM 10000000
+
+bool is_prime[MAXNUM+1];
+vector<int> prime;
+int tab[MAXNUM+1][4];
+
+inline void get_prime()	// Eratosthenes sieve
+{
+	int i, j;
+	is_prime[0] = is_prime[1] = false;
+	is_prime[2] = true;
+	for(i=3; i<=MAXNUM; i++)
+	{
+		if((i&1)==0)
+			is_prime[i] = false;
+		else
+			is_prime[i] = true;
+	}
+	for(i=3; i<=MAXNUM; i+=2)
+	{
+		if(!is_prime[i])
+			continue;
+		j=2;
+		while(i*j<=MAXNUM)
+			is_prime[i*(j++)] = false;
+	}
+	prime.reserve(MAXNUM);
+	prime.push_back(2);
+	for(i=3; i<=MAXNUM; i+=2)
+		if(is_prime[i])
+			prime.push_back(i);
+}
+
+void calc(int n, int i)
+{
+	if(tab[n][i]>=0)
+		return;
+	if(2*(i+1)>n)
+	{
+		tab[n][i] = 0;
+		return;
+	}
+	if(i==0)
+	{
+		if(is_prime[n])
+			tab[n][i] = n;
+		else
+			tab[n][i] = 0;
+		return;
+	}
+	int j;
+	for(j=0; j<=prime.size(); j++)
+	{
+		if(prime[j]>=n-1)
+			break;
+		if(tab[n-prime[j]][i-1]==-1)
+			calc(n-prime[j], i-1);
+		if(tab[n-prime[j]][i-1]==0)
+			continue;
+		else
+		{
+			tab[n][i] = prime[j];
+			return;
+		}
+	}
+	tab[n][i] = 0;
+}
+
+int main()
+{
+	int i, n;
+	get_prime();
+	memset(tab, -1, sizeof(tab));
+	while(cin>>n)
+	{
+		calc(n, 3);
+		if(tab[n][3]==0)
+			cout<<"Impossible."<<endl;
+		else
+		{
+			i = n;
+			cout<<tab[i][3]<<' ';
+			i -= tab[i][3];
+			cout<<tab[i][2]<<' ';
+			i -= tab[i][2];
+			cout<<tab[i][1]<<' ';
+			i -= tab[i][1];
+			cout<<tab[i][0]<<endl;
+		}
+	}
+	return 0;
+}
+====================================================================================================
+
+
+However, if we assume that the Goldbach's conjecture are true, we can simplify the code and improve the efficiency as follows.
+It's obvious that integer less than 8 cannot be represented as the summation of four primes. So we only consider integer n larger than or equal to 8.
+If n is an even number, then it can be decomposed as 2+2+two primes, since n-4 is an even number larger than or equal to 4, and according to the Goldbach's conjecture, n-4 can be decomposed as two primes. 
+If n is an odd number, then it can be decomposed as 2+3+two primes, since n-5 is an even number larger than or equal to 4, and according to the Goldbach's conjecture, n-5 can also be decomposed as two primes. 
+Since this algorithm is based on the assumption of the correctness of the Goldbach's conjecture, it may be wrong. But, at least it's true for the integer range of this problem.
+The implementation of this algorithm is in my final code. And its time cost is 0.712s in UVa. Most of the time is spent on sieving the prime numbers.

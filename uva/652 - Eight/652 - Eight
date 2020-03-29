@@ -1,0 +1,9 @@
+Here, I use BFS to pre-calculate from the target all possible board layouts. 
+
+0.119s in uva (17/374)
+
+In poj, 1077 is a same problem except that it has only one test case in a run. There, I use bi-directional BFS to solve it, which ran in 0.016s. But if I use that code here in uva, I’ll always get TLE. On the other hand, if I use this code there in poj, it costs 0.500s there. So, different algorithms and different implementations have their own advantages and shortages. The reason may be that the number of test cases in poj is quite small (even only one). 
+See the code in poj 1077. (It looks tedious and ugly… since it’s written long ago.)
+
+Same problem:
+	poj 1077

@@ -1,0 +1,5 @@
+Keyword:
+geometry, incircle of triangle
+
+Simple problem. Notice that the input data may not be a triangle, and under such cases the radius is 0.
+My code runs in 0.012s in uva.

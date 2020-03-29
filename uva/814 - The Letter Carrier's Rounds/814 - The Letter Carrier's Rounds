@@ -1,0 +1,4 @@
+It's a simple simulation problem. Use std::map and std::set to record email accounts. Be careful that the target email addresses may also be duplicated in one session.
+
+0.000s in uva 814
+0.009s in la 5214

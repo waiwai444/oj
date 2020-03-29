@@ -1,0 +1,43 @@
+Simple math problem.
+
+Use logarithm to calculate n.
+
+====================================================================================================
+The following code ran in poj in 157MS. It calculates each n once. 
+====================================================================================================
+#include <stdio.h>
+#include <math.h>
+
+int rec[21];
+
+int main()
+{
+	int y, d, z, n;
+	double s;
+	while(scanf("%d", &y), y)
+	{
+		z = (y-1960)/10;
+		if(rec[z] == 0)
+		{
+			d = 4;
+			while(z--)
+				d *= 2;
+			n = 1;
+			s = 0.0;
+			while(s < d)
+			{
+				n++;
+				s += log((double)n)/log(2.0);
+			}
+			rec[z] = n-1;
+		}
+		printf("%d\n", rec[z]);
+	}
+	return 0;
+}
+====================================================================================================
+
+The code in the cpp file uses pre-calculated n's.
+
+Same problem:
+	poj 2661

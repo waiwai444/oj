@@ -1,0 +1,8 @@
+math, root finding of transcendental equation
+
+I use the simplest bisection method.
+
+Note: use fabs(y) > epsilon instead of fabs(x1-x0) > epsilon as the loop condition, otherwise we'll use a large negative power to avoid WA.
+
+0.019s in uva
+

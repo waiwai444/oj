@@ -1,0 +1,5 @@
+binary tree
+
+I used a stack to traverse the tree instead of recursion.
+
+It ran in 0.045s in uva.

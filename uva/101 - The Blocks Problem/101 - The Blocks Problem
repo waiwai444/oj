@@ -1,0 +1,6 @@
+A good problem for basic data structure (the idea is simple, but the implementation is troublesome)
+
+Note: The test data set in poj is too weak. My initial code got AC here, but got TLE and RE in uva 101, since in my initial code there exists a big bug. 
+
+Same problem:
+	poj 1208

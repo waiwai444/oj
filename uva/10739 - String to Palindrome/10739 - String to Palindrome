@@ -1,0 +1,5 @@
+DP. Let dp[l][r] be the minimum number of operations to change substring from index l to index r to a palindrome.
+I used non-recursive code here. My recursive code ran in 0.078s in uva.
+
+0.032s in uva (10739)
+

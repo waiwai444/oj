@@ -1,0 +1,12 @@
+DP
+
+Let dp[i][j][k] be the number of paths from i to j with length k (k edges), and sum[i][j] be the sum of the number of paths from i to j.
+If there is a cycle in a path from i to j, then there are infinite number of paths from i to j, hence sum[i][j] should be -1.
+If there is no cycle in a path from i to j, then the length of this path will be less than n. So we can try different lengths from 1 up to n-1 to find the number of paths without cycle.
+Then in order to check if there is any cycle in a path from i to j, we can try n more edges in our DP algorithm. This guarantees that all cycles can be found.
+See the code for details.
+
+Notice that since dp[i][j][k] only depends on dp[i][j'][k-1], we can reduce the storage space to only 2 matrices.
+
+0.000s in uva 125
+

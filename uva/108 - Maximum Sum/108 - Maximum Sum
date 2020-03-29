@@ -1,0 +1,42 @@
+Keyword:
+maximum submatrix
+
+====================================================================================================
+The following code uses the O(n^4) brute-force method. It ran in uva in 0.072s.
+====================================================================================================
+#include <stdio.h>
+
+int n;
+int matrix[101][101];
+int rec[101][101];
+
+int main()
+{
+	int i, j, k, l;
+	scanf("%d", &n);
+	for(i = 1; i <= n; i++)
+		for(j = 1; j <= n; j++)
+			scanf("%d", &matrix[i][j]);
+	rec[1][1] = matrix[1][1];
+	for(i = 2; i <= n; i++)
+	{
+		rec[1][i] = rec[1][i-1]+matrix[1][i];
+		rec[i][1] = rec[i-1][1]+matrix[i][1];
+	}
+	for(i = 2; i <= n; i++)
+		for(j = 2; j <= n; j++)
+			rec[i][j] = rec[i-1][j]+rec[i][j-1]-rec[i-1][j-1]+matrix[i][j];
+	int max_size = -128, size;
+	for(i = 1; i <= n; i++)
+		for(j = i; j <= n; j++)
+			for(k = 1; k <= n; k++)
+				for(l = k; l <= n; l++)
+					if((size = rec[j][l]-rec[i-1][l]-rec[j][k-1]+rec[i-1][k-1]) > max_size)
+						max_size = size;
+	printf("%d\n", max_size);
+	return 0;
+}
+====================================================================================================
+
+The code in cpp file uses an O(n^3) algorithm that introduce some DP. It ran in 0.022s in uva. To see the idea of this algorithm, refer to uva 836. 
+Other better algorithm exists, but I didn't implement them in this problem because O(n^3) algorithm suffices.

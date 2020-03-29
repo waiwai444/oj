@@ -1,0 +1,4 @@
+The test data set in UVa for this problem is too weak so that my previous wrong code can also be accepted.
+There are also lots of wrong answer in the internet that are accepted by UVa (at least as the posters said).
+
+Now, the code I've written here is completely correct. Its main idea is similar to that in Algorithmist.com, although there is also some unclarity or mistake in that website (the process to find the potential "files" in each iteration).

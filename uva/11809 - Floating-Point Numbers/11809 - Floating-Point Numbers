@@ -1,0 +1,13 @@
+Math
+
+Since 0 <= M <= 9 and 1 <= E <= 30, we can enumerate A and B for all M and E.
+
+The relationship between A/B and M/E is as follows:
+  (1-1/2^(M+1))*2^(2^E-1) = A*10^B
+
+Take the base-10 logarithm of this equation:
+  log10(1-1/2^(M+1))+(2^E-1)*log10(2) = log10(A)+B
+
+Because 0 < A < 10, log10(A) must be less than 1. And if A < 1, we can multiply it by 10 until it's not less than 1, and decrease B correspondingly. So we can assume 1 <= A < 10, and 0 <= log10(A) < 1. Then we can easily obtain A anb B by computing the left side of this equation.
+
+0.000s in uva 11809

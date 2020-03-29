@@ -1,0 +1,4 @@
+Easy problem.
+Represent the board as an N*N bool matrix. In order to check duplication, record all boards that have been reached. I classify those boards by the number of spots. 
+
+0.028s in uva

@@ -1,0 +1,134 @@
+graph
+
+I use just DFS with some pruning to solve this problem. First, use BFS (or DFS) from the target to find out whether each node can reach the target, regardless of the energy. Then, use DFS from the start node to find a path to the target, taking into account of the energy and positive cycles. Here, I use a lower bound of energy for each node to reduce repeated traversal of the same node.
+
+0.016s in poj
+0.016s in uva
+
+I’ve got WA and TLE several times. TLEs are because that same nodes are traversed several times during DFS. WAs are because that I tried to solve this problem as a variant of SSSP problem but made some logical mistakes.
+
+
+Note that, the test data in both uva and poj are week so that some wrong code can get AC. (Some codes in the internet are of this kind.)
+====================================================================================================
+WRONG
+The following code is written by me and is wrong code but got AC in both uva and poj. It ran in poj in 0.016s and in uva in 0.018s, BUT IT’S WRONG. It wrongly excludes node that is visited, can not reach the target in that path, but may have a chance to reach the target in other path with more energy. 
+====================================================================================================
+#include <stdio.h>
+#include <string.h>
+
+#define INIT_ENERGY 100
+
+struct edge_link
+{
+    int to;
+    int next;
+};
+
+int room_num;
+int room_energy[100];
+edge_link edge_set[100*100];
+int edge_list_head[100];
+edge_link edge_set_r[100*100];
+int edge_list_head_r[100];
+
+bool reachable[100];
+bool on_path[100];
+int path_energy[100];
+
+void check_reachable()
+{
+    int que[101], front, back;
+    int cur_room, next_room, edge_idx;
+    front = back = 0;
+    memset(reachable, false, sizeof(reachable));
+    reachable[room_num-1] = true;
+    que[back++] = room_num-1;
+    while(front != back)
+    {
+        cur_room = que[front++];
+        for(edge_idx = edge_list_head_r[cur_room]; edge_idx != -1; edge_idx = edge_set_r[edge_idx].next)
+        {
+            next_room = edge_set_r[edge_idx].to;
+            if(!reachable[next_room])
+            {
+                reachable[next_room] = true;
+                que[back++] = next_room;
+            }
+        }
+    }
+}
+
+bool search_path(int room)
+{
+	int edge_idx, next_room;
+	for(edge_idx = edge_list_head[room]; edge_idx != -1; edge_idx = edge_set[edge_idx].next)
+	{
+        next_room = edge_set[edge_idx].to;
+        if(next_room == room_num-1)
+            return true;
+        if(reachable[next_room])
+        {
+            if(!on_path[next_room] && path_energy[room]+room_energy[next_room] > 0)
+            {
+                on_path[next_room] = true;
+                path_energy[next_room] = path_energy[room]+room_energy[next_room];
+                if(search_path(next_room))
+                    return true;
+                on_path[next_room] = false;
+            }
+            else if(path_energy[room]+room_energy[next_room]-path_energy[next_room] > 0)	// positive loop
+                return true;
+        }
+	}
+    reachable[room] = false;
+	return false;
+}
+
+int main()
+{
+	int i, j, k, edge_num;
+	while(scanf("%d", &room_num), room_num != -1)
+	{
+		edge_num = 0;
+        for(i = 0; i < room_num; i++)
+            edge_list_head[i] = edge_list_head_r[i] = -1;
+		for(i = 0; i < room_num; i++)
+		{
+			scanf("%d%d", &room_energy[i], &j);
+			while(j--)
+			{
+				scanf("%d", &k);
+				edge_set[edge_num].to = k-1;
+                edge_set[edge_num].next = edge_list_head[i];
+                edge_list_head[i] = edge_num;
+                edge_set_r[edge_num].to = i;
+                edge_set_r[edge_num].next = edge_list_head_r[k-1];
+                edge_list_head_r[k-1]=edge_num;
+                edge_num++;
+			}
+		}
+        if(room_num == 1)
+        {
+            printf("winnable\n");
+            continue;
+        }
+        check_reachable();
+        if(!reachable[0])
+        {
+            printf("hopeless\n");
+            continue;
+        }
+        memset(on_path, false, room_num*sizeof(bool));
+        on_path[0] = true;
+        path_energy[0] = INIT_ENERGY;
+        if(search_path(0))
+            printf("winnable\n");
+        else
+            printf("hopeless\n");
+	}
+	return 0;
+}
+====================================================================================================
+
+Same problem:
+	poj 1932

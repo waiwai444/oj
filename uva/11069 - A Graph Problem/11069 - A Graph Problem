@@ -1,0 +1,5 @@
+DP
+Let dp[i] be the number of sets when the last node is the i'th node.
+
+0.000s in uva 11069
+

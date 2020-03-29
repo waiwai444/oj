@@ -1,0 +1,6 @@
+This problem is to count the number of different edges in all shortest paths for each pair of vertices in a graph.
+We can first use Floyd-Warshall algorithm to solve the APSP problem, and then traverse all edges to check if they are in some shortest path of some pair of vertices.
+The bottleneck of performance is in enumerating all edges. A brute force method would cost about 0.2s or 0.3s. So I filter out those vertices that must not use the edge in their shortest paths when enumerating edges.
+
+0.050s in uva 10985
+

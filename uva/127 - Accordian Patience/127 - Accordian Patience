@@ -1,0 +1,9 @@
+linear list
+
+A basic problem about linear list.
+Here, I use a linked list (without dynamic memory) to represent piles.
+
+0.152s in uva (9/2094); 0s in poj.
+
+Same problem:
+	poj 1214 (note that, there's a tiny difference about the output formats, which got me WA once...)

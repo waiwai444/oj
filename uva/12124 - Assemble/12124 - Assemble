@@ -1,0 +1,13 @@
+First, put components into different containers according to their types. 
+Second, sort components in each container by their quality descendingly, and if there is a tie, by their price ascendingly. 
+Third, remove those components that are useless. For example, if there are two components A and B that A has worse quality but higher price, then A will not be used at any case.
+And finally, find the solution from the one with the highest quality. If the one with highest quality doesn't satisfy the requirement, try the next one with the second highest quality. Repeat until a solution is found. See the code for the details.
+
+0.016s in icpcarchive (18/407)
+0.026s in uva
+0.204s in poj (122/669)
+
+Same problem:
+	icpcarchive 3971
+	poj 3497
+

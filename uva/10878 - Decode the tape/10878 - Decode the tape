@@ -1,0 +1,1 @@
+A very simple problem. But there are two pitfalls I've encountered. The first one is that, the output will be more than 1023 bytes. I got RE for this. The second one is that you should not output a newline finally. All the outputs depend on the tape.

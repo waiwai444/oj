@@ -1,0 +1,4 @@
+Use a queue to store jobs. I implemented a circular queue by myself here. And another array is used to keep the priority order of jobs.
+
+0.000s in uva 12100
+0.000s in la 3638

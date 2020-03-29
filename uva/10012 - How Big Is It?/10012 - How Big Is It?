@@ -1,0 +1,7 @@
+Keyword:
+geometry, brute force, permutation
+
+Simple problem. Because the amount of input data is small, brute force suffices. Make all permutations of the input balls, and place them from left to right to obtain the width of the rectangle. Be careful the details of placement. 
+Note that, the "size" in the description of the problem means only the width of the rectangle, not the area.
+
+My code runs in 0.099s in uva.

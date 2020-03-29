@@ -1,0 +1,12 @@
+permutation
+
+For simplicity, I use std::next_permutation().
+
+0.025s in uva
+0.063s in poj
+
+Same problem:
+	poj 1256
+
+Similar problem:
+	uva 10098

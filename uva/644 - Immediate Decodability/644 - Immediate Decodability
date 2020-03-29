@@ -1,0 +1,8 @@
+Keyword:
+prefix code
+
+I used a binary tree to check if some code is the prefix of others. Since the length of code is at most ten, we can used an array of 2048 bytes to represent the binary tree. 
+This binary tree can be seen as a degenerated Trie tree with only 2 characters.
+
+Same problem:
+	poj 1056

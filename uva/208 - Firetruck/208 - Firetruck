@@ -1,0 +1,4 @@
+I use backtracking here. But only backtracking will cause TLE. Since in the test data set, there may exist lots of cases in which the graph is dense and the start node and the target node are not in the same connected subgraph. 
+Adding a normal DFS prior to backtracking will get AC in uva (and fast enough there in my opinion). 
+
+0.013s in uva

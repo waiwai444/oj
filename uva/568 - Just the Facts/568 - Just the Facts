@@ -1,0 +1,6 @@
+number theory, factorial
+
+Multiply from 1 to n, factor out 2 and 5, and then mod by 10. 
+
+Same problem:
+	poj 1604

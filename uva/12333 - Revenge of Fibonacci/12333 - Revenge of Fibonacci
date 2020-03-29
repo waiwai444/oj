@@ -1,0 +1,8 @@
+The algorithm for this problem is straightforward. We can pre-calculate all 40-digit prefixes of the 100000 Fibonacci numbers and their related smallest Fibonacci indices, and then simply query them later.
+
+All Fibonacci prefixes are stored by a Trie tree.
+
+This algorithm ran in 4.130s in uva. To speed up, we can only compute and store the first 50 digits of each Fibonacci number since we only need the first 40 digits and other digits have no effect on the first 40 digits. I don't know how to find such a bound for an arbitrary number of Fibonacci numbers, it's just true for this problem, i.e. the first 100000 ones.
+
+0.110s in uva 12333
+0.279s in la 5711

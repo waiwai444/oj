@@ -1,0 +1,10 @@
+We can check the feasibility in reverse order, i.e. from the last square put to the first one. So at each iteration, we just need to find out whether there is any possible square that can be the current top one, taking into account those uncovered cells which may be in turn covered by some lower level square.
+
+On the other hand, since this problem requires at most 6 squares, we need to limit the number of iterations to not exceed that limitation. This may bring another problem for our algorithm. That is, there exist some patterns that can be formed with different numbers of squares, some is less than or equal to 6, some is not. Depending on the specified pattern, our algorithm may go along with some path which leads to the solution with more than 6 squares, which will cause our program wrongly report "no" as the answer.
+
+However, because the whole board is only 4*4, it's impossible for any hole to exist in any pattern. Without hole in a pattern, it can guarentee that our greedy algorithm can always find a solution with the minimum number of squares.
+
+PS. Since the problem requires 1 to 6 pieces, empty pattern cannot be formed.
+
+0.000s in uva 12113
+0.000s in la 3790

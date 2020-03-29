@@ -1,0 +1,7 @@
+Quadtree
+
+Easy
+It's comprised of two problems, one for each direction of the conversion. But both of them can be solved by recursion.
+
+0.010s in uva 806
+0.036s in la 5206

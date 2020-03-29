@@ -1,0 +1,65 @@
+Case 1. When one dimension is 1, then the answer is the other number.
+Case 2. When the smaller dimension is 2, we can arrange the knights as follows:
+  NN__NN__...
+  NN__NN__...
+Case 3. When the smaller dimension is at least 3, we can color the board like in the standard chessboard as black and white, and we place all knights on cells of the same color. If the number of one color is larger than that of the other, then choose that with larger number.
+  Like:
+  N_N_N_N_
+  _N_N_N_N
+  N_N_N_N_
+
+
+==========
+To prove this result, we make use of the following fact:
+  The size of the maximum independent set of a bipartite is the number of vertices minus the size of the maximum matching.
+
+Case 1 is obvious.
+For case 2 and 3, we color the cells where knights are placed as black, and the empty cells white. Then we take each cell as a node in a graph, and there is a edge between two cells iff a knight can move in one jump between them.
+Obviously, this graph is a bipartite, with one part colored with black and the other with white.
+Then our task is to find a maximum independent set in this bipartite.
+
+Case 2:
+We can make a matching as follows (9 columns as example, with the same number be in a match):
+  1 2 3 4 5 7 6 8 _
+  3 4 1 2 6 8 5 7 _
+Then we can easily find a matching of size (n be the number of columns and "/" denote the integer division):
+  Size = n/4*4    n%4==0,1,2
+         n-1      n%4==3
+Now we have an upper bound for the size of independent sets:
+  UB = 2*n-n/4*4  n%4==0,1,2
+       2*n-(n-1)  n%4==3
+(This is equivalent to the expression in my code.)
+And we have already find an independent set of such size by the method mentioned above.
+
+Case 3:
+There is a theorem(Cull et al. and Conrad et al) stating that on any rectangular board whose smaller dimension is at least 5, there is a knight's tour[1].
+Then we can easily get a matching by this knight's tour, which will have the size of m*n/2. This number complements the size of the independent set we obtained by the method above.
+So the only cases left are for m == 3 or 4, and n >= m.
+
+For m == 3:
+1. If n is even, and not 4, 6, 8, then by the theorem(Schwenk), which states that under these cases there is a knight's tour[1].
+2. If n is 4, 6, or 8, then we can easily find a matching which will bound the size of the independent set.
+3. If n is odd: We can construct a matching using a method depicted below:
+  0  1  2  1' 2' 1''          x  2"
+  2  3  2' 3' 2''3''       2" _  y
+  1  0  1' 3  1''3' ... ...y  3" x
+  (Sorry, I'm not able to draw a real picture here....)
+Such matching will match all nodes except one (marked as "_").
+
+For m == 4:
+1. If n is even, then it's trivial to find a matching involving all nodes.
+2. If n is odd: We can construct a matching using a method depicted below:
+  1  a  1' 3  1''           a"
+  b  3  1  3' 1'         b"
+  a  4  2  4' 2'         a"
+  2  b  2' 4  2'' ... ...   b"
+Such matching will match all nodes.
+==========
+
+
+[1] https://en.wikipedia.org/wiki/Knight%27s_tour
+
+
+0.000s in uva 696
+0.019s in la 5468
+

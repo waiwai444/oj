@@ -1,0 +1,6 @@
+Use DFS with memorization for each digit. 
+Note that when calculating for n and m, we will obtain values for n and i, where i is among n and m, so we can save these intermediate results. 
+
+The time cost of my code in uva is not good. But my code doesn't use any precalculated results, which will reduce the time cost tremendously with certainty. 
+
+1.879s in uva

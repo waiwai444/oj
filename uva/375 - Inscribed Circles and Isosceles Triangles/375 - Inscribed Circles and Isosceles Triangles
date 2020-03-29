@@ -1,0 +1,7 @@
+math, geometry
+
+A simple problem, but with some precision issue.
+We can easily deduce that the radius of the incircle is r = (-b^2+b*(sqrt(b^2+4*h^2)))/(4*h). But with this equation, it will get WA in uva.
+r also equals to tan(arctan(2*h/b)/2)*b/2. This will be accepted in uva in 0.139s.
+Also, with r = 2*h/(b+sqrt(4*h*h+b*b))*b/2, it will be accepted in uva in 0.076s. 
+All the three equations for r are completely equivalent. So there exists some precision issue in this problem. 

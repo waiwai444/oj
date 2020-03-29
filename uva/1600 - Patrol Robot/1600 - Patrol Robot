@@ -1,0 +1,5 @@
+BFS
+For cells with obstacles, we can re-visit them again if we have less turbo count.
+
+0.000s in uva 1600
+0.003s in la 3670

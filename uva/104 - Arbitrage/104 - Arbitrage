@@ -1,0 +1,8 @@
+Graph, DP
+
+Use DP to solve this problem. Let dp[i][j][k] be the arbitrage of maximum profits from country i to country j with k intermediate countries. So the result will be among dp[i][i][k] for some i and k.
+To print the path of arbitrage, use another array prev[i][j][k] to trace the previous country.
+
+0.010s in uva 104
+0.000s in poj 1238
+

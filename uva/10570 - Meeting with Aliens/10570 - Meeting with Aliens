@@ -1,0 +1,6 @@
+First, we need to try each position for number 1(the starting position) and the two directions of the sequence at that position, in order to find out the result of minimum exchange number.
+So the key is to find out the number of minimum exchange number for each starting point and direction.
+To do this, we observe that if we have determined the starting point and the direction, numbers(positions) can be partitioned to a set of cycles of substitutions. By terms of graph theory, if position i contains number j, then we can draw an arc from node i to node j. Such substitions will form a cycle, and there may be more than one cycles. Of course, we don't consider those numbers that are already in place, which is just a isolated node in such a graph. Then, our goal is to break such cycles by exchanges. It's easily to see that it always needs n-1 exchanges to break a cycle of size n. Hence, the minimum exchange number for a givin starting point and direction can be obtained by finding those cycles of substitutions and computing their sizes.
+
+0.040s in uva 10570
+

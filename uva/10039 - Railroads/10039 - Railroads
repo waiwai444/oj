@@ -1,0 +1,11 @@
+Keyword: 
+Graph, Greedy algorithm
+
+Each city is a vertex, and a train line is split into a set of consecutive edges connecting cities. 
+Then, a greedy algorithm with two greedy phase is implemented. The first greedy phase is to find out the earliest arrival time. The structure of this phase is the same as Dijkstra's algorithm for SSSP, with a different criterion for selection of vertex. The direction of this phase is from the starting city to the target city. The second greedy phase is to find out the latest feasible departure time, given that earliest arrival time. The direction of this phase is reversed, from the target city to the starting city. 
+
+My final code uses a hash map to store city names, and runs in 0.069s in uva.
+
+
+Same problem:
+	poj 1394

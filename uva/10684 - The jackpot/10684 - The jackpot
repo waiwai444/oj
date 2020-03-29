@@ -1,0 +1,3 @@
+We can make use of the fact that the sums of all prefixes of the maximum winning sequence are positive.
+
+See the code for the simple O(n) algorithm.

@@ -1,0 +1,4 @@
+DP
+Use a 6-dimensional array to record the state.
+
+0.163s in uva (10604)

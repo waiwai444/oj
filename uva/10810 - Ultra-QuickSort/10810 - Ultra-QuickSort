@@ -1,0 +1,35 @@
+This problem is similar to uva 299. It only needs to count the inverse number.
+But the naive method, which is O(n^2), will cause TLE here. 
+Here, the merge sort is used to count the inverse number (O(nlogn)). The rationale is simple and can be seen from the code. It ran in 391MS in poj and 0.196s in uva.
+
+====================================================================================================
+The following code is similar to uva 299 (O(n^2)). It caused TLE in poj.
+====================================================================================================
+#include <stdio.h>
+
+int num[500000];
+
+int main()
+{
+	int i, j, n;
+	long long count;
+	while(scanf("%d", &n), n)
+	{
+		for(i = 0; i < n; i++)
+			scanf("%d", &num[i]);
+		count = 0;
+		for(i = 0; i < n; i++)
+			for(j = i+1; j < n; j++)
+				if(num[i] > num[j])
+					count++;
+		printf("%d\n", count);
+	}
+	return 0;
+}
+====================================================================================================
+
+Similar problem:
+	uva 299
+	
+Same problem:
+	poj 2299

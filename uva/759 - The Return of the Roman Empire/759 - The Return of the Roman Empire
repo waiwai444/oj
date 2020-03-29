@@ -1,0 +1,4 @@
+We can compute the decimal format one digit by one. First, convert M for thousands, and then C and D for hundreds, and so on.
+
+0.000s in uva 759
+0.013s in la 5335

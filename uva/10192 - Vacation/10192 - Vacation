@@ -1,0 +1,8 @@
+longest common subsequence
+
+Easy problem. Use O(n^2) DP algorithm.
+
+Note that the max length of the city sequence can exceed 100. 
+
+0.009s in uva (10192)
+

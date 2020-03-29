@@ -1,0 +1,20 @@
+math, number theory
+
+Since Ca and Cb are coprime, and this problem is guaranteed to be solvable, there is a common way to generate the result:
+	1) Repeat the following two steps until B is full or N is satisfied:
+		1.1 Fill A;
+		1.2 Pour A to B.
+	2) When B is full, empty it and pour the remaining water in A to B. If N isn't satisfied, go to step 1).
+
+The correctness of this algorithm is easy to prove:
+Denote the amount of water in A and B as a and b, respectively.
+The key point is in step 2) above, when the remaining water in A is poured to B. When we execute this operation the first time, b = Ca-r, where r = Cb%Ca. And when the second time, b = Ca-(2*r)%Ca. And we can easily prove that when execute this operation the k'th time, b = Ca-(k*r)%Ca.
+Then we need to show that these b values traverse all positive integers less than Ca, so that by adding some Ca's to some of such b value, we will surely get to the target N.
+This is because Ca and Cb are relatively prime to each other. Then r = Cb%Ca is also coprime with Ca. So we have (k*r)%Ca traverse all positive integers less than Ca by choosing some k.
+
+In my implementation, there is a special case I handle separately. It is when N is congruent to Cb mod Ca. Although this case can also be solved by the above algorithm, we can separately solve it to improve efficiency a little bit.
+
+0.000s in uva 571
+0.000s in poj 1606
+0.003s in la 5502
+

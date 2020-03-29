@@ -1,0 +1,104 @@
+DP
+
+This problem can be efficiently solved by DP.
+Denote that l-person and r-person as the person who can see the left and who can see the right. 
+Let f(n,p,r) be the number of permutations for n persons in which p of them are l-person and r of them are r-person. 
+In order to get f(n,p,r), we could assume that there are already n-1 persons in the queue, and the shortest one is added to them. Why choose the shortest one to be added? It's because that the shortest one can be added to the queue with minimal influence. There are n positions can be used. If it is added to the leftmost, then the number of l-person is increased by 1. If it's added to the rightmost, the number of r-person is increased by 1. And if it's added to other positions, there's no influence at all. Hence, we have
+	f(n,p,r) = f(n-1,p-1,r)+f(n-1,p,r-1)+(n-2)*f(n-1,p,r).
+
+The final code using DP costs only 0.012sec in UVa.
+
+
+Since this problem appears as an exercise of Chapter 8 Backtracking in [1], I first tried DFS for it, as is shown in the following code. However, it costs about 2sec and 16sec in my laptop in debug mode for the example test case (10, 4, 4) and (11, 3, 1). And of course, it caused TLE in UVa. 
+====================================================================================================
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+int queue[13];
+bool available[13];
+int n, p, r;
+
+inline void construct_candidates(int *candidates, int &nc)
+{
+	int i;
+	nc = 0;
+	for(i=0; i<n; i++)
+		if(available[i])
+			candidates[nc++] = i;
+}
+
+bool is_solution(int max_idx, int see_left)
+{
+	int i;
+	int cur_max = queue[n-1];
+	int see_right = 1;
+	for(i=n-2; i>=max_idx; i--)
+	{
+		if(queue[i]>cur_max)
+		{
+			see_right++;
+			cur_max = queue[i];
+		}
+	}
+	return (see_left==p && see_right==r);
+}
+
+// backtrack
+int backtrack(int cur_pos, int max_idx, int cur_max, int see_left)	// use see_left for simple pruning
+{
+	int i, nc;
+	int candidates[13];
+	int count = 0;
+	int old_max = cur_max;
+
+	if(cur_max!=n-1 && see_left>=p || cur_max==n-1 && see_left<p)
+		return 0;
+
+	if(cur_pos==n)
+	{
+		if(is_solution(max_idx, see_left))
+			return 1;
+		else
+			return 0;
+	}
+
+	construct_candidates(candidates, nc);
+	for(i=0; i<nc; i++)
+	{
+		queue[cur_pos] = candidates[i];
+		available[candidates[i]] = false;
+		if(queue[cur_pos]==n-1)
+			max_idx = cur_pos;
+		if(queue[cur_pos]>old_max)
+		{
+			cur_max = queue[cur_pos];
+			see_left++;
+		}
+		else
+			cur_max = old_max;
+
+		count += backtrack(cur_pos+1, max_idx, cur_max, see_left);
+
+		if(queue[cur_pos]>old_max) see_left--;
+		available[candidates[i]] = true;
+	}
+	return count;
+}
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>p>>r;
+		memset(available, true, sizeof(available));
+		cout<<backtrack(0, -1, -1, 0)<<endl;
+	}
+	return 0;
+}
+====================================================================================================
+
+[1] Programming Challenges: The Programming Contest Training Manual. Steven S. Skiena, Miguel A. Revilla. Springer. 2009.

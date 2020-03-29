@@ -1,0 +1,17 @@
+string, Lindenmayer system
+
+I use DFS to solve this problem. The DFS is from the given string, and traces back to see if the starting string can generate this given string. There are a lot of details to take care. I'll emphasize some of them here:
+
+(1) In order to make the DFS stop in a small number of steps, I take those cases that the lengths of both u and v are only 1 as special cases, and treat them seperately. (See the code)
+(2) If the length of z is greater than 2, and at least one of the length of u or v is greater than 1, then the backtracking will stop in a small number of steps (about 20 steps or so). This fact can be easily deduced. If u or v which length is greater than 1 is used to replace middle characters of the string, then the length of it will reduce. And in some cases, like some production rule with length 1 is used or some production rule is used to replace only the first or the last character, the length of the string will not reduce, but due to the premise of this item, the length of the string will eventually reduce only after several steps.
+If the length of z is less than or equal to 2, then the total number of possible strings is not more than 4! Surely, the backtracking can stop.
+
+The details can be found in the code. 
+
+p.s. A wrong pruning causes me a large amount of time to debug it. In order to find it, I submitted tens of codes to POJ... (See the code for more information. The code with this bug can be ACed in UVA...)
+
+0.016s in uva (32/193)
+0.032s in poj (152KB, 11/56)
+
+Same problem:
+	poj 1373

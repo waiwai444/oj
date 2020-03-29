@@ -1,0 +1,9 @@
+Floodfill
+
+Use floodfill algorithm to mark the area that can be reached from the starting point. Then check each contour point and paint.
+
+PS. It seems that the data set for this problem is not consistent with what the problem text said. It may have more than 30 lines or more than 80 characters in a line for a single grid. (Or it may be just some of my bug?) This caused me runtime error several times.
+
+0.010s in uva 782
+0.029s in la 5278
+

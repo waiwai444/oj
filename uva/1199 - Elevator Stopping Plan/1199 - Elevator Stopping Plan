@@ -1,0 +1,7 @@
+Find the minimum time by bisection method. And for each possible time value, use a greedy strategy that choose the floor as high as possible to stop. The correctness of this greedy strategy is obvious.
+I have implemented two versions. One is more efficient in general cases than the other. This can be seen from poj1744, in which the maximum floor is raised to 30000. This efficient one is used in all problems but uva1199, in which it runs in 0.018s. The less efficient version will get TLE in poj1744. 
+
+0.003s in icpcarchive (2949)
+0.000s in poj (1771)
+0.009s in uva (1199)
+0.047s in poj (1744) (The maximum floor is 30000 instead of 31)

@@ -1,0 +1,5 @@
+Keyword:
+geometry, spherical distance, graph, all-pairs shortest path problem
+
+Simple problem. Calculate the spherical distances and solve the all-pairs shortest path problem. 
+I used the Floyd-Warshall's algorithm for the APSPP and the code runs in 0.025s in uva.

@@ -1,0 +1,8 @@
+Easy problem.
+
+Use std::next_permutation to traverse all possible combinations.
+
+Notice that, in LA, std::div() is slower than % and /.
+
+0.020s in uva 725
+0.036s in la 5362

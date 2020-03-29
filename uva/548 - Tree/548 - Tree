@@ -1,0 +1,5 @@
+binary tree, inorder traversal, postorder traversal
+
+The idea of this problem is simple. I sum the values from leaves to the root by recursive postorder traversal. 
+
+My code ran in 0.042s (18/1087) in uva.

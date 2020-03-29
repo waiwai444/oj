@@ -1,0 +1,9 @@
+It has nothing to do with data mining...
+
+Didn't have any idea about this problem until referring to other's analysis.
+The description of this problem has at least two mistakes. One is the precedence of operators in equation (4). It should be (Pofs(i)+(Pofs(i)<<A))>>B. The other is "(where K <= N*SQ)". It's obviously nonsense that the total amounts of memory will be less than or equal to N*SQ. In fact, it should be K >= N*SQ.
+
+Although the text doesn't mention, both A and B are less than 32. So we can simply enumerate all possible combinations and check the resulting K values.
+
+0.000s in uva 1591
+0.000s in la 2959

@@ -1,0 +1,4 @@
+We can use Floyd-Warshall algorithm to compute APSP. And then find out the maximum value among these SPs.
+
+0.010s in uva 10803
+

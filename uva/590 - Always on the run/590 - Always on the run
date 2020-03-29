@@ -1,0 +1,6 @@
+Easy DP problem. Use a table to record the min cost to reach some city at some day.
+
+0.019s in uva (590)
+0.000s in poj (1476)
+0.000s in icpcarchive (5623)
+

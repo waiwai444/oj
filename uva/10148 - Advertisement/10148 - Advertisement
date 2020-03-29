@@ -1,0 +1,10 @@
+This is a generalized version of the problem of selecting points in a set of intervals. 
+Sort the intervals by their last point ascendingly. Then use the similar greedy algorithm that choose points rightmost. 
+The correctness of the greedy strategy is easy to prove.
+
+0.083s in uva
+0.125s in poj
+
+Same problem:
+	poj 1752
+

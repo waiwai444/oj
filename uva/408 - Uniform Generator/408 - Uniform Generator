@@ -1,0 +1,9 @@
+number theory
+
+It's a "Good Choice" iff STEP and MOD are relatively prime. The proof is easy. 
+Proof:
+Denote the numbers from 0 (the start number) to the first another 0 as r0(=0), r1, ..., rk, r_{k+1}(=0). Then we have (k+1)*STEP%MOD = 0, i.e. MOD | (k+1)*STEP.
+If STEP and MOD are relatively prime, then MOD | (k+1). Hence, we have MOD = k+1, that is, it can traverse all numbers in [0,MOD-1]. If STEP and MOD are not relatively prime, then k+1 will be less than MOD.
+
+Same problem:
+	poj 1597

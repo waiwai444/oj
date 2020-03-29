@@ -1,0 +1,8 @@
+DP
+
+The basic idea is quite straightforward. Let dp[i][j] be the current minimum badness after placed word 0 to word i and word i is placed at column j. Here, we don't need to consider rowssince once the column is determined, the row also determined. The word 0 must be placed on column 0.
+However, per this problem's restriction on the unique result text, it will be easy to output such a result if we DP from the last word back to the first word (reverse from the algorithm above). The algorithm is almost the same except it handles words backwards.
+
+0.007s in uva (709)
+0.000s in poj (1093)
+0.009s in icpcarchive (5562)

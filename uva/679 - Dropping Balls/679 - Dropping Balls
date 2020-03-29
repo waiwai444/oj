@@ -1,0 +1,5 @@
+binary tree
+
+I didn't use the simulation method, which is the simplest one, since the efficiency may not be accepted. 
+Notice that, we can drop the ball from the root according to the binary representation of the number (i-1). We inspect the binary representation from the least significant bit to the most significant bit and traverse the tree from the root. If the current bit is 0, then choose the left subtree, otherwise the right subtree. The correctness can easily be seen by induction from the root. 
+0.048s (99/1772)

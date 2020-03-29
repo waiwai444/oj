@@ -1,0 +1,6 @@
+math
+
+Both probabilities are easy to compute. But for the second one, we cannot get the value because it's too small. We can just compute its significant digits like in the scientific notation and record the consecutive zeros after the decimal point.
+
+0.010s in uva 10169 (2/392)
+

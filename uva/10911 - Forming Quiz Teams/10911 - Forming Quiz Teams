@@ -1,0 +1,6 @@
+DP
+Let S be a subset of the 2n people, and let dp(S) be the minimum sum of distances in subset S. 
+dp(S) = min(|AB|+dp(S-A-B)), where A is the first person in subset S, B is any other person in S, and |AB| is the distance between A and B.
+Since the number of people is at most 16, we can represent a set of people as a 16-bit integer.
+
+0.039s in uva (10911)

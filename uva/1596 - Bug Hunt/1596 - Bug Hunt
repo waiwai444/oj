@@ -1,0 +1,4 @@
+Easy problem. Use recursion to evaluate each array expression. And use a map to keep track of assigned values in an array.
+
+0.000s in uva 1596
+0.006s in la 3889

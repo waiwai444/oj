@@ -1,0 +1,9 @@
+Keyword:
+math
+
+A simple problem. Calculate the derivation of volume formula to get the maximum point.
+Note that this problem has some floating point problem. The answers should be added by a very small number to get AC. The explanation can be found in [1].
+
+My code runs in 0.019s in uva.
+
+[1] http://online-judge.uva.es/board/viewtopic.php?f=17&t=2595&start=30

@@ -1,0 +1,8 @@
+maximum submatrix sum on torus
+
+I use an O(n^4) algorithm. But it's modified from the O(n^3) maximum submatrix sum algorithm. So it's more efficient than the naive O(n^4) algorithm. 
+The idea is to expand the matrix for torus to a 2n*2n matrix. Then use the algorithm to find the maximum submatrix sum. Note that we have to avoid overlapping area when the submatrix wraps on the boundary while using a traditional maximum submatrix sum algorithm. That is why I added another level of loop, which is used to avoid overlapping area. 
+For information about the maximum submatrix sum problem, refer to other problems like uva108.
+
+0.083s in uva
+

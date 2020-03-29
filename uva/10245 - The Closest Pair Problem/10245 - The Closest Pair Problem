@@ -1,0 +1,215 @@
+Keyword:
+geometry, computational geometry, closest pair
+
+The magnitude of input data is large so that the simple O(n^2) brute force algorithm will get TLE (>= 3s). 
+
+====================================================================================================
+// deprecated code
+The following code also uses an O(n^2) brute force algorithm, but with some pruning. First, I sort the points from left to right and from bottom to top. Then, we can get the left bound and right bound to check the possible minimum distance for a current point. All points that are out of the bounds can be ignored for the current point. Also, don't use sqrt() for distance calculation. Only use it before output. 
+This code ran in 1.676s in uva. Not ideal, but it works. 
+====================================================================================================
+#include <stdio.h>
+#include <math.h>
+#include <algorithm>
+
+#define MAX 2e10
+
+struct Point
+{
+	double x, y;
+};
+
+int n;
+Point point[10000];
+
+bool cmp(const Point& p1, const Point& p2)
+{
+	return p1.y < p2.y || p1.y == p2.y && p1.x < p2.x;
+}
+
+inline double distance2(const Point& p1, const Point& p2)
+{
+	return (p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y);
+}
+
+int main()
+{
+	int i, j;
+	double min_dist, dist, left, right, tmp;
+	while(scanf("%d", &n) && n)
+	{
+		for(i = 0; i < n; i++)
+			scanf("%lf%lf", &point[i].x, &point[i].y);
+		min_dist = MAX;
+		if(n > 1)
+		{
+			std::sort(point, point+n, cmp);
+			min_dist = MAX;
+			for(i = 0; i < n-1; i++)
+			{
+				left = -1;
+				right = MAX;
+				for(j = i+1; j < n; j++)
+				{
+					if(point[j].x <= left || point[j].x >= right)
+						continue;
+					dist = distance2(point[i], point[j]);
+					if(dist < min_dist)
+						min_dist = dist;
+					if(point[j].x == point[i].x)
+						break;
+					if(point[j].x >= point[i].x)
+					{
+						right = point[j].x;
+						tmp = 2*point[i].x-point[j].x;
+						if(tmp > left)
+							left = tmp;
+					}
+					if(point[j].x <= point[i].x)
+					{
+						left = point[j].x;
+						tmp = 2*point[i].x-point[j].x;
+						if(tmp < right)
+							right = tmp;
+					}
+				}
+			}
+			min_dist = sqrt(min_dist);
+		}
+		if(min_dist >= 10000)
+			printf("INFINITY\n");
+		else
+			printf("%.4lf\n", min_dist);
+	}
+	return 0;
+}
+====================================================================================================
+
+A more clever algorithm can be found in CLRS ed.2, section 33.1. This algorithm uses sorting and divide-and-conquer method, and its time complexity is O(nlogn). 
+The following code implements this algorithm, which ran in 0.102s in uva. 
+====================================================================================================
+#include <stdio.h>
+#include <math.h>
+#include <algorithm>
+
+#define MAX 2e10
+#define MAXP 10000
+
+struct Point
+{
+	double x, y;
+};
+
+int n;
+Point point[MAXP];
+
+bool cmp_x(const Point& p1, const Point& p2)
+{
+	return p1.x < p2.x;
+}
+
+bool cmp_y(int i1, int i2)
+{
+	return point[i1].y < point[i2].y;
+}
+
+inline double distance2(const Point& p1, const Point& p2)
+{
+	return (p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y);
+}
+
+double sub_problem(int p1, int p2, int idx_y[])
+{
+	int i, j, k;
+	int sn = p2-p1+1;
+	double tmp_d, min_d = MAX;
+	
+	if(sn <= 3)	// base case
+	{
+		for(i = p1; i < p2; i++)
+		{
+			for(j = i+1; j <=p2; j++)
+			{
+				tmp_d = distance2(point[i], point[j]);
+				if(tmp_d < min_d)
+					min_d = tmp_d;
+			}
+		}
+	}
+	else	// recursive
+	{
+		int pmid = (p1+p2)/2;
+		double dl, dr;
+		int sub_idx_y[MAXP/2+1];
+		
+		// left sub-problem
+		for(i = k = 0; i < sn; i++)
+			if(idx_y[i] <= pmid)
+				sub_idx_y[k++] = idx_y[i];	
+		dl = sub_problem(p1, pmid, sub_idx_y);
+		// right sub-problem
+		for(i = k = 0; i < sn; i++)
+			if(idx_y[i] > pmid)
+				sub_idx_y[k++] = idx_y[i];
+		dr = sub_problem(pmid+1, p2, sub_idx_y);
+		
+		min_d = dl < dr ? dl : dr;
+		
+		// merge
+		double bound_l = point[pmid].x-min_d;
+		double bound_r = point[pmid].x+min_d;
+		int idx_y_mid[MAXP];
+		for(i = k = 0; i < sn; i++)
+			if(point[idx_y[i]].x > bound_l && point[idx_y[i]].x < bound_r)
+				idx_y_mid[k++] = idx_y[i];
+		for(i = 0; i < k; i++)
+		{
+			for(j = i+1; j < i+8 && j < k; j++)
+			{
+				tmp_d = distance2(point[idx_y_mid[i]], point[idx_y_mid[j]]);
+				if(tmp_d < min_d)
+					min_d = tmp_d;
+			}
+		}
+	}
+	return min_d;
+}
+
+double divide_and_conquer()
+{
+	int i;
+	int idx_y[MAXP];
+	for(i = 0; i < n; i++)
+		idx_y[i] = i;
+	std::sort(point, point+n, cmp_x);
+	std::sort(idx_y, idx_y+n, cmp_y);
+	return sub_problem(0, n-1, idx_y);
+}
+
+int main()
+{
+	int i;
+	double min_dist;
+	while(scanf("%d", &n) && n)
+	{
+		for(i = 0; i < n; i++)
+			scanf("%lf%lf", &point[i].x, &point[i].y);
+		min_dist = MAX;
+		if(n > 1)
+		{			
+			min_dist = sqrt(divide_and_conquer());
+		}
+		if(min_dist >= 10000)
+			printf("INFINITY\n");
+		else
+			printf("%.4lf\n", min_dist);
+	}
+	return 0;
+}
+====================================================================================================
+
+Due to the data set in uva, a kind of very simple brute force algorithm with pruning can achieve the best performance among these algorithms. This brute force algorithm can not be simpler. It ran in 0.072s in uva.
+However, there exists some cases that this algorithm will reach the O(n^2) bound. (Consider the case that all points are in a vertical line.)
+Hence, although this algorithm outperforms the O(nlogn) algorithm in uva's test data set, it's not an ideal algorithm. 
+This code can be found in the cpp file.
+

@@ -1,0 +1,6 @@
+math
+
+Super easy problem. One solution is p=k-r, q=r, where r=x%k.
+It's very easy to prove. Let x=m*k+r, where m=x/k(int div) and r=x%k. If r!=0, then the equation becomes x=p*m+q*(m+1)=(p+q)*m+q. If r=0, then x=p*m+q*m=(p+q)*m.
+
+0.000s in uva 10673

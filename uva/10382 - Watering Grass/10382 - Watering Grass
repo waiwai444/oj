@@ -1,0 +1,8 @@
+This problem can be seen as an interval covering problem. So the greedy algorithm can be applied. 
+We can use the crossing points of circles and the rectangle as the starting and the ending points of intervals. 
+Those circles with radius less than or equal to half of the width, and those with crossing points not inside the horizontal edge, can be ignored. Since if there's a area that only they can cover, then there must exist areas that no circle can cover. 
+
+p.s.: There may exist some precision problem with this problem. Since if I remove type conversions "(double)" in "sqrt((double)rad*rad-(double)width*width/4.0)", it will get WA. 
+
+0.016s in uva
+

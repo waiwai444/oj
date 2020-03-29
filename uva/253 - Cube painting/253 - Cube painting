@@ -1,0 +1,173 @@
+
+====================================================================================================
+The following code use the brute-force method with memorization. It simulates all possible rotations by BFS to check if the two cubes are the same. It ran in 0.015s in uva.
+====================================================================================================
+#include <stdio.h>
+#include <queue>
+
+#define R 0
+#define G 1
+#define B 2
+
+int painting[729];
+
+inline int to_int(const char arr[])
+{
+	int res = 0;
+	for(int i = 0; i < 6; i++)
+		res = 3*res+arr[i];
+	return res;
+}
+
+inline void to_arr(int num, char arr[])
+{
+	int i;
+	for(i = 5; i >= 0; i--)
+	{
+		arr[i] = num%3;
+		num /= 3;
+	}
+}
+
+int x_cc(int num)
+{
+	char t, arr[6];
+	to_arr(num, arr);
+	t = arr[0];
+	arr[0] = arr[3];
+	arr[3] = arr[5];
+	arr[5] = arr[2];
+	arr[2] = t;
+	return to_int(arr);
+}
+
+int x_c(int num)
+{
+	char t, arr[6];
+	to_arr(num, arr);
+	t = arr[0];
+	arr[0] = arr[2];
+	arr[2] = arr[5];
+	arr[5] = arr[3];
+	arr[3] = t;
+	return to_int(arr);
+}
+
+int y_cc(int num)
+{
+	char t, arr[6];
+	to_arr(num, arr);
+	t = arr[0];
+	arr[0] = arr[4];
+	arr[4] = arr[5];
+	arr[5] = arr[1];
+	arr[1] = t;
+	return to_int(arr);
+}
+
+int y_c(int num)
+{
+	char t, arr[6];
+	to_arr(num, arr);
+	t = arr[0];
+	arr[0] = arr[1];
+	arr[1] = arr[5];
+	arr[5] = arr[4];
+	arr[4] = t;
+	return to_int(arr);
+}
+
+int z_cc(int num)
+{
+	char t, arr[6];
+	to_arr(num, arr);
+	t = arr[1];
+	arr[1] = arr[2];
+	arr[2] = arr[4];
+	arr[4] = arr[3];
+	arr[3] = t;
+	return to_int(arr);
+}
+
+int z_c(int num)
+{
+	char t, arr[6];
+	to_arr(num, arr);
+	t = arr[1];
+	arr[1] = arr[3];
+	arr[3] = arr[4];
+	arr[4] = arr[2];
+	arr[2] = t;
+	return to_int(arr);
+}
+
+bool rotate(int c1, int c2, int color)
+{
+	bool reachable = false;
+	int (*func[6])(int) = { x_cc, x_c, y_cc, y_c, z_cc, z_c };
+	std::queue<int> que;
+	que.push(c1);
+	while(!que.empty())
+	{
+		int c = que.front();
+		que.pop();
+		int t;
+		for(int i = 0; i < 6; i++)
+		{
+			t = func[i](c);
+			if(painting[t] == 0)
+			{
+				painting[t] = color;
+				que.push(t);
+				if(t == c2)
+					reachable = true;
+			}
+		}
+	}
+	return reachable;
+}
+
+int main()
+{
+	int i, color = 0;
+	char input[13];
+	while(scanf("%s", input) != EOF)
+	{
+		int c1 = 0, c2 = 0;
+		for(i = 0; i < 6; i++)
+		{
+			c1 *= 3;
+			if(input[i] == 'g')
+				c1 += G;
+			else if(input[i] == 'b')
+				c1 += B;
+		}
+		for(i = 6; i < 12; i++)
+		{
+			c2 *= 3;
+			if(input[i] == 'g')
+				c2 += G;
+			else if(input[i] == 'b')
+				c2 += B;
+		}
+		if(c1 == c2)
+			printf("TRUE\n");
+		else if(painting[c1] == 0 && painting[c2] == 0)
+		{
+			color++;
+			painting[c1] == color;
+			if(rotate(c1, c2, color))
+				printf("TRUE\n");
+			else
+				printf("FALSE\n");
+		}
+		else if(painting[c1] == painting[c2])
+			printf("TRUE\n");
+		else
+			printf("FALSE\n");
+	}
+	return 0;
+}
+====================================================================================================
+
+The code in the cpp file directly enumerate all rotations. It's much shorter than the previous one. But its time cost is almost the same. It also ran in 0.015s in uva. (Note that, the time cost in uva is not stable, that is, sometimes it may be more than 0.015s, but sometimes less.

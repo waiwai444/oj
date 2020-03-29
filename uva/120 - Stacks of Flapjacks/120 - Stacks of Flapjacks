@@ -1,0 +1,111 @@
+The following code traverses a stack from the top to find the flip position. 
+It costs 0.016s in UVa, slower than the final code (0.012s), which traverses a stack from the bottom to flip the current largest flapjack.
+====================================================================================================
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+inline void flip(vector<int> &flapjack)
+{
+	int i, j, k;
+	int t;
+	if(flapjack.size()==1)
+	{
+		return;
+	}
+	while(true)
+	{
+		if(flapjack[0]<=flapjack[1])
+		{
+			for(i=1; i<flapjack.size()-1; i++)
+			{
+				if(flapjack[i]>flapjack[i+1])
+					break;
+			}
+			if(i==flapjack.size()-1)
+				break;
+			else
+				j = i;
+			for(i++; i<flapjack.size()-1; i++)
+			{
+				if(flapjack[i]<flapjack[i+1] || flapjack[i]<flapjack[j-1])
+					break;
+			}
+			cout<<flapjack.size()-i<<' ';
+			cout<<flapjack.size()-i+j<<' ';
+			cout<<flapjack.size()-i<<' ';
+			if(i==flapjack.size()-1 && flapjack[i]>=flapjack[j-1])
+				break;
+			for(k=j; k<(i+j+1)/2; k++)
+			{
+				t = flapjack[k];
+				flapjack[k] = flapjack[i+j-k];
+				flapjack[i+j-k] = t;
+			}
+		}
+		else
+		{
+			for(i=1; i<flapjack.size()-1; i++)
+			{
+				if(flapjack[i]<flapjack[i+1])
+					break;
+			}
+			if(i==flapjack.size()-1)
+			{
+				cout<<flapjack.size()-i<<' ';
+				break;
+			}
+			else
+				j = i;
+			for(i++; i<flapjack.size()-1; i++)
+			{
+				if(flapjack[i]>flapjack[i+1] || flapjack[i]>flapjack[j-1])
+					break;
+			}
+			cout<<flapjack.size()-i<<' ';
+			cout<<flapjack.size()-i+j<<' ';
+			if(i==flapjack.size()-1 && flapjack[i]<=flapjack[j-1])
+				break;
+			for(k=j; k<(i+j+1)/2; k++)
+			{
+				t = flapjack[k];
+				flapjack[k] = flapjack[i+j-k];
+				flapjack[i+j-k] = t;
+			}
+			for(k=0; k<(i+1)/2; k++)
+			{
+				t = flapjack[k];
+				flapjack[k] = flapjack[i-k];
+				flapjack[i-k] = t;
+			}
+		}
+	}
+}
+
+int main()
+{
+	int i;
+	vector<int> flapjack;
+	flapjack.reserve(30);
+	char line[256];
+	char *temp;
+	while(cin.getline(line, 256))
+	{
+		if(line[0]==0)
+			continue;
+		cout<<line<<endl;
+		flapjack.push_back(atoi(strtok(line, " ")));
+		while((temp=strtok(NULL, " "))!=NULL)
+			flapjack.push_back(atoi(temp));
+		
+		flip(flapjack);
+		cout<<0<<endl;
+
+		flapjack.clear();
+	}
+	return 0;
+}
+====================================================================================================

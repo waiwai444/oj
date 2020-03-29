@@ -1,0 +1,10 @@
+System of difference constraints
+
+Let Si = a1+...+ai. Then all constraints in this problem can be transformed to Si-Sj <= k-1 (use equal sign because we only consider integers). It's a typical form of system of difference constraints, and we can use SSSP algorithm to solve it.
+That is, we construct a graph with node vi represents Si, and if Si-Sj <= k, add an edge from node vj to node vi with weight k. Also add a dummy node v0 and edges from v0 to every other nodes with all weights 0. There are solutions for this SDC iff there is no negative cycle in the graph. And if there are solutions, the set of d[i] is one of them, where d[i] is the length of shortest path from v0 to vi. It's very easy to prove the correctness.
+Since there are negative weights in such a graph, we can use Bellman-Ford algorithm.
+
+0.030s in uva 515
+0.096s in la 5532
+0.000s in poj 1364
+

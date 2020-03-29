@@ -1,0 +1,2 @@
+The algorithm is quite straightforward. It first calculates the sum for those numbers whose least significant digits are non-zero, and then for those whose second digits are non-zero, and so on. See the code for details.
+

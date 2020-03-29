@@ -1,0 +1,6 @@
+Fractal
+
+Simulate the process of folding paper and record each crease iteratively. I used a linked list to record creases in order to efficiently insert new creases during each folding. Then we can walk along the curve and draw it according to the directions of creases.
+
+0.000s in uva 177
+0.003s in la 5237

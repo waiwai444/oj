@@ -1,0 +1,5 @@
+Easy DP.
+Let ans[i][j] be the number of ways to add up j numbers to i.
+
+0.000s in uva 10943
+

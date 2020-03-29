@@ -1,0 +1,5 @@
+DP
+Since we need to output the lexicographically smallest path, we can traverse from bottom to top (opposite direction). Let dp[i][j][k] be the number of different paths from the bottom to cell (i,j) with summation k.
+Notice that long long int should be used for the path number.
+
+0.022s in uva (10564)

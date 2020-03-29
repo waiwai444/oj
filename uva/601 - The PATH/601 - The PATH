@@ -1,0 +1,8 @@
+BFS(floodfill)
+
+First, use BFS from left to right to see if WHITE can win. If not, try BLACK from top to bottom.
+If neither can win, try all unfilled cells to see if one can be used to connect WHITE from left to right, or connect BLACK from top to bottom.
+
+0.000s in uva 601
+0.003s in la 5473
+

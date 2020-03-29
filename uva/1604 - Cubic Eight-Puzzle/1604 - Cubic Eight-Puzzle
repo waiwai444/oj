@@ -1,0 +1,12 @@
+I used bidirectional BFS.
+
+Because the target is only defined by the top face, in order to use bidirectional BFS, we need to generate all possible targets. In fact, there are 256 targets.
+
+Here is an interesting trick to speed up. Since there are 256 targets, we can first use normal BFS from the initial configuration until the depth of the BFS reaches some specified value. If not yet reach any target, then the bidirectional BFS will be used. This specific value I used in my code is 8. This value is selected randomly, to some extent. I chose 8 because except the first step, most of the subsequent steps will generate about 2 new configurations, which may generate the similar amount of configurations as the number of the targets. Also notice that, because of my implementation of the bidirectional BFS, I have to choose an even number for this value, otherwise we will get 31 instead of -1 for some test cases.
+
+This trick will speed up my code about 4-5 times faster.
+
+Notice that, it's not necessary to compress the configuration into an integer, i.e. using an integer to represent a configuration, because the bit operations introduced by this kind of compression may be a little bit slower than the normal array operation. It increased the speed of my algorithm by about 40ms in uva 1604.
+
+0.120s in uva 1604
+0.192s in la 3618

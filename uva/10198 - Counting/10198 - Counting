@@ -1,0 +1,1 @@
+Denote the counting of the number n as F(n). So F(n)=F(n-1)+F(n-2)+F(n-3)+F(n-1)=2*F(n-1)+F(n-2)+F(n-3).

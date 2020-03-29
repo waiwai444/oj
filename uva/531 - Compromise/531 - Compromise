@@ -1,0 +1,8 @@
+longest common subsequence
+
+Use the dynamic programming algorithm, with another array to record the last word in the LCS of the current state so that we can construct the LCS. 
+In order to reduce the complexity of comparison during DP, I use a hash map to convert each word into a unique integer.
+
+0.019s in uva 531 (13/2895(3917))
+0.000s in poj 2250
+

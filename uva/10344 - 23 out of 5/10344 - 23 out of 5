@@ -1,0 +1,82 @@
+I used naive algorithm with two backtrackings.
+
+====================================================================================================
+In the following code, I wrote a function to generate all permutations by myself.
+
+0.456s in uva.
+====================================================================================================
+#include <stdio.h>
+#include <string.h>
+#include <algorithm>
+
+int numbers[5];
+bool used[5];
+int perm[5];
+char ops[4];
+
+bool assign_op(int pos, int result)
+{
+	if(pos == 4)
+	{
+		return result == 23;
+	}
+	else
+	{
+		ops[pos] = '+';
+		if(assign_op(pos+1, result+perm[pos+1]))
+			return true;
+		ops[pos] = '-';
+		if(assign_op(pos+1, result-perm[pos+1]))
+			return true;
+		ops[pos] = '*';
+		if(assign_op(pos+1, result*perm[pos+1]))
+			return true;
+	}
+	return false;
+}
+
+bool permute(int pos)
+{
+	if(pos == 5)
+	{
+		return assign_op(0,  perm[0]);
+	}
+	else
+	{
+		for(int i = 0; i < 5; i++)
+		{
+			if(used[i])
+				continue;
+			if(i > 0 && !used[i-1] && numbers[i-1] == numbers[i])
+				continue;
+			used[i] = true;
+			perm[pos] = numbers[i];
+			if(permute(pos+1))
+				return true;
+			used[i] = false;
+		}
+	}
+	return false;
+}
+
+int main()
+{
+	while(scanf("%d%d%d%d%d", &numbers[0], &numbers[1], &numbers[2], &numbers[3], &numbers[4]))
+	{
+		if(numbers[0] == 0 && numbers[1] == 0 && numbers[2] == 0 && numbers[3] == 0 && numbers[4] == 0)
+			break;
+		std::sort(numbers, numbers+5);
+		memset(used, false, sizeof(used));
+		if(permute(0))
+			printf("Possible\n");
+		else
+			printf("Impossible\n");
+	}
+	return 0;
+}
+====================================================================================================
+
+The code in cpp file use std::next_permutation() to replace my own permutation generating function.
+
+0.415s in uva.
+

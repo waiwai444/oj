@@ -1,0 +1,10 @@
+Use IDDFS + pruning.
+
+Since this problem requires the shortest solution, we can use either BFS or IDDFS. But because we also need the actual detailed solution, if we use BFS, it requires lots of memory and will reduce the speed when handle those memory. So I chose to use IDDFS. In fact, in my implementations, pure IDDFS is about 4 times faster than my BFS.
+
+In addition, at each configuration, the minimum number of possible remaining steps to reach the target is counted for pruning. It will speed up tremendously, about 40-60 times faster. Otherwise, even IDDFS will cause TLE.
+
+PS. Bit operations don't help here. They will slightly reduce the speed, at least for my implementation.
+
+0.060s in uva 1343
+0.136s in la 3265

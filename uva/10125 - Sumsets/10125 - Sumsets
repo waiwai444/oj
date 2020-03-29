@@ -1,0 +1,82 @@
+3SUM
+
+====================================================================================================
+The following code uses brute-force with binary search. Its time complexity is O(n^3*logn). 
+0.079s in poj
+0.036s in uva
+====================================================================================================
+#include <stdio.h>
+#include <stdlib.h>
+#include <algorithm>
+
+int S[1000], ns, res;
+
+int cmp(const void *a, const void *b)
+{
+	if(*(int *)a < *(int *)b) return -1;
+	if(*(int *)a == *(int *)b) return 0;
+	return 1;
+}
+
+bool solve()
+{
+	int i, j, k, t, *r;
+	if(ns < 4)
+		return false;
+	for(k = ns-1; k >= 0; k--)
+	{
+		for(i = 0; i < ns; i++)
+		{
+			if(i == k)
+				continue;
+			if((S[k] >= 0 && i > k) || (S[k] < 0 && S[i] >= 0))
+				break;
+			for(j = i+1; j < ns; j++)
+			{
+				if(j == k)
+					continue;
+				t = S[k]-S[i]-S[j];
+				if(t <= S[j])
+					break;
+				r = (int *)bsearch(&t, &S[j+1], ns-j-1, sizeof(int), cmp);
+				if(r != NULL && *r != S[k])
+				{
+					res = S[k];
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+int main()
+{
+	int i;
+	while(scanf("%d", &ns), ns)
+	{
+		for(i = 0; i < ns; i++)
+			scanf("%d", &S[i]);
+		std::sort(&S[0], &S[ns]);
+		if(solve())
+			printf("%d\n", res);
+		else
+			printf("no solution\n");
+	}
+	return 0;
+}
+====================================================================================================
+
+
+
+====================================================================================================
+The code in cpp file also uses brute-force, but with a linear search instead of binary search. Its time complexity is O(n^3).
+
+0.016s in poj
+0.019s in uva
+====================================================================================================
+
+
+
+Same problem:
+	poj 2549

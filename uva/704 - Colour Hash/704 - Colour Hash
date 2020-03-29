@@ -1,0 +1,4 @@
+This problem was solved by bi-directional bfs in 0.035s in uva.
+It uses four queues, two for positions traversed in forward direction and the corresponding paths, two for those traversed in backward direction. It also uses two std::set to store all traversed positions.
+
+There is no doubt that if we use normal bfs, it will be TLE. The first time I tried to solve this problem, I used the id-dfs, but it can't even get the result for the 2nd and 3rd example inputs in uva web for a very long time in my laptop, so it must be TLE. 

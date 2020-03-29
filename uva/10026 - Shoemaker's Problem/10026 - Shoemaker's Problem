@@ -1,0 +1,11 @@
+Greedy algorithm
+
+Compare the adjacent tasks, i.e. if T_i*S_(i+1)<T_(i+1)*S_i, task i should be placed before task i+1.
+
+====================================================================================================
+Proof of the correctness of the greedy algorithm:
+
+Compare a pair of tasks, task i and task j. If we do task i first, and then task j, the cost of this schedule is T_i*(S_j+(other later fines))+T_j*(other later fines)+(other costs). In turn, if we do task j first and then i, and all other tasks are in the same order, then the cost is T_j*(S_i+(other later fines))+T_i*(other later fines)+(other costs). The difference of these two costs is T_i*S_j-T_j*S_i. Hence, if T_i*S_j<T_j*S_i, doing task i first will cause less cost. That is, for a pair of tasks - task i and task j, if T_i/S_i<T_j/S_j, we should give priority to task i. 
+On the other hand, it's very obvious that the value T_i/S_i has the property of transitivity. So we can sort tasks according to their values of T_i/S_i in ascending order. It can be proved that such an order is an optimal solution to the problem. That is, if there is an optimal solution where a pair of tasks are reversed according to their T_i/S_i values, we can swap their order to get a better solution. Contradiction. 
+Hence, we can sort the tasks according to their T_i/S_i values to get an optimal order. 
+====================================================================================================

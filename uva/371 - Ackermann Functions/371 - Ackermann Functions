@@ -1,0 +1,6 @@
+The 3n+1 problem.
+
+Note that the first integer in the input pair may be greater than the second one, and we need to swap them first.
+
+0.000s in uva 371
+0.012s in la 5343

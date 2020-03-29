@@ -1,0 +1,9 @@
+I used DFS with memorization and pruning
+First, calculate the minimum number of lectures, which is determined by greedy strategy.
+An array dp[i][j] is used indicating the minimum dissatisfaction index starting from lecture i to the last lecture and with the topic j to the topic n. 
+
+Not a good algorithm. But I'm lazy...
+
+0.219s in uva (607)
+0.532s in poj (1513)
+0.139s in icpcarchive (5409)

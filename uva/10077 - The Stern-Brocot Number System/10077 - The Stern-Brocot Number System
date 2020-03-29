@@ -1,0 +1,8 @@
+We can use binary search to find out the rational number, since if a/b>c/d, then a/b>(a+c)/(b+d)>c/d, and in the leftmost and the rightmost branches, a/b>(a+0)/(b+1)>0/1 and a/b<(a+1)/(b+0).
+
+The proof of the former case:
+	Let a=t*c and b=k*d. Since a/b>c/d, we have t*c/k*d>c/d, i.e. t>k, => (t+1)>(k+1).
+	And (a+c)/(b+d)=(t+1)c/(k+1)d>c/d.
+	Same reason for a/b>(a+c)/(b+d).
+	
+Other properties and the proofs of the Stern-Brocot tree can be found in "Concrete Mathematics".

@@ -1,0 +1,2 @@
+It's very much like the SSSP problem. So a modified Dijkstra algorithm can be applied.
+My code uses a modified Dijkstra algorithrm and costs 0.012s - 0.019s in uva. 

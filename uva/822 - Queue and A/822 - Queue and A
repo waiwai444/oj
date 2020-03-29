@@ -1,0 +1,10 @@
+Simulation.
+
+Proceed along the time line and handle each incoming new request and each staff who has finished their current job. I used a priority queue to select the most prioritized staff at each time point.
+
+In order to speed up, do not traverse each time point. Just visit time points that have new requests arriving or have some staffs finishing their jobs.
+
+0.000s in uva 822
+0.023s in la 5222
+
+PS. The output in uDebug is different from mine. I don't know why...

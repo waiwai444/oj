@@ -1,0 +1,5 @@
+A very easy problem. Each new cut can intersect with all previous cuts, which make n+1 more pieces if n is the current cut number.
+So we have f(n) = 1+n*(n+1)/2.
+
+0.000s in uva 10079
+

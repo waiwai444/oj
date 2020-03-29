@@ -1,0 +1,6 @@
+This problem can be solved as a Huffman code problem. 
+Each number can be treated as a leaf node in a binary tree, with its own number as the weight. The weight of a non-leaf node is the sum of the weights of its children. The target of this problem is to find the minimum sum of weights of non-leaf nodes. It's easy to see that it's equivalent to the Huffman code problem with these numbers. 
+
+Here, I use two queues to construct the Huffman tree, which is O(n). So the main cost is in sorting, which is O(nlogn). 
+
+0.025s in uva
