@@ -1,0 +1,9 @@
+DFS
+
+The general idea is to DFS on the input number to insert operators, and finally check whether the generated expressions equal to 2000. To evaluate the expression, we can use stacks. But since there are only +, -, and *, and no parenthesis, such stacks only have at most 2 elements.
+
+For better performance, we can calculate the expression simultaneously while doing DFS.
+
+Notice that 2000= should be "IMPOSSIBLE".
+
+0.020s
