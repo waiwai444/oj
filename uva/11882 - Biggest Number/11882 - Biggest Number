@@ -1,0 +1,5 @@
+DFS
+
+1. Iterate the maximum length of answers downwards.
+2. Prune by comparing the current digit to be inserted and the digit in the same position in the current answer.
+3. Prune by comparing the current maximum answer length and the number of all remaining reachable digits. This can be achieved by another DFS, which is faster compared to the DFS to get the largest number.
