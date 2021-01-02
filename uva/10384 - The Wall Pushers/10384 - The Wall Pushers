@@ -1,0 +1,7 @@
+ID-DFS
+
+During DFS, typically a "vis" array is used to avoid searching duplicated states. Here I just used a flag for each cell to indicate whether this cell was visited before in the current search path. It can be easily proved that this suffices, no matter how we reach a cell. Suppose we have a shortest solution that has a cell appearing in the path more than once, say C1->C2->...->Cn->...->Cn->.... Let the last "Cn" shown in this path be the last appearance of all such duplicated cells. Then that means when we previously visited this "Cn", the final path to from it to an exit was still infeasible due to some wall in the path that cannot be pushed (may be pushed to some place where it cannot be pushed any further), and in between the last two visits of "Cn", that obstacle was removed away. But this is impossible since in order to remove such a kind of obstacles, we need to enter at least one cell between the two walls that form the obstacle between the last two visits of "Cn". However, if such a cell exists, it will be visited again later since it's also in the final path from the last "Cn" to the exit, which contradicts the assumption that "Cn" is the last of such repeated cells.
+
+P.S. Before I noticed this fact, I used the full state including all walls to avoid duplication, which is also feasible since there are only 58 walls at most and hence the full state, including the current position, can be encoded in a uint64_t. But this method is slower (0.030s in uva).
+
+0.000s in uva 10384
