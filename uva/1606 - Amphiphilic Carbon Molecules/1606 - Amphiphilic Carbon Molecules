@@ -1,0 +1,11 @@
+geometry, sort
+
+Since points on the partition line always dissolve, it's obvious that the partition line can be put on a pair of points. So, we can enumerate all pairs of points and check points in each side of the partition. But such a naive algorithm is O(n^3) and may lead to TLE. A better solution is to enumerate each point, taking that point as the origin, and sort all other points based on their angles to the current origin. And then we can scan all these points in order and count the numbers of 0-node and 1-node. Counting can be done by first counting the partition made by the origin and the first point in the order, and then moving the partition line in order and update the counting as we move forward. This leads to an O(n^2logn) algorithm.
+
+A trick to make coding much easier is to inverse all 1-nodes so that we can only scan only the first half of the partition and simply count all nodes we meet in that half. The correctness of this trick can be seen as follows.
+
+1. For a partition line on two 0-nodes, we will count 0s on one side and 1s on the other side when one of the two 0-nodes is the origin. And when the other one becomes the origin, the counting of 0s and 1s will reverse. So for such a partition line, we will test all two countings of 0s and 1s.
+2. For a partition line on two 1-nodes, whichever node is picked as the origin, the other will be inversed. Both sides still have chances to take 0 (and 1 when the other side taks 0).
+3. For a partition line on two nodes of different kinds, we will always have one side taking 0 and the other taking 1, no matter which node is the origin. But we don't need to worry about that. We can pick the 0-node or the inversed 1-node that is the nearest to the 1-node on the previous partition line. By counting based on this new partition line, we can easily see that it's at least equivalent to counting the reverse in the original partition, or even better.
+
+0.380s
