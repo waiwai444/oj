@@ -1,0 +1,7 @@
+1. Define two arrays, one for the longest forward length, which is the length of the longest increasing subsequence starting at num[i], and the other for the backward length, which is the length of those ending at num[i].
+2. Define another array min[], where min[i] means the minimum of the last numbers of all increasing subsequences of length i. Obviously, this array is monotonically increasing.
+3. Go through all numbers, add the length of the longest possible prefix subsequence to the current forward length by binary searching min[]. And then update min[] by the current backward length.
+
+O(nlogn)
+
+0.260s
