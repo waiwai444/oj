@@ -1,0 +1,86 @@
+The solution here is from Rujia Liu's book, which has the best time complexity of O(n).
+
+Here is the abstract of this algorithm.
+1. First, we need to compute the prefix sums.
+2. Map all positions onto an x-y coordinate, where x indicates positions 1 to n, and y for the corresponding prefix sum. As a result, we get an monotonically increasing curve.
+3. Go through all positions from L to n, and find the maximum slope ending at the each point. The maximum slope of all points is the answer. (Be careful when choosing the answer if there are same slope at different positions and different lengths)
+
+The key part of this algorithm is to efficiently find the maximum slope. For a position t and the point Pt, all points between P0 to P_(t-L+1) can be the starting point. But we don't need to consider all such points.
+
+To determine which points need to be considered, we observed the following properties.
+1. For any point Pi before P_(t-L), if there exist any two points Pj and Pk that j < i < k <= t-L+1 and the slope between Pj and Pi is larger than that between Pi and Pk (Pi is concave downwards), then Pi must not be a starting point for the maximum slope. This can be easily seen by drawing the graph.
+2. After removed all concave-down points, we got a concave-up curve. When proceeding with t, a new point will be considered. This new point will make some of the points in the concave-up curve concave downwards. It's easy to see that all such changed points are at the right-most side of the curve. After removed such points, a new concave-up curve with the new point added will be made.
+3. After we got the new concave-up curve, we can go through this curve one point after another, checking their slopes to point Pt, until we reach the last point in the curve or a point which has larger slope than its next adjacent point.
+
+The time complexity of this algorithm is O(n), since when going through all positions, each position will be added to or removed from the curve at most once.
+
+0.070s
+
+
+====================================================================================================
+My previous code uses a more naive algorithm. It uses a similar structure but without considering slopes. It also uses the prefix sums and goes through all positions. It's based on the observation that all subsequences must be stopped at a '1' position, except for the first subsequence [1,L]. And all subsequences of length larger than L must also start at a '1' position. Then we can use an O(n*L) way to find the best subsequence, of course with some pruning.
+
+0.140s
+====================================================================================================
+#include <cstdio>
+
+#define MAXN 100000
+
+int n, L;
+char input[MAXN+2];
+int cnt1[MAXN+1], start[MAXN+1];
+
+bool compare(int l1, int r1, int l2, int r2)
+{
+    int len1 = r1-l1+1, len2 = r2-l2+1;
+    int c1 = cnt1[r1]-cnt1[l1-1], c2 = cnt1[r2]-cnt1[l2-1];
+    return c2*len1 > c1*len2 || c2*len1 == c1*len2 && len2 < len1;
+}
+
+void solve()
+{
+    int i, j, h, t;
+    int ans_l = 1, ans_r = L;
+
+    for(i = 1; i <= n; ++i)
+    {
+        cnt1[i] = cnt1[i-1]+input[i]-'0';
+        if(i > L && compare(ans_l, ans_r, i-L+1, i))
+            ans_l = i-L+1, ans_r = i;
+    }
+
+    h = t = 0;
+    for(i = 1; i <= n; ++i)
+    {
+        if(input[i] == '1' && input[i-1] != '1')
+            start[t++] = i;
+
+        if(i > L && input[i] == '1' && (i == n || input[i+1] != '1'))
+        {
+            while(h < t-1 && (i-start[h]+1 >= L*2 || (i-start[h] > L && compare(start[h], i-L, ans_l, ans_r))))
+                ++h;
+            for(j = h; j < t; ++j)
+            {
+                if(i-start[j] >= L && compare(ans_l, ans_r, start[j], i))
+                    ans_l = start[j], ans_r = i;
+            }
+        }
+    }
+
+    printf("%d %d\n", ans_l, ans_r);
+}
+
+int main()
+{
+    int t;
+    scanf("%d", &t);
+    while(t--)
+    {
+        scanf("%d%d%s", &n, &L, input+1);
+        solve();
+    }
+    return 0;
+}
+
+====================================================================================================
+
