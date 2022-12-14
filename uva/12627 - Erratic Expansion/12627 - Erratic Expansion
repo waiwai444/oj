@@ -1,0 +1,5 @@
+First, compute the total number of red ballons at each hour. And then for each test case, recursively compute the nunber of red ballons by dividing the box into 4 sub-boxes of equal size. It can be easily seen that at each hour, the expansion will duplicate the previous box into its right side and its bottom side, and generate an all-blue sub-box at the bottom right side. So we only need to recursively compute the upper left and the bottom left sub-boxes.
+
+The recursion won't explode exponentially, since even if A and B are cross the middle line and we need to recurse into two sub-boxes, each branch will immediately reach a situation where one of its two sub-boxes will be either out of the range, or all in the range. And in the latter case we can immediate obtain the number by the pre-computed value.
+
+0.000
