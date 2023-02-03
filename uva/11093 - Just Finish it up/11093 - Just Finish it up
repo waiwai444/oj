@@ -1,0 +1,15 @@
+An easy problem. Can be solved in O(n).
+
+The most intuitive algorithm is to go through the cycle, starting from a station to see if it can finish from that starting station. Once it reaches a station and cannot proceed further, we can just start from the current next station instead of the starting's next station. In worst case, it will check 2n-1 stations.
+
+There is a trick that leads to even less iterations.
+
+First, we have an observation that there is a solution iff the sum of all available petrols minus the sum of all petrols cost on the track is not negative.
+
+To prove this, on one side, it's obvious that if the sum is negative, then we cannot finish the lap by any means since the initial tank is empty. On the other side, if the sum is non-negative, we can see that there must have a solution. One way to see that is by separating the cycle into subsequences. Some of these subsequences are those longest possible sub-routes that a car can race without using up all its fuel in the middle (we call them non-negative subsequences). If we can find a single non-negative subsequence that cover all n stations, then it's finish. If we cannot, then there are at least two such non-negative subsequences, and between them are all stations with negative petrol diff (available minus the cost to the next station). Denote them as negative subsequences. So, each non-negative subsequence will be followed be a negative subsequence, and this negative subsequence must have more negative petrol diff than its precedent non-negative subsequence's petrol diff (remaining petrol). By summing them up, we'll have a negative petrol sum. That contradicts with the precondition that the sum is non-negative.
+
+With this observation, we can even further reduce the number of iterations that we only need to check n stations, since when start iterating, we already know that there must have a solution, and it's not necessary to check the stations at the second lap (after the last station).
+
+However, such a improvement didn't really improve the performance in uva 11093. Both the intuitive algorithm and the improved one ran about 0.1s. The actual improvement was made from changing stdio to iostream. So it's probable that most of the time is cost by IO operations instead of the computation.
+
+0.080s
