@@ -1,0 +1,12 @@
+Binary search
+
+First, for the simplest case, when the output is a constant no matter what x is, then we can choose either all 0 or all 1 as the answer.
+Then, when the outputs for x=0 and x=1 are different, we can binary search the answer.
+For example, if
+00000000 -> 0
+11111111 -> 1
+then we can check 11110000.
+If 11110000 -> 0, it means 1111xxxx has the same output. So, we can fix the first 4 inputs as 1, and continue searching in the last 4 inputs. And then, if 11111100 -> 1, it means 1111xx00 has the same output, so that we can fix the last 2 inputs as 0 and continue searching for the remaining 2 undetermined x's.
+And in the final result, there is only 1 x in such cases.
+
+0.120s
