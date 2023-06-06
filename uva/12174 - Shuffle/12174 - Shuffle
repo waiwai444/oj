@@ -1,0 +1,5 @@
+Use two indexes i and j to traverse the input array. i points to the next item and j points to the beginning of an interval where there is no duplicated item in [j,i). For each i, we consider if it can be the next reshuffle point by checking if i-j == s and j points to the previous reshuffle point. And then we check the i'th item itself and see if it has a duplicate in [j,i), and update j accordingly.
+
+See the code for details. It's a linear algorithm.
+
+0.020s
