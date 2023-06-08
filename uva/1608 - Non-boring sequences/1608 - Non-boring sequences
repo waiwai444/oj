@@ -1,0 +1,5 @@
+It's easy to think up a divide-and-conquer method to find a boring subsequence. Given a sequence, find a unique element in it, and recursively search in its left subsequence and right subsequence. To see if an element is unique in a subsequence, we need to know the positions of its previous same number and its next same number. This can be done by scanning the sequence first and record each element's previous and next same number by something like a map.
+
+This method will still TLE since the divide-and-conquer part may degrade to an O(n^2) algorithm. A tricky optimization is to search the unique element from both sides of the sequence instead of from one side only. Under this the algorithm will always be O(nlogn).
+
+0.280s
