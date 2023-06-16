@@ -1,0 +1,21 @@
+Two key points:
+1. Team 1 can beat at least half of the other teams.
+2. For every team t that team 1 cannot beat, there is a team t' that beats t but is itself beaten by team 1. (Only one intermediate level, but different t may have the same t')
+
+Algorithm:
+1. For each team t that beats team 1, find any team t' that beats it but is itself beaten by team 1. Record it in a corresponding list s[t'] for team t'.
+2. Sort the array s of lists in descending order by their sizes.
+3. Go through the list array s to schedule the first round, one team after another, and from left to right. For each list s[t'], put t' as the current first team, and all teams in list s[t'] follow. If the resulting size is of a power of 2, then finish it and continue with the next t'. If the resulting size is not of a power of 2, then we need to continue adding more teams that can be beaten by team 1 and do not need to help team 1 to beat any team t, to the next power of 2.
+4. Add remaining teams and finally add team 1 at the last position.
+5. Build all the remaining rounds bottom up.
+
+To see the correctness of this algorithm, we need to prove that
+1. Step 3 is feasible. That is, we can always construct such a kind of first round.
+2. Team 1 can be the final winner.
+
+To prove #1, we need to make use of the key point 1 listed at the beginning. First, we group by teams in each s[t'] with t' itself. For each such a group, if its size is not of a power of 2, then we can always find enough teams that can be beaten by team 1 while do not need to beat any team t, to add to the group and make the size of the group to the next power of 2. This is because team 1 can beat at least half of the other teams. We have a number of teams that cannot be beaten by team 1 in a group, then we must have the same number of teams that can be beaten by team 1.
+
+To prove #2, since we already have groups of sizes of 2's powers by step 3, and due to their construction algorithm, at the roots of such subtrees, there are always teams that can be beaten by team 1. We merge them into a whole tree, and the root must be team 1.
+
+0.020s
+
