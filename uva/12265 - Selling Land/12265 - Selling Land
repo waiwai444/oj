@@ -1,0 +1,29 @@
+We can easily define 4 matrices to record cell's max rectangle size, upper swamp(same column), left swamp(same row), and the leftmost boundary of the rectangle that with the current cell as the bottom-right corner and with the row under the upper swamp as the top-right corner. Then we traverse the map top-down and from left to right, calculating these values and using them to compute the largest rectangle for each cell.
+
+When calculating the largest rectangle, we need to compare the current rightmost rectangle (the one with the left boundary recorded, as described previously) with the largest rectangle directly left to it, if any. See the below graph for example. Outside of this shape are swamps. When calculating the rectangle for cell x, we need to compare the size of the rightmost rectangle and the largest one for cell y.
+
+         _________
+      __|         |
+   __|  |         |
+ _|     |         |
+|       |         |
+|       |         |
+|       |         |
+|______y|________x|
+
+This is because sometimes the largest rectangle is the one like the following graph shows.
+
+         _________
+      __|         |
+   __|  |         |
+ _|_____|_________|
+|       |         |
+|       |         |
+|       |         |
+|______y|________x|
+
+And we can easily see that the largest rectangle for cell y will also be the largest one (among rectangles for cell y) when they are expanded to the right side to include cell x.
+
+This algorithm is already O(n*m). But there is still an optimization for it. We observe that when we traverse the map, we only traverse each cell once, and when calculating the rectangle, the row of the upper swamp and the leftmost boundary of the rightmost rectangle can both be easily obtained from the cell just above the current cell, let alone the left swamp, which is from the left side of the same row. So, the optimization is to only use 3 arrays to record the max rectangle size of the same row, upper swamp for each column, and the left boundary of the rightmost rectangle. This will reduce the memory usage significantly, and also lead to faster running time.
+
+0.030s
