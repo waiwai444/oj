@@ -1,0 +1,3 @@
+Sort by length, and then go through the items from both sides and greedy packs two items into one bin if possible. It's easy to see the correctness that by this means we can get an optimal number of bins.
+
+0.020s
