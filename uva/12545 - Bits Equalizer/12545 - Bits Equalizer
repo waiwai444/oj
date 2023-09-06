@@ -1,0 +1,12 @@
+Denote positions with 0 in S and 1 in T as p01, positions with 1 in S and 0 in T as p10, and as well as p?0 and p?1.
+
+Since 1 cannot be converted to 0 directly, it can only be swapped with p01 and p?1. If there are not enough p01 and p?1, then there is no feasible solution. Then we use the following method to find an optimal solution.
+
+Swap p10 with p01 first, and if there are still remaining p10, swap them with p?0, and finally convert remaining p01, p?0, p?1.
+
+This algorithm is very straightforward and intuitive. To prove the correctness strictly, consider the following factors.
+
+1. It's impossible to use any step to increase the numbers of p01 and p?1 without increasing the number of p10. So, if #p10 > #p01+#p?1, then there is no answer.
+2. In any optimal solution, #steps >= #p?0+#p?1+max(#p01, #p10). And our algorithm above can reach this number no matter whether #p10 > or <= #p01.
+
+0.000s
