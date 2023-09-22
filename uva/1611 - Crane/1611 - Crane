@@ -1,0 +1,5 @@
+The number of swaps can be at most 2*n by the following algorithm.
+
+Traverse the array and put every crates into their correct positions. For the current crate i, if its current position pos[i] is at the last half of the array, then we swap the two halves of the array to make its position at the first half. And then swap it to the position i in one swap. The time complexity is O(n^2), but it's ok for this problem since n is not very large and the most concern is the number of swaps.
+
+0.280s
