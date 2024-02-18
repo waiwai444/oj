@@ -1,0 +1,13 @@
+Transform the permutation back to the initial arrangement and print the operations in the reverse order. Notice that the operation 2 should be revert in such a transformation. My algorithm to transform is as follows.
+
+Two levels of loops. Each iteration of the outer loop is to find the i'th smallest number. And for the inner loop, it operates as follows.
+Step1: Use operation 2 (reversed) to move the last number to the first place.
+Step2: Compare the first number and the second one. Swap (operation 1) them if the first one is larger than the second one.
+Continue the above two steps until the step 1 has been done n-i times. Now the current first number is the i'th smallest one.
+And then some additional operation 2 (reversed) to let the first number the smallest one.
+
+See the code for the details. There are some shortcuts in this algorithm to reduce the number of operations.
+
+This algorithm satisfies the requirement that at most 2n^2 operations are needed. The total number of operations < (n-1)*(2n) < 2n^2.
+
+0.000s
