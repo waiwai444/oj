@@ -1,0 +1,126 @@
+Here is an algorithm to find a solution with no more than the required minimum k colors.
+
+1. If there is only 1 vertex, color it with color 1.
+2. At the beginning, we have the original graph with n vertices. We find a vertex with the minimum degree and remove it from the graph to obtain a sub-graph of size n-1.
+3. Solve the sub problem for the sub-graph of size n-1.
+4. After solved the sub problem, add back the current removed vertex and color it. When coloring it, we need to use a color with the smallest color number that is not in any of its already colored neighbors.
+
+Let md = the maximum degree.
+When the recursive algorithm finished, the number of colors is at most md if md is odd, or md+1 if md is even.
+
+==========
+We need to prove two things for such a connected simple graph with odd size.
+
+1. k = md if md is odd, and k = md+1 if md is even.
+2. The algorithm above can find a solution with coloring number c <= k.
+
+-----
+To prove 1:
+
+Given a simple graph G(n) of size n, let c(n) be its smallest coloring number, and md(n) be its the max degree.
+
+It's obvious that c(n) <= md(n)+1 for any graph, and hence k <= md+1.
+
+We need to prove that if, in a graph, c(n) = md(n)+1, then all vertices have the same degree md(n) if it's connected.
+
+Consider a connected graph. It's obvious that every vertices whose color is c(n) must have md(n) neighbors and those neighbors' colors must be all different. If there is a vertex with a degree < md(n), then we can follow the below process to eliminate the largest color c(n).
+
+1. Consider a vertex with degree < md(n) as V0, and one of its nearest vertex with color c(n) as Vx, and the path between them (V0, V1, .., Vx). Then we will try to move the color c(n) from Vx to V0 along the path.
+2. Exchange the colors of V(x-1) and Vx. Then it's obvious that Vx's new color will not conflict with its neighbors. For V(x-1)'s new color c(n),
+  - If it conflicts with its neighbors, then it implies that there is at least one color from 1 to c(n)-1 that is missing in its neighbors, and we can again change its color from c(n) to that missing one.
+  - If some of its neighbors' color is the same, then it also implies there is a color from 1 to c(n)-1 that is missing in its neighbors. Change it from c(n) to that one.
+3. If after step 2, V(x-1)'s color is still c(n), then repeat the these step. And finally it will reach V0 and then be safely eliminated.
+
+So, if the connected graph has c(n) = md(n)+1, then all of its vertices must have degree md(n).
+
+When both n and md(n) are odd, if c(n) = md(n)+1, then its all vertices have the same degree as shown above. Since n is odd, n*md(n) is also odd, which is impossible. So, we have c(n) <= md(n), and k = md if md is odd.
+-----
+
+-----
+To prove 2:
+
+Given a simple graph G(n) of odd size n, let G(n-1) be the subgraph in G(n) after the algorithm removed the min degree vertex V. And let md(n) be the max degree, k(n) be the k values for them, and c(n) be a coloring number we obtained from the algorithm.
+
+First, we have d(V), the degree of V, <= md(n-1)+1, and md(n) <= md(n-1)+1, since V is the min degree vertex. And c(x) <= md(x)+1.
+
+Then we need to discuss several different cases.
+
+1. If md(n-1) is odd:
+1.1. If c(n-1) <= md(n-1):
+1.1.1. If md(n) is also odd, then md(n) = md(n-1).
+1.1.1.1. If c(n) = md(n-1)+1:
+  In this case, V's color must be c(n) = md(n-1)+1. It means V's degree is md(n-1). Since V has the min degree, and the max degree in G(n) is md(n-1), it implies that the md(n-1) neighbors of V all have the degree of md(n-1)-1 in G(n-1), and the remaining n-1-md(n-1) vertices in G(n-1) have the degree of md(n-1). And because md(n-1)*(md(n-1)-1)+(n-1-md(n-1))*md(n-1) is odd, it's impossible to form a graph. So, this case doesn't exist.
+1.1.1.2. If c(n) <= md(n-1), then it's obvious that c(n) <= k(n).
+1.1.2. If md(n) is even, then md(n) = md(n-1)+1.
+  => c(n) <= c(n-1)+1 <= md(n-1)+1 = md(n)
+  => c(n) <= k(n)
+1.2. If c(n-1) = md(n-1)+1:
+  We'll discuss this case later.
+2. If md(n-1) is even,
+  Obviously we have c(n-1) <= md(n-1)+1. We can safely assume c(n-1) = md(n-1)+1.
+2.1. If md(n) is odd, then md(n) = md(n-1)+1.
+2.1.1. If c(n) = c(n-1)+1 = md(n-1)+2, then V's degree is md(n-1)+1. Since V has the min degree, all vertices in G(n) have the same degree of md(n-1)+1, and their degrees are all md(n-1) in G(n-1). So, they are all V's neighbors. This means both G(n) and G(n-1) are complete graphs and md(n) is even and md(n-1) is odd. Contradiction. So, this case doesn't exist.
+2.1.2. If c(n) = c(n-1) = md(n-1)+1, then c(n) = md(n), and then c(n) <= k(n).
+2.2. If md(n) is even, then md(n) = md(n-1). In this case, since c(n) <= md(n)+1, we have c(n) <= k(n).
+
+The only remaining case is 1.2. Because in all other cases we can always get a coloring of G(n) satisfying the requirements from G(n-1), all odd-sized subgraphs in the process will have c(x) <= k(x) if they are generated from these cases. Then, if in some phase during coloring there comes a case of 1.2, say from G(i-1) to G(i) where i is odd, we known that the largest color c(i-1) must be newly added in this step. This is because md(i-2) <= md(i-1) so that c(i-2) must equal to c(i-1)-1. Denote this vertex added in G(i-1) as U, then U must have m(i-1) = c(i-1)-1 neighbors in G(i-2). Then consider two cases:
+- If md(i-2) = md(i-1), then all vertices in G(i-1) have degree of md(i-1). That means from G(i-1) to G(i), md(i) = md(i-1)+1.
+- If md(i-2) = md(i-1)-1, then all vertices in G(i-1) have degree of md(i-1) and U connects to all other vertices. So, G(i-1) is a complete graph. Then for G(i), md(i) = md(i-1)+1.
+Since md(i) = md(i-1)+1, md(i) is even, and k(i) = md(i)+1. And because c(i) <= c(i-1)+1 = md(i-1)+2 = md(i)+1 = k(i), the solution found for G(i) is also valid. Repeat this process if there is other cases of 1.2, and we have c(n) <= k(n).
+
+Now, we have proved that all possible cases lead to c(n) <= k(n). So, the above algorithm can get a feasible solution within k.
+-----
+==========
+
+My implementation ran 0.220s.
+
+My old code with the same algorithm but use std::list in the degree map ran 2.320s. But after I changed std::list to my own list which doesn't need memory alloc/dealloc when moving between different map buckets, the code ran 0.220s, much faster than before.
+
+Noticed that, this algorithm doesn't guarantee the optimal solution. Here is an example that it generates a correct but not best answer.
+
+9 15
+1 2
+1 3
+1 4
+2 5
+2 3
+3 6
+4 6
+4 7
+5 8
+5 6
+6 9
+6 7
+7 8
+7 9
+8 9
+
+Its best solution will use only 3 colors, but my algorithm generates 4 colors. But since k = 5, it's still correct.
+
+Also noticed that, in the internet there are lots of codes that use DFS and they can pass the check in UVaOJ and runs much faster. But in fact, they are wrong. UVaOJ's test cases do not have good coverage.
+
+Here is an example that all those DFS based codes failed. This example is represented by two forms with different vertex orders, since different DFS codes I got from internet use different order to handle them. They failed at one of them.
+
+7 9
+1 2
+2 3
+2 6
+3 4
+4 5
+5 6
+3 7
+4 7
+6 7
+
+7 9
+1 2
+2 6
+2 3
+3 7
+3 4
+4 7
+4 5
+5 6
+6 7
+
+Their results have the last vertex being colored as 0...
