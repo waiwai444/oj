@@ -1,0 +1,3 @@
+First, calculate the left and right bound of the exit for each village based on its location and D. Then sort villages by their right bounds. And then traverse the villages in this order and put an exit on each current village's right bound if this village hasn't have an exit yet. The correctness is very obvious.
+
+0.000s in uva
