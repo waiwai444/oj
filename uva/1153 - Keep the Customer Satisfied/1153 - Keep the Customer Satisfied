@@ -1,0 +1,24 @@
+First, sort the orders by their due dates increasingly.
+Then, go through the sorted order list and check each order whether it can be accepted or not.
+If the current order can be satisfied within its due date, then simply accept it. Otherwise, check if its amount is less than the largest amount in the current accepted list. If it's less, then replace that largest one with the current one.
+We can use a max heap as the current temporary accepted list so that we can easily find and update the largest order seen before.
+
+The correctness of this algorithm is as follows.
+
+When go through the sorted list, we maintain a "best" accepted list, that is, a temporary accepted list for orders up until the current one which has the maximum number of accepted orders and the shortest total production time.
+
+1. If the current order can be added to that list without being overdue, then we just accept it. Obviously, the resulting list has the maximum number of orders and shortest total time for now, since the list is already the "best" before the current one.
+
+2. If adding the current order will make it overdue, then we need to check if we need to rearrange the accepted list to make it shorter while keeping it the maximum number.
+Let the current "best" list be L, which has the size M. We can observe that the shortest time made up of M-1 orders currently can be achieved by removing the latest order currently we have.
+Let the current largest order be Jk, it's the i'th order in list L, and its finish date is Fi <= dk. Let the list after removed Jk be L1. It has the size M-1. And suppose there is a shorter accepted list of size M-1. We take the shortest one of them as L2. Then
+  2.1. We can see that orders in L2 with finish dates before Fi-qk must have the same count and the same total time as in L1.
+    2.1.1. If the number of these orders in L2 is larger, then we can append Jk and remaining orders in L1 to it to make a new list of size > M. Contradicted.
+    2.1.2. If the number of these orders in L2 is less, then when we replace them with those in L1 and potentially remove one that is across the boundary(the date point Fi-qk), we get a new list of size >= M-1 without increasing the total time. It's contradicted if size > M-1. And if size = M-1, then it means the number of those orders in L2 is just one less than those in L1, and there is a removed cross-boundary order. And when such a cross-boundary order exists, the resulting total time will be shorter, which is also contradicted.
+    2.1.3. Given that we've seen the number of these orders in L2 is the same as in L1, then if the last finish date of these orders in L2 is less than Fi-qk, then we can simply append Jk and the remaining orders in L1 to them to make a shorter total time. Contradicted.
+  2.2. In L2, if the i'th order's finish date < dk, then we can easily get a new list of size M with shorter time by replacing Jk with this new i'th order. Contradicted. On the other hand, if the i'th order's finish date >= dk, then we can also just replace this i'th order in L2 with Jk to make a shorter L2, which is also contradicted.
+So, we have all the above branches contradicted, which means L1 we get from removing Jk is the "best" current solution for size M-1.
+So, if the current new order is less than Jk, we can just replace Jk with it to get a "better" solution of size M.
+
+0.150s in uva
+
