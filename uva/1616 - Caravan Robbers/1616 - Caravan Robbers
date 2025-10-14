@@ -1,0 +1,14 @@
+Since intervals are not included inside each other, we can sort the intervals and go over them one by one.
+
+Then we have the following algorithm.
+For the current interval whose left part has not yet been occupied by previous intervals, we execute the following steps.
+1. We try putting p/q to intervals from the current one until we reach an interval that won't be affected by putting p/q in previous intervals (whose left part won't be occupied). We call this set of intervals the "current interval chain".
+2. During handling this interval chain, we may hit a case where current p/q cannot be put into an interval due to no enough remaining space. Then we can update p/q by the average length of intervals in the chain we processed so far.
+3. If in step 2, we hit a place where we need to update p/q, then after finished step 2, we need to go over the chain again to put the current updated p/q into them to see if we can really use this p/q for these intervals. Sometimes, after putting the "p/q" for an interval I, the next interval I+1 won't be affected since the current "p/q" is small enough. In this case, we need to update "p/q" again by the average of the remaining intervals.
+
+The correctness can be seen by the fact that every time we update p/q, it's always be the maximum possible value for intervals currently processed.
+1. Updates in step 2: It's obvious since the new p/q is the average length. But since we don't actually check if the new p/q is suitable for all previous intervals in the chain, the actual p/q may be less than this average value.
+2. Updates in step 3: Updating only happens when the remaining length is larger than the remaining total interval length. So, it's also obvious.
+
+0.080s in uva
+
