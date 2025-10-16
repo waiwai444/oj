@@ -1,0 +1,15 @@
+1. Sort the input tasks from left to right. This is possible according to the restrictions about ri and di.
+2. For each beginning task Ti, always try to put it to its deadline (finish time = deadline). And then check its next task Tj.
+  2.1. If Tj's release time > the last finish time, then we start over from step 2 with Tj as the new beginning task.
+  2.2. Else, if Tj's deadline > the last finish time, we just put it next to the last finish time.
+  2.3. Else, we put it to the last finish time, which means all previously finished tasks in the current chain will be brought towards front one unit.
+  2.4. Advance to the next task as Tj.
+
+To see the correctness, we have the following observations.
+
+1. Each time after we put a task, the current number of idle time is always the minimum, and its finish time is always the largest.
+  1.1. It's obvious if the task can be put adjacent to the last finish time.
+  1.2. If the task's release time > the last finish time, then we will inevitably add one more idle time. This is because the current number of idle time for previous tasks is already the minimum and is with the largest finish time.
+2. In step 2.3 where we push previous tasks' finish times one unit forwards, it's always feasible for us to do that. This is because the restrictions of ri and di and the order we process the tasks, and the assumption in this problem that there is always a valid solution. So, there won't be a task that will be pushed forwards to exceed its release time.
+
+0.000s in uva
