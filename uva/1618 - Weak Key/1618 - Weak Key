@@ -1,0 +1,30 @@
+There is a very simple but interesting O(n^2) algorithm for this problem.
+
+For this algorithm, we only need to consider the first pattern (Nq > Ns > Np > Nr), since the second pattern can be convert to the first case by just reversing the sequence.
+
+First, for each number, we need to find the first smaller number on its left side, and the first larger number on its right hand side.
+Then, we enumerate all pairs of numbers, as Nq and Nr, and take Nq's first smaller number on the left as Np, and Nr's first larger number on the right as Ns. We just check if this (Np, Nq, Nr, Ns) satisfies the pattern.
+
+Although this algorithm is O(n^2), it's quite efficient since in both steps we can quickly break the loop once we find what we need.
+
+To see the correctness of this algorithm, we need to prove that we can always find a pattern if there exists one, by just checking the first left smaller number and the first right larger number (no need to look further).
+
+Let Np, Nq, Nr, Ns be the tuple whose Nr is the rightmost one among all such pattern instances (Nq > Ns > Np > Nr), and if there are multiple such instances, we choose Ns to be the leftmost possible one.
+
+----------
+  *
+         *
+*
+      *
+----------
+p q   r  s
+
+So, if Ns is not Nr's first right larger number, then we have Nr's first right larger number > Nq (it cannot be less than Nq according to our assumption). Then we find a rightmost number in (r,s) whose value > Nq, and denote it as Na. Then Na's first right smaller number must be Ns, also a conclusion from our previous assumptions about Nr and Ns.
+Now that we have Na and Ns, we check numbers between Nq and Nr.
+If Nq is already the first left larger number of Nr, then we are done. Because we have Nq, Nr, Na, Ns as the second type of patterns, with Nq and Ns be the first left/right larger/smaller numbers, which can be found in the reversed sequence by the same algorithm.
+If it's not, then we find the leftmost number in (q,r] whose value < Ns. We denote it as Nb (b can be equal to r). Then Nb's first left larger number must be > Ns. If it's < Na, then we are also done. Otherwise, if it's > Na, then we find the leftmost number in (q,b) whose value > Na, and denote it as Nc. Then Nc's first left smaller number (we mark it as Nd, and can be the same as Nq) must be > Ns and < Na, which is also a conclusion from previous assumptions. Then with this Nd, Nc, Nr, Na, we have Nc > Na > Nd > Nr. However, this contradicts to our previous assumption that Ns is the leftmost one (now we have a < s).
+Now, we can see that if Ns is not Nr's first right larger number, then there must exist an instance of the second type of patterns whose Np and Ns are the first those numbers that our algorithm can find in reversed order.
+And since it's symmetric, the same logic applies for Np and Nq. So, by running the algorithm twice, one for the original order, and one for the reversed order, we can always find the correct answer.
+
+0.000s in uva
+
