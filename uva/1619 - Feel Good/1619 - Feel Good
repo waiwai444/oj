@@ -1,0 +1,6 @@
+Since all numbers are non-negative, when a number acts as the base multiplier (the minimum in a range), its left and right boundaries can reach as much as possible until no more numbers or hitting a smaller number.
+The basic idea of the algorithm is to traverse the sequence and use a stack to record those numbers that are acting as the base multipliers and still not yet reach their rightmost boundaries. Then once we hit a smaller number, we go back to check the stack and pop out those numbers who is >= the current smaller number to calculate the sum and the product (finished the full range for that base multiplier), and then push the current smaller number into the stack.
+
+See the code for details. We can get all information we need in O(n) time.
+
+0.090s in uva
