@@ -1,0 +1,4 @@
+Notice that the maximum square must have its right hand side being blocked by a tree or the right border. So, we can traverse all trees, take the x axis of a tree as the right edge of a square, and look back to its left to see how large a square can be formed from this tree on the right edge.
+In order to handle the left and the right borders in a unified manner, we can add some pseudo trees at specific positions on the left and the right borders. See the code for the details.
+
+0.000s in uva
