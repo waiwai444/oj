@@ -1,0 +1,17 @@
+It's difficult to find the pattern of what kinds of sequences can be transformed to a sorted state. My first thought is to find the inversion count of the sequence, but I'm not able to prove or disprove my idea.
+After some search on the internet, I find the algorithm for this problem is quite simple and yes it's based on inversion counts. When n >= 8, it's solvable if and only if there exists a rotation of the sequence whose inversion count is even.
+
+If n is even, then a single step of rotation will change the parity of the inversion count. So, there is always a rotation whose inversion count is even.
+If n is odd, then all rotations of the input sequence have the same parity.
+So, the code only needs to compute the inversion count for an odd n.
+
+Part of the correctness of this algorithm can be seen as follows.
+
+1. The 4-number reversion operation inside a rotation (no wrapping) won't change the parity of the inversion count. This can be easily seen by the fact that this reversion step only change the inversion count between these 4 elements. And if the original inversion count between them is x, then after reversed, it becomes 6-x. They have the same parity. So, the overall parity won't change.
+2. So, if n is odd, and the parity of its inversion count is also odd, no matter how we reverse numbers and rotate them, its overall inversion count is always odd. So, it must not reach a zero inversion count.
+3. And if n is even, we can always keep the parity as even by finding an initial even parity rotation and by rotating 2 numbers at once when needed. However, how can we prove that the inversion count will finally reach zero?
+
+I'm still not able to find a valid proof for the point 3 above for even n. We can only verify that it's NOT true for n = 4.
+DeepSeek said it's a known math conclusion in group theory after I pointed out the mistake in it's initial wrong reasoning, and after it modified its reasoning, the sample it gave me was still wrong. So, I'm a little worried whether it told me the correct information.
+
+0.000s in uva
