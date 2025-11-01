@@ -1,0 +1,94 @@
+Since the size of the rectangle is the product of lengths of the two axes, we can list the resulting lengths of movements of the two axes in two arrays. For example in a 5 * 4 grid, if north = 6 and south = 3, we will get an array for the north-south axis like [4,4,4,4,4,4,4,3,2] by first moving north and then south, then north, then south, until no more south, then always north.
+We will get two such arrays for both axes. For simplicity, we call them NS and WE. Then, we will try to place numbers of NS and WE into a single new array OD that represents the order of all movements, while make sure the total sum of sizes is the maximum.
+To make the maximum result, first we need to see that the best way of movement for each axis is just like the way we show in the above example. This is obvious because each time we move, the length will at most reduce by one. Then, it's also obvious that the best final solution must come from the two arrays that are generated both by this method, otherwise, we can simply replace the array with such one. Also, the first move is always towards the direction with more steps.
+
+Once we have NS and WE, we will need to design an algorithm to merge them into OD. To get such an algorithm, we have the following observations.
+
+1. If the beginning part of NS or WE is a series of the same number (repetitive numbers), then in OD, there won't be any number from the other array being inserted among them. This means such consecutive same numbers can be arranged as a whole.
+  For example, if we have the following order in OD, (notice that numbers represent the resulting length after that move, not before it)
+    NS: a    a
+    WE:  bcde
+  Let L(x) be the left adjacent number in x's own array (NS or WE), and R(x) be the right one. So, L(a) = a or a+1, c = R(b) = b or b-1, etc.
+  Then, the sum of products in this part is L(a)*L(b)+a*L(b)+a*b+a*c+a*d+a*e.
+  Now, we rearrange OD to
+    NS: aa
+    WE:   bcde
+  The sum of products in this sequence is L(a)*L(b)+a*L(b)+a*L(b)+a*b+a*c+a*d.
+  The difference between them is a*L(b)-a*e >= 0. Now we know that we can always move those intervening numbers out of the repetitive sequence.
+
+2. For non-repetitive numbers, we can always order them in OD in decreasing order.
+  Say we have these,
+    NS: a
+    WE:  c
+  where a < c.
+  The sum of products here is (a+1)*(c+1)+a*(c+1).
+  Then, if we swap them, we have
+    NS:  a
+    WE: c
+  The sum of products now is (a+1)*(c+1)+(a+1)*c.
+  The difference is (a+1)*c-a*(c+1) = c-a > 0. So, we can always put the larger one before the smaller one.
+
+3. For the relation between repetitive numbers and non-repetitive numbers, we can compare them by the following expression.
+  If we have,
+    NS: bb...b
+    WE:       a
+  where b's count is k.
+  The sum of products is (b+1)*(a+1)+b*(a+1)*(k-1)+b*(a+1) = (b+1)*(a+1)+b*(a+1)*k.
+  Then if we have,
+    NS:  bb...b
+    WE: a
+  Then the sum now is (b+1)*(a+1)+a*(b+1)+b*a*(k-1).
+  The difference between the second case and the first case is a*(b+1)+b*a*(k-1)-b*(a+1)*k = a-b*k. So, the order depends on the sizes of a and b*k.
+  (In this problem, b here will always be n-1 or m-1.)
+
+With the above 3 observations, we can easily get the algorithm. It will simply compare each current element (single number or repetitive numbers in a whole) of NS and WE with the above 3 rules.
+
+See the code for details. Notice that we don't necessarily store all these arrays. They are just conceptual. We can get all we need simply by n, m, and those step counts.
+
+0.000s in uva.
+
+
+==========
+Sample input
+==========
+2 2
+1 0 0 0
+2 2
+1 1 1 1
+1 1
+1 1 1 1
+1 1
+0 0 0 0
+1 1
+0 0 0 1
+2 2
+5 5 5 5
+3 4
+10 5 10 5
+3 3
+2 0 2 0
+3 3
+0 2 0 2
+1 5
+5 5 5 5
+5 5
+5 5 5 5
+100000 100000
+100000 100000 100000 100000
+0 0
+==========
+Output
+==========
+Case 1: 4
+Case 2: 9
+Case 3: 1
+Case 4: 0
+Case 5: 1
+Case 6: 33
+Case 7: 184
+Case 8: 21
+Case 9: 21
+Case 10: 45
+Case 11: 369
+Case 12: 3999940000399999
+
