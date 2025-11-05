@@ -1,0 +1,67 @@
+The algorithm is straightforward. Just simulate the process to either rain or drink at each day. For a non-raining day, we need to choose a lake to drink. The principle is to always choose the full lake with the nearest raining day. The correctness of this principle is obvious, otherwise we can simply swap with the nearest one without any downside.
+
+My implementation here is an O(nlogn) one, which only traverses the input array in O(n) to find the next lake to drink. In this process we will meet with some raining day that its target lake has already been empty. We cannot drink at an empty lake. So, we have to record such raining days so that once the lake is full again later, we can try to drink it. To keep this information, use linked lists for lakes to track those days, and once lakes are available, put those days into a priority queue sorted by the day so that we can get the nearest one in O(logn).
+
+0.220s in uva.
+
+==========
+Sample input
+==========
+15
+2 4
+0 0 1 1
+2 4
+0 1 0 2
+2 3
+0 1 2
+2 4
+0 0 0 1
+1 1
+0
+5 5
+0 0 0 0 0
+5 5
+1 2 3 4 5
+1 1
+1
+5 10
+0 1 0 1 0 2 0 1 0 0
+3 5
+0 0 1 1 0
+1 5
+0 0 1 0 1
+3 15
+0 0 1 2 0 3 0 0 0 3 1 2 0 1 0
+2 6
+0 0 1 0 1 2
+3 15
+0 0 0 1 2 0 0 2 1 3 0 0 0 1 2
+3 20
+0 0 0 0 1 2 0 3 0 3 0 0 0 1 3 2 0 0 0 0
+==========
+NO
+YES
+1 2
+NO
+YES
+1 0 0
+YES
+0
+YES
+0 0 0 0 0
+NO
+NO
+YES
+1 1 2 1 0 0
+NO
+YES
+1 0 1
+YES
+1 2 3 3 1 2 1 0
+YES
+1 2 1
+YES
+1 2 3 2 1 1 2 0
+YES
+1 2 3 0 1 3 3 2 0 0 0 0 0
+==========
