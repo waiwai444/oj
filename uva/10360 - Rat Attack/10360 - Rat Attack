@@ -1,0 +1,45 @@
+I just use the brute force DP to calculate sums of left bottom rectangles of each crosses. Seems like the scale of the test data is smaller enough so that such a brute force method can still pass.
+
+0.030s in uva.
+
+==========
+Sample input
+==========
+7
+1
+2
+4 4 10
+6 6 20
+3
+5
+0 0 10
+1 1 20
+3 2 20
+7 7 30
+7 8 5
+1
+1
+0 0 255
+1
+1
+1024 1024 255
+1
+1
+0 1024 255
+1
+1
+1024 0 255
+10
+1
+1024 1024 100
+==========
+Answer
+==========
+5 5 30
+4 4 70
+0 0 255
+1023 1023 255
+0 1023 255
+1023 0 255
+1014 1014 100
+==========
