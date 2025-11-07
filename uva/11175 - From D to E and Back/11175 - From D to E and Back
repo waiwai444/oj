@@ -1,0 +1,61 @@
+For any input graph, it's obvious that we can always form a graph by the reversed way of D to E. For example, if there is an edge from x to y in the input graph, then we can simply merge x's target vertex and y's source vertex into a single vertex, since D allows duplicate edges and self edges. So, the problem becomes checking whether there is any missing edges in D. That is, if in E we have a->b and c->b and c->d, then we must also have a->d in E. So, given a vertex x in E, let S be the set of vertices which have edges to x, then all vertices in S must have the same out-neighbors.
+
+Our algorithm is straightforward. It just checks the adjacent matrix of E to see if it satisfies the above property of edges and out-neighbors. To speed up the comparison, first sort the order of vertices by their first out-neighbor so that we can simply compare one vertex with its next one in that order. Such an algorithm is O(n^2logn).
+
+0.020s in uva.
+
+==========
+Sample input
+==========
+8
+2
+1
+0 1
+5
+0
+4
+3
+0 1
+2 1
+2 3
+3
+9
+0 1
+0 2
+1 2
+1 0
+2 0
+2 1
+0 0
+1 1
+2 2
+1
+1
+0 0
+1
+2
+0 0
+0 0
+4
+4
+0 1
+2 1
+0 3
+2 3
+4
+5
+0 0
+0 2
+1 1
+1 3
+2 2
+==========
+Case #1: Yes
+Case #2: Yes
+Case #3: No
+Case #4: Yes
+Case #5: Yes
+Case #6: No
+Case #7: Yes
+Case #8: No
+==========
