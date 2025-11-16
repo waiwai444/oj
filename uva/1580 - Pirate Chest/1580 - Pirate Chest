@@ -1,0 +1,36 @@
+I use a brute force algorithm to solve this problem. The test data set is not big so even a brute force method can pass.
+
+My algorithm is to traverse all cells in the grid one by one. For each cell, compute its maximum possible rectangle that can encompass the current cell while not exceeding the limit of a*b. Then calculate the maximum height that doesn't go out of the water surface.
+For getting the encompassing rectangle, I use an O(n^2) algorithm. So the overall algorithm is O(n^4). But this is just the upper limit. The actual performance of this algorithm is still good enough.
+For the height, it can be easily computed through this inequation: d+h < s*(d+h)/(m*n)+d, where h is the extra height and s is the bottom area size.
+
+0.000s in uva
+
+==========
+Sample input
+==========
+3 1 2 3
+2 1 1
+2 2 1
+4 1 1 5
+2 0 2 2 2
+2 3 3 5
+2 2 2 2 2
+2 2 2 2 2
+2 2 2 2 2
+4 4 4 5
+0 100 100 0 0
+10 100 100 100 100
+100 100 100 100 5
+5 5 100 100 5
+1 1 1 2
+100 1000000000
+==========
+Answer
+==========
+4
+12
+18
+852
+1999999999
+==========
