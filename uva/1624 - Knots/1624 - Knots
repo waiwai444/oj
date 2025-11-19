@@ -1,0 +1,138 @@
+This problem's description is not quite clear and a little ambiguitous. Seems like "passing" only allows passing a single line segment.
+
+So, the algorithm for this problem is quite simple and straightforward. We just link all overlaps with their next and previous overlap, as well as the overlapping or overlapped one. Then we go through this linked circle and try to repetitively remove simple self loops which don't have other overlaps in the loop, and simple passings which only pass a single line segment and no other overlaps in between it.
+
+This simple algorithm doesn't work for all cases. For example, the following shape is isomorphic to a single circle:
+
+28 14
+0 9
+1 20
+2 11
+3 22
+4 13
+5 24
+6 15
+26 7
+8 17
+10 19
+12 21
+14 23
+25 16
+27 18
+
+But this simple algorithm returns "NO". All other codes I can search from the internet use the same algorithm. So, none of them are able to solve this case.
+
+For the above "complex" case, I have another algorithm to solve it, but it always gets TLE in UVA. This "complex" algorithm's basic idea is to search from each overlap point to find a large loop, and if all line segments between those overlaps do not pass through the loop, then we can safely remove that loop. This is to simulate the process of passing through complex crossing lines, like in the above example.
+
+My final code only have the simple part to remove simple self loops and passings, no the "complex" part, and it still got accepted.
+
+But even combining with my "complex" algorithm, I don't know if they can find all isomorphic shapes. We may need a proof.
+
+0.070s in uva
+
+==========
+Sample input
+==========
+11
+20 5
+0 8
+2 10
+4 12
+15 5
+18 7
+
+50 7
+10 42
+28 15
+27 39
+18 31
+38 32
+21 37
+24 34
+
+20 5
+0 8
+10 2
+4 12
+15 5
+7 18
+
+6 3
+0 3
+4 1
+2 5
+
+16 4
+9 0
+2 8
+14 3
+12 5
+
+21 6
+11 0
+2 10
+19 3
+13 4
+5 14
+16 6
+
+4 1
+2 0
+
+50 9
+10 42
+28 15
+27 39
+18 31
+38 32
+21 37
+24 34
+36 22
+35 23
+
+10 5
+8 9
+0 7
+1 6
+5 2
+3 4
+
+8 4
+3 0
+1 4
+2 5
+6 7
+
+32 16
+17 0
+14 1
+13 2
+3 18
+4 27
+26 5
+25 6
+7 20
+21 8
+24 9
+10 23
+11 22
+12 29
+30 15
+31 16
+28 19
+==========
+Answer
+==========
+Case #1: YES
+Case #2: YES
+Case #3: NO
+Case #4: NO
+Case #5: YES
+Case #6: NO
+Case #7: YES
+Case #8: YES
+Case #9: YES
+Case #10: YES
+Case #11: YES
+==========
+
