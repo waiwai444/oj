@@ -1,0 +1,9 @@
+This problem's description is a bit ambiguous. There are two key points to notice. First is Maria can only meet the local spy at station N at the exact time of T. She cannot just reach station N and leave. Second is the trains do not turn around and go back when they reach the other end station. Given the first point, we need to use DP to calculate the minimum waiting time at each time point and at each station. And for the second point, we don't need to consider trains turning around.
+
+So, we can have an easy DP algorithm. Let dp[i][j] be the minimum waiting time at time point i and station j. Then dp[i][j] can be dp[i-1][j] if Maria waits there. And if at time i and station j there is a train reaching it from either direction, we need to also consider it.
+
+The final result is in dp[T][N].
+
+Btw, at the beginning I thought trains can turn around. But it will get WA.
+
+0.000s in uva
