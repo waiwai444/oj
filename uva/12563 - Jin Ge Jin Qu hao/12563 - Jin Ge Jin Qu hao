@@ -1,0 +1,3 @@
+It's a 0/1 knapsack problem. Consider the total time t-1 as the bag capacity, song lengths as the item volumes, and each song has the same value of 1. So, we have the DP table with DP[i][j] being the maximum number of songs we can sing when considering the first i songs when the bag capacity is j. Besides finding the maximum number of songs, we also need to know the maximum length. So, in addition to a normal DP table, we also need another table to keep the maximum length for each position in the DP table.
+
+0.000s in uva
