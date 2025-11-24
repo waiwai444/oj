@@ -1,0 +1,3 @@
+An easy DP problem. DP[i] means the minimum number of palindromes for the string prefix str[0..i].
+
+0.010s in uva.
