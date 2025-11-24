@@ -1,0 +1,18 @@
+The problem's description is a little bit distracted, but in essense it's asking us about the total cost of all voltage sources and all lamps, given that lamps can be replaced by lamps with larger voltage ratings.
+
+The algorithm is quite straightforward.
+
+First, we sort the categories by their voltage ratings increasingly.
+Then, we can use DP. Define min[i] be the minimum cost when considering ratings [i..n-1]. And define DP[i][j] as the minimum cost when considering categories [i..n-1] and all categories [i..j] being merged just to j. So, we have DP[i][i] = min(DP[i+1][i+1..n-1])+K[i]+C[i]*L[i] and DP[i][j] = DP[i+1][j]+C[j]*L[i] for j > i.
+We will see that min[i] = min(DP[i][i..n-1]).
+
+Due to the property of the equation for DP[i][j], we can reduce it to just DP[j] for saving space.
+
+The correctness of this algorithm can be seen as follows.
+
+1. All voltage ratings are different as the problem describes. That is why we can easily sort the ratings and handle them sequentially.
+2. We always eliminate an entire category, not part of it, as the problem describes (even if it's not, it's obvious that we always need to eliminate an entire category to get a minimum cost if we need to eliminate some).
+3. For any subsequence [i,n-1], in a solution with the minimum cost, it's obvious that the lamp costs must be in strictly increasing order.
+4. Assume in a minimum solution the first non-eliminated category is j. Then, all categories from i to j-1 must be merged to j, since according to point 3 above, in a minimum solution the sequence of non-eliminated ratings must be in strictly increasing order in lamp costs. So we have min[i] = min(DP[i][i..n-1]).
+
+0.040s in uva.
