@@ -1,0 +1,22 @@
+Referenced from https://github.com/aoapc-book/aoapc-bac2nd/blob/master/ch9/UVa1625.cpp
+
+My first thought was that because of the scale of the input strings (up to 5000) we may not be able to use an O(n^2) DP, until I found the above reference code.
+
+The basic idea of the algorithm is that for str1[1..i] and str2[1..j], use DP[i][j] to store the minimum sum of color lengths that are already completed in the range and the current distances to i+j for those not yet completed colors.
+
+To get the equation for the DP, we have the following observations.
+
+For any pair [i,j] and any ordering of it,
+    1. Colors that have not yet completed are all the same.
+    2. The last character after merged is either str1[i] or str2[j].
+
+So, if the last character at position i+j is str1[i], then we can get the minimum sum for DP[i][j] from DP[i-1][j], because adding str1[i] will always contribute the same amount of lengths, which equals to the number of colors not yet completed.
+
+So, we have DP[i][j] = min(DP[i-1][j]+res[i-1][j], DP[i][j-1]+res[i][j-1]), where res[i][j] is the number of residual colors (colors not yet completed)
+
+My implementation use two O(n^2) tables. It will cost about 200MB space. But it can still pass the OJ judge. An optimization is to reduce it to rolling tables to reduce the space used.
+
+And seems like the test data set is not very large, so this O(n^2) algorithm can still get accepted very quickly.
+
+0.000s in uva
+
