@@ -1,0 +1,3 @@
+Construct a tree and then traverse it to calculate the number of workers needed for a boss to file a petition. For each boss, since no matter whether a subordinate is another boss with multiple workers or just a direct worker, each of their petitions are counted as 1, we can simply sort the subordinates by their total numbers of workers needed for them to raise a petition.
+
+0.040s in uva
