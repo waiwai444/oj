@@ -1,0 +1,5 @@
+Each hour except 11 and 12 has exactly one cross point for the hour hand and the minute hand in minutes 1 to 59. The remaining one cross point is 12:00. Then just count the number of cross points according to the initial time and the end time. See the code for details.
+
+Notice that there are two fixed hidden output lines in this problem at the very first line and the last line. I got a WA without them. After searching the internet I see these hidden lines... -_-
+
+0.000s in uva
