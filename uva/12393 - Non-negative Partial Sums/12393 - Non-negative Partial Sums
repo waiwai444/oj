@@ -1,0 +1,16 @@
+Prefix sum, monotonic queue
+
+Since sequences can be cycled, for simplicity we can double the array to store prefix sums. Let S[i] be the sum from a0 to ai. Then for a range [i,j], any prefix sum s[k] in the current range equals to S[k]-S[i-1]. We can see this array of sums like a histogram, and for each range [i,j] we take S[i-1] as the zero line. So, if there is any S[k] less than S[i-1], we know that this range cannot be the prefix part of a sequence we want.
+
+So, when we start the sequence from ai, and go forward to hit a k where S[k] < S[i-1], then it's obvious we don't need to consider any sequences starting from the range [i,k].
+
+On the other hand, if we successfully find a sequence we want in [i,i+n-1], then we don't need to start over from the range [i+1,i+1], but keep the ending position unchanged at i+n. The reason this works is as follows.
+
+1. If the minimum S[k] in [i+1,i+n-1] is not less than S[i], then all prefix sums in [i+1,i+n-1] are not less than 0 (S[x]-S[i] >= 0). This means we only need to check a_(i+n).
+2. If the minimum S[k] in [i+1,i+n-1] is less than S[i], then we only need to start the sequence from k+1. The reason is also obvious. And since S[k] is the minimum in [k+1,i+n-1], we know that all S[x] in [k+1,i+n-1] are not less than S[k], and hence all S[x]-S[k] >= 0.
+
+In order to quickly get the minimum S[k] in any range, we can use a monotonic queue in non-decreasing order when we go through the array.
+
+This algorithm has the time complexity of O(n).
+
+0.170s in uva
