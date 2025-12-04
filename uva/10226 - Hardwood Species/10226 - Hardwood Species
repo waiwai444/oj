@@ -1,0 +1,3 @@
+Easy problem. Just use a map to store all species and their numbers. It may be possible to improve it by using hash map or similar methods, but simply a stl map suffices in this problem.
+
+0.230s in uva
