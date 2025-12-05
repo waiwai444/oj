@@ -1,0 +1,7 @@
+DP
+
+Easy problem
+
+Let DP[i][j] be the minimum of the maximum daily distance when at the i'th night they stay at the j'th campsite.
+
+0.000s in uva
