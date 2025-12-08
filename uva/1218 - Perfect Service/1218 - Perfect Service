@@ -1,0 +1,12 @@
+Tree DP
+
+First, we construct the tree. And then start from an arbitrary node as the root for the tree DP.
+
+For each node i, we define three values as follows.
+1. min[i][0]: the perfect service number when it's neither the server itself nor covered by one of its children.
+2. min[i][1]: the perfect service number when it's not a server itself but is covered by exactly one of it's children.
+3. min[i][2]: the perfect service number when it's a server by itself.
+
+See the code for the details of the DP equation.
+
+0.000s
