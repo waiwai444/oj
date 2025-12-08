@@ -1,0 +1,4 @@
+1. Construct the hierarchy tree.
+2. Use max[i][0] for the maximun number when the i'th people is not chosen, while max[i][1] for the case where the i'th people is chosen. Also, use another array of the same size to represent that under the corresponding case whether the solution is unique or not.
+
+0.000s
