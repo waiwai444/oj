@@ -1,0 +1,9 @@
+DP
+
+The basic idea is to go through the process of selecting questions based on previously answered questions. So, the sequences of questions plus the answers to those questions form a DAG with a single root. The root of the DAG represents the state that no question is asked yet. And for each node in the graph, we traverse all the next question to ask, as well as the two answers (0/1) for that question. So, in each node we have two values for the current state, one is for the currently asked questions, and the other is for the current answers for those questions.
+
+In order to avoid duplicated computations, we use DP to record those states. So, we have DP[i][j] be the minimum of the maximum questions further needed to distinguish objects for the state [i,j] where i is the bit mask for the currently asked questions and j is the current answers to those questions.
+
+See the code for details of the DP equation and some optimizations.
+
+0.080s
