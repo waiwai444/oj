@@ -1,0 +1,22 @@
+DP with state compression
+
+It's easy to come up with a DP solution that dp[i][j] is the maximum cash when at the i'th day and the state j of the current stocks we own. But how can we represent the stocks we own as a state j? Notice that there are at most 8 stocks, and each stock can have at most 8 lots. We can represent the stock state as an integer where each 4 bits represent the number of lots of the corresponding stock we own. Then the state transition equation is obvious - buying each stock, selling each stock, and holding.
+
+My first solution uses unordered_map as each dp[i], since the state j can be quite large that we cannot use an array for it. However, looking up and insertion of unordered_map causes quite a lot of time. It ran about >1.1s in uva. I guess the reason why the hash map is so slow is that there are lots of conflictions for the stock state we defined.
+
+To improve the performance, we can set up an index for stock states. We assign an index value to each stock state, then use this index as the second dimension j in dp[i][j]. From a simple calculation (another DP) we know that when distributing 0 to 8 lots to 8 stocks, the number of all stock states doesn't exceed 13000.
+
+So, we have,
+state2idx: map state to its index
+idx2state: map state index back to its state represented as an integer
+
+In advance, we can also pre-calculate the state transitions before DP. So, we also have,
+next_buy_sidx[i][j]: the state index after the next buying action when the current state index is i and the next bought stock is j.
+next_sell_sidx[i][j]: similar to next_buy_sidx, but for selling.
+
+Also, for simplifying the result backtracking, we define two more data fields in each DP state value.
+"from": The state index the current state comes from.
+"act": The action for the transition to the current state.
+
+0.120s
+
